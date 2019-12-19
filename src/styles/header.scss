@@ -1,62 +1,134 @@
-                .nav {
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    height: 80px;
-                    padding-left: 120px;
-                    border-bottom: 1px solid #d5d5d5;
-                    padding-bottom: 10px;
-                    &__button {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 50px;
-                        width: 130px;
-                        border-radius: 30px;
-                        border: none;
-                        outline: none;
-                        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
-                        background-color: white;
-                        margin-right: 50px;
-                        font-size: 18px;
-                    }
-                    &_day {
-                        border: 1px solid #928d8d61;
-                        border-radius: 5px;
-                        height: 40px;
-                        width: 90px;
-                        background-color: transparent;
-                        outline: none;
-                        margin-right: 50px;
-                        font-weight: 700;
-                    }
-                    &__dateMonEar-today {}
-                }
-                
-                .nav__arow {
-                    display: flex;
-                    margin-right: 50px;
-                    &_right {
-                        background-image: url("https://img.icons8.com/material-sharp/24/000000/forward.png");
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        background-position: center;
-                        background-size: auto;
-                    }
-                    &_left {
-                        background-image: url("https://img.icons8.com/material-sharp/24/000000/forward.png");
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        transform: rotate(180deg);
-                        background-position: center;
-                        background-size: auto;
-                    }
-                }
-                
-                .plus {
-                    width: 35px;
-                    height: 35px;
-                    margin-right: 10px;
-                }
+
+
+
+
+.nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 80px;
+    padding-left: 120px;
+    border-bottom: 1px solid #d5d5d5;
+    padding-bottom: 10px;
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 130px;
+        border-radius: 30px;
+        border: none;
+        outline: none;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+        background-color: white;
+        margin-right: 50px;
+        font-size: 18px;
+    }
+    &_day {
+        border: 1px solid #928d8d61;
+        border-radius: 5px;
+        height: 40px;
+        width: 90px;
+        background-color: transparent;
+        outline: none;
+        margin-right: 50px;
+        font-weight: 700;
+    }
+    &__dateMonEar-today {}
+}
+
+.nav__arow {
+    display: flex;
+    margin-right: 50px;
+    &_right {
+        background-image: url("https://img.icons8.com/material-sharp/24/000000/forward.png");
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: auto;
+    }
+    &_left {
+        background-image: url("https://img.icons8.com/material-sharp/24/000000/forward.png");
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        transform: rotate(180deg);
+        background-position: center;
+        background-size: auto;
+    }
+}
+
+.plus {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+
+
+.header{
+    position: fixed;
+    width: 100%;
+    background-color: $backgroundColor;
+    z-index: 3;
+    &__week-block{
+        height: 80px;
+        display: flex;
+        &_days{
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 10px 0 5px 0;
+            border-bottom: 1px solid $borderColor;
+            position: relative;
+        }
+        &_dayname, &_daydate{
+            margin: 0;
+            padding-top: 6px;
+        }
+        &_daydate{
+            padding: 10px;
+            display: inline-block;
+            border-radius: 50%;
+            margin-top: 3px;
+        }
+        &_daydate:hover{
+            background-color: $backgroundGreyColor;
+            cursor: pointer;
+        }
+        &_dayname, .gmt-cell{
+            color: $textColorgrey;
+            font-size: 10px;
+        }
+        .gmt-cell{
+            text-align: left;
+            align-self: flex-end;
+            flex-shrink: 2;
+            padding-right: 20px;
+        }
+        &_part-bord{
+            width: 1px;
+            height: 20px;
+            background-color: $borderColor;
+            position: absolute;
+            bottom: 0;
+        }
+    }
+    
+}
+
+
+
+
+
+
+.today__header__week-block_days{
+    .header__week-block_dayname{
+        color: $blueColor;
+    }
+    .header__week-block_daydate{
+        background-color: $blueColor;
+        color: $backgroundColor;
+    }
+}
