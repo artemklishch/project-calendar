@@ -60,53 +60,56 @@
 }
 
 .header {
-  position: fixed;
   width: 100%;
-  background-color: #fff;
+  position: fixed;
   z-index: 3;
+  background-color: #fff;
 }
 .header__week-block {
   height: 80px;
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #a7abb0;
+}
+.header__week-block_line {
+  width: 100%;
   display: flex;
 }
 .header__week-block_days {
-  width: 100%;
+  flex: 1;
+  align-self: flex-end;
   text-align: center;
   text-transform: uppercase;
-  padding: 10px 0 5px 0;
-  border-bottom: 1px solid #a7abb0;
   position: relative;
+  padding-bottom: 8px;
+}
+.header__week-block_part-bord {
+  position: absolute;
+  bottom: 0;
+  height: 30px;
+  width: 1px;
+  background-color: #a7abb0;
+}
+.header__week-block_gmt-cell {
+  padding-right: 2%;
+  align-self: flex-end;
+  margin-bottom: 1%;
 }
 .header__week-block_dayname, .header__week-block_daydate {
   margin: 0;
-  padding-top: 6px;
+}
+.header__week-block_dayname, .header__week-block_gmt-cell {
+  color: #52575c;
+  font-size: 12px;
 }
 .header__week-block_daydate {
-  padding: 10px;
   display: inline-block;
+  padding: 10px;
   border-radius: 50%;
-  margin-top: 3px;
+  margin-top: 5px;
 }
 .header__week-block_daydate:hover {
   background-color: #e8edf3;
-  cursor: pointer;
-}
-.header__week-block_dayname, .header__week-block .gmt-cell {
-  color: #52575c;
-  font-size: 10px;
-}
-.header__week-block .gmt-cell {
-  text-align: left;
-  align-self: flex-end;
-  flex-shrink: 2;
-  padding-right: 20px;
-}
-.header__week-block_part-bord {
-  width: 1px;
-  height: 20px;
-  background-color: #a7abb0;
-  position: absolute;
-  bottom: 0;
 }
 
 .today__header__week-block_days .header__week-block_dayname {
