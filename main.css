@@ -1,7 +1,75 @@
-.box {
-  width: 100px;
-  height: 100px;
-  background-color: red;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+  background-color: #fff;
+  height: 100vh;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  color: #000;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 3;
+}
+.header__week-block {
+  display: flex;
+}
+.header__week-block_days {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 10px 0 5px 0;
+  border-bottom: 1px solid #a7abb0;
+  position: relative;
+}
+.header__week-block_dayname, .header__week-block_daydate {
+  margin: 0;
+  padding-top: 6px;
+}
+.header__week-block_daydate {
+  padding: 10px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-top: 3px;
+}
+.header__week-block_daydate:hover {
+  background-color: #e8edf3;
+  cursor: pointer;
+}
+.header__week-block_dayname, .header__week-block .gmt-cell {
+  color: #52575c;
+  font-size: 10px;
+}
+.header__week-block .gmt-cell {
+  text-align: left;
+  align-self: flex-end;
+  flex-shrink: 2;
+  padding-right: 20px;
+}
+.header__week-block_part-bord {
+  width: 1px;
+  height: 20px;
+  background-color: #a7abb0;
+  position: absolute;
+  bottom: 0;
+}
+
+.today__header__week-block_days .header__week-block_dayname {
+  color: #0851f6;
+}
+.today__header__week-block_days .header__week-block_daydate {
+  background-color: #0851f6;
+  color: #fff;
+}
+
+.main {
+  position: relative;
+  top: 70px;
 }
 
 /*# sourceMappingURL=main.css.map */
