@@ -66,6 +66,7 @@
   z-index: 3;
 }
 .header__week-block {
+  height: 80px;
   display: flex;
 }
 .header__week-block_days {
@@ -118,7 +119,7 @@
 
 .main {
   position: relative;
-  top: 70px;
+  top: 160px;
 }
 
 * {

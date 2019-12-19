@@ -73,6 +73,7 @@
     background-color: $backgroundColor;
     z-index: 3;
     &__week-block{
+        height: 80px;
         display: flex;
         &_days{
             width: 100%;
@@ -130,10 +131,4 @@
         background-color: $blueColor;
         color: $backgroundColor;
     }
-}
-
-
-.main{
-    position: relative;
-    top: 70px;
 }
