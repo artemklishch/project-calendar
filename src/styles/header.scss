@@ -76,9 +76,8 @@
         height: 80px;
         width: 100%;
         display: flex;
-        border-bottom: 1px solid $borderColor;
         &_line{
-            width: 100%;
+            flex: 1;
             display: flex;
         }
         &_days{

@@ -69,10 +69,9 @@
   height: 80px;
   width: 100%;
   display: flex;
-  border-bottom: 1px solid #a7abb0;
 }
 .header__week-block_line {
-  width: 100%;
+  flex: 1;
   display: flex;
 }
 .header__week-block_days {
@@ -122,17 +121,45 @@
 }
 
 .main {
+  width: 100%;
   position: relative;
   top: 160px;
   display: flex;
 }
-
-.sidebar_timing {
+.main__sidebar_time {
+  color: #52575c;
+  font-size: 12px;
+}
+.main__sidebar_timing {
   width: 6%;
 }
-
-.sidebar_days {
+.main__sidebar_timing_place {
+  height: 50px;
+  position: relative;
+}
+.main__sidebar_timing_place span {
+  position: absolute;
+  top: -8px;
+}
+.main__sidebar_timing_place-bord {
+  width: 15px;
+  height: 1px;
+  background-color: #a7abb0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.main__sidebar_days {
   flex: 1;
+}
+.main__sidebar_days_line {
+  display: flex;
+}
+.main__sidebar_days_place {
+  height: 50px;
+  flex: 1;
+  border-top: 1px solid #a7abb0;
+  border-left: 1px solid #a7abb0;
 }
 
 * {

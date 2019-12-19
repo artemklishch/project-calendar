@@ -1,11 +1,42 @@
 .main{
+    width: 100%;
     position: relative;
     top: 160px;
     display: flex;
+    &__sidebar_time{
+        color: $textColorgrey;
+        font-size: 12px;
+    }
+    &__sidebar_timing{
+        width: 6%;
+        &_place{
+            height: 50px;
+            position: relative;
+            span{
+                position: absolute;
+                top: -8px;
+            }
+        }
+        &_place-bord{
+            width: 15px;
+            height: 1px;
+            background-color:$borderColor;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+    &__sidebar_days{
+        flex: 1;
+        &_line{
+            display: flex;
+        }
+        &_place{
+            height: 50px;
+            flex: 1;
+            border-top: 1px solid $borderColor;
+            border-left: 1px solid $borderColor;
+        }
+    }
 }
-.sidebar_timing{
-    width: 6%;
-}
-.sidebar_days{
-    flex: 1;
-}
+
