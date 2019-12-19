@@ -94,6 +94,7 @@
   padding-right: 2%;
   align-self: flex-end;
   margin-bottom: 1%;
+  width: 6%;
 }
 .header__week-block_dayname, .header__week-block_daydate {
   margin: 0;
@@ -123,6 +124,15 @@
 .main {
   position: relative;
   top: 160px;
+  display: flex;
+}
+
+.sidebar_timing {
+  width: 6%;
+}
+
+.sidebar_days {
+  flex: 1;
 }
 
 * {
