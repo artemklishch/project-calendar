@@ -1,2 +1,15 @@
 @import 'common.scss';
-@import 'layout.scss';
+@import 'header.scss';
+
+
+
+*{
+    box-sizing: border-box;
+}
+body{
+    font-size: $commoFontSize;
+    background-color: $backgroundColor;
+    height: 100vh;
+    font-family: 'Roboto', Helvetica,Arial,sans-serif;
+    color: $textColorBlack;
+}
