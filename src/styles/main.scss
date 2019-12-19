@@ -23,7 +23,7 @@
             background-color:$borderColor;
             position: absolute;
             right: 0;
-            top: 0;
+            top: -1px;
         }
     }
     &__sidebar_days{
@@ -34,7 +34,7 @@
         &_place{
             height: 50px;
             flex: 1;
-            border-top: 1px solid $borderColor;
+            border-bottom: 1px solid $borderColor;
             border-left: 1px solid $borderColor;
         }
     }
