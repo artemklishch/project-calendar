@@ -68,59 +68,57 @@
 
 
 .header{
-    position: fixed;
     width: 100%;
-    background-color: $backgroundColor;
+    position: fixed;
     z-index: 3;
+    background-color: $backgroundColor;
     &__week-block{
         height: 80px;
+        width: 100%;
         display: flex;
-        &_days{
+        border-bottom: 1px solid $borderColor;
+        &_line{
             width: 100%;
+            display: flex;
+        }
+        &_days{
+            flex: 1;
+            align-self: flex-end;
             text-align: center;
             text-transform: uppercase;
-            padding: 10px 0 5px 0;
-            border-bottom: 1px solid $borderColor;
             position: relative;
+            padding-bottom: 8px;
+        }
+        &_part-bord{
+            position: absolute;
+            bottom: 0;
+            height: 30px;
+            width: 1px;
+            background-color: $borderColor;
+        }
+        &_gmt-cell{
+            padding-right: 2%;
+            align-self: flex-end;
+            margin-bottom: 1%;
         }
         &_dayname, &_daydate{
-            margin: 0;
-            padding-top: 6px;
+           margin: 0;
+        }
+        &_dayname, &_gmt-cell{
+            color: $textColorgrey;
+            font-size: 12px;
         }
         &_daydate{
-            padding: 10px;
             display: inline-block;
+            padding: 10px;
             border-radius: 50%;
-            margin-top: 3px;
+            margin-top: 5px;
         }
         &_daydate:hover{
             background-color: $backgroundGreyColor;
-            cursor: pointer;
-        }
-        &_dayname, .gmt-cell{
-            color: $textColorgrey;
-            font-size: 10px;
-        }
-        .gmt-cell{
-            text-align: left;
-            align-self: flex-end;
-            flex-shrink: 2;
-            padding-right: 20px;
-        }
-        &_part-bord{
-            width: 1px;
-            height: 20px;
-            background-color: $borderColor;
-            position: absolute;
-            bottom: 0;
         }
     }
-    
 }
-
-
-
-
 
 
 .today__header__week-block_days{
