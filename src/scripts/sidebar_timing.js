@@ -1,7 +1,7 @@
 const generateNumbers = (from, to) => {
     let count = 0;
     let arrOfPoints = []; 
-    let timeOfDay = 'AM'
+    let timeOfDay = 'AM';
     for(let i = from; count !== 2; i++){
         let tempStr;
         if(i === from){

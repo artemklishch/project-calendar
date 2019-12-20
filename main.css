@@ -73,7 +73,7 @@
 .header__week-block_line {
   flex: 1;
   display: flex;
-  border-bottom: 1px solid #a7abb0;
+  border-bottom: 1px solid #e0e5ea;
 }
 .header__week-block_days {
   flex: 1;
@@ -88,7 +88,7 @@
   bottom: 0;
   height: 30px;
   width: 1px;
-  background-color: #a7abb0;
+  background-color: #e0e5ea;
 }
 .header__week-block_gmt-cell {
   padding-right: 2%;
@@ -100,7 +100,7 @@
 .header__week-block_gmt-cell_part-bord {
   width: 15px;
   height: 1px;
-  background-color: #a7abb0;
+  background-color: #e0e5ea;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -120,6 +120,7 @@
 }
 .header__week-block_daydate:hover {
   background-color: #e8edf3;
+  cursor: pointer;
 }
 
 .today__header__week-block_days .header__week-block_dayname {
@@ -154,7 +155,7 @@
 .main__sidebar_timing_place-bord {
   width: 15px;
   height: 1px;
-  background-color: #a7abb0;
+  background-color: #e0e5ea;
   position: absolute;
   right: 0;
   top: -1px;
@@ -168,8 +169,8 @@
 .main__sidebar_days_place {
   height: 50px;
   flex: 1;
-  border-bottom: 1px solid #a7abb0;
-  border-left: 1px solid #a7abb0;
+  border-bottom: 1px solid #e0e5ea;
+  border-left: 1px solid #e0e5ea;
 }
 
 * {
