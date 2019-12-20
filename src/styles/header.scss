@@ -140,4 +140,7 @@
         background-color: $blueColor;
         color: $backgroundColor;
     }
+    .header__week-block_daydate:hover{
+        background-color: $blueColorDarker;
+    }
 }

@@ -130,6 +130,9 @@
   background-color: #0851f6;
   color: #fff;
 }
+.today__header__week-block_days .header__week-block_daydate:hover {
+  background-color: #0b60c0;
+}
 
 .main {
   width: 100%;
