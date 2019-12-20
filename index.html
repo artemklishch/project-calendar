@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
-        integrity="sha256-WAgYcAck1C1/zEl5sBl5cfyhxtLgKGdpI3oKyJffVRI=" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha256-WAgYcAck1C1/zEl5sBl5cfyhxtLgKGdpI3oKyJffVRI=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="./main.css">
     <title>Calendar</title>
 </head>
@@ -35,8 +33,9 @@
             <div class="header__week-block">
                 <div class="header__week-block_gmt-cell">
                     gmt+02
-                    <div class ="header__week-block_gmt-cell_part-bord"></div></div
+                    <div class="header__week-block_gmt-cell_part-bord"></div>
                 </div>
+            </div>
 
                 <div class="header__week-block_line">
                     <div class="header__week-block_days">
@@ -75,13 +74,57 @@
                         <p class="header__week-block_daydate">30</p>
                     </div>
                 </div>
-
+                <div class="header__week-block_days">
+                    <div class="header__week-block_part-bord"></div>
+                    <p class="header__week-block_dayname">th</p>
+                    <p class="header__week-block_daydate">28</p>
+                </div>
+                <div class="header__week-block_days">
+                    <div class="header__week-block_part-bord"></div>
+                    <p class="header__week-block_dayname">fr</p>
+                    <p class="header__week-block_daydate">29</p>
+                </div>
+                <div class="header__week-block_days">
+                    <div class="header__week-block_part-bord"></div>
+                    <p class="header__week-block_dayname">sat</p>
+                    <p class="header__week-block_daydate">30</p>
+                </div>
+                <div class="header__week-block_days">
+                    <div class="header__week-block_part-bord"></div>
+                    <p class="header__week-block_dayname">sun</p>
+                    <p class="header__week-block_daydate">31</p>
+                </div>
             </div>
-        </header>
-        <main class="main">
-            <div class="main__sidebar_timing"></div>
-            <div class="main__sidebar_days"></div>
-        </main>
+            <div class="popup-layer">
+                <form class="popup event" data-id-event="">
+                    <span class="popup__btn-close"><img class="close"
+                            src="https://img.icons8.com/color/48/000000/close-window.png"></span>
+                    <input class="event__name" name="eventName" type="text" required placeholder="Add title ">
+                    <div class="popup__picker">
+                        <img class="clock" src="https://img.icons8.com/pastel-glyph/64/000000/time.png">
+                        <input class="event__date-start" name="eventDateStart" required type="date">
+                        <select class="event__time-start select" size="1" name="eventTimeStart" required></select>
+                        <span class='line'></span>
+                        <select class="event__time-end select" name="eventTimeEnd" required></select>
+                        <input class="event__date-end" name="eventDateEnd" required type="date">
+
+                    </div>
+                    <img class="multiline" src="https://img.icons8.com/windows/32/000000/multiline-text.png">
+                    <div class="multiline__text"> add description </div>
+                    <div class="footer-popup">
+                        <span class="event__btn-delete"><img class="bascket"
+                                src="https://img.icons8.com/windows/32/000000/trash.png"></span>
+                        <button class="event__btn-save">Save</button>
+                    </div>
+                </form>
+            </div>
+
+    </div>
+    </header>
+    <main class="main">
+        <div class="main__sidebar_timing"></div>
+        <div class="main__sidebar_days"></div>
+    </main>
     </div>
 
 
