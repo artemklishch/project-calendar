@@ -141,6 +141,7 @@
         }
         &_daydate:hover {
             background-color: $backgroundGreyColor;
+            cursor: pointer;
         }
     }
 }
@@ -152,5 +153,8 @@
     .header__week-block_daydate {
         background-color: $blueColor;
         color: $backgroundColor;
+    }
+    .header__week-block_daydate:hover{
+        background-color: $blueColorDarker;
     }
 }
