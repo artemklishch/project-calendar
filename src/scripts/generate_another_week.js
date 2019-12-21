@@ -42,6 +42,11 @@ export const renderAnotherWeek = event => {
     }
     renderTitleDate(firstDayOfWeek, lastDayOfWeek);
     if(counter === 0) renderCurrentWeek();
+    const todayButton = document.querySelector('.nav_day');
+    todayButton.addEventListener('click', () => {
+        firstDayOfWeek = new Date(startWeekYear);
+        lastDayOfWeek = new Date(endWeekYear);
+    });
 };
 
 const arrows = document.querySelector('.nav__arow');
