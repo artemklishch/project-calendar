@@ -1,7 +1,10 @@
 import { startWeekYear, endWeekYear } from './current_week.js';
+import { renderCurrentWeek } from './current_week.js';
+
 let firstDayOfWeek = new Date(startWeekYear);
 let lastDayOdWeek = new Date(endWeekYear);
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
+let counter = 0;
 
 export const renderAnotherWeek = event => {
     const certainArrow = event.target;
@@ -9,6 +12,7 @@ export const renderAnotherWeek = event => {
         || certainArrow.classList.contains('nav__arow_right');  
     if(!checkArrow) return;
     let weekTimeMilliseconds = 604800000;
+    
     if(certainArrow.classList.contains('nav__arow_right')){
         firstDayOfWeek = new Date(firstDayOfWeek.valueOf() + weekTimeMilliseconds);
         lastDayOdWeek = new Date(lastDayOdWeek.valueOf() + weekTimeMilliseconds); 
@@ -20,6 +24,7 @@ export const renderAnotherWeek = event => {
                 elem.innerHTML = temp.getDate();
                 temp.setDate(temp.getDate()+1);
             });
+        counter++;
     }
     if(certainArrow.classList.contains('nav__arow_left')){
         firstDayOfWeek = new Date(firstDayOfWeek.valueOf() - weekTimeMilliseconds);
@@ -32,7 +37,9 @@ export const renderAnotherWeek = event => {
                 elem.innerHTML = temp.getDate();
                 temp.setDate(temp.getDate()+1);
             });
+        counter--;
     }
+    if(counter === 0) renderCurrentWeek();
 };
 
 const arrows = document.querySelector('.nav__arow');
