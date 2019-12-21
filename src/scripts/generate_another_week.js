@@ -1,8 +1,9 @@
 import { startWeekYear, endWeekYear } from './current_week.js';
 import { renderCurrentWeek } from './current_week.js';
+import { renderTitleDate } from './generate_title_date.js';
 
 let firstDayOfWeek = new Date(startWeekYear);
-let lastDayOdWeek = new Date(endWeekYear);
+let lastDayOfWeek = new Date(endWeekYear);
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
 let counter = 0;
 
@@ -15,7 +16,7 @@ export const renderAnotherWeek = event => {
     
     if(certainArrow.classList.contains('nav__arow_right')){
         firstDayOfWeek = new Date(firstDayOfWeek.valueOf() + weekTimeMilliseconds);
-        lastDayOdWeek = new Date(lastDayOdWeek.valueOf() + weekTimeMilliseconds); 
+        lastDayOfWeek = new Date(lastDayOfWeek.valueOf() + weekTimeMilliseconds); 
         let temp = new Date(firstDayOfWeek);
         [...numbersOfDates]
             .forEach(elem => {
@@ -28,7 +29,7 @@ export const renderAnotherWeek = event => {
     }
     if(certainArrow.classList.contains('nav__arow_left')){
         firstDayOfWeek = new Date(firstDayOfWeek.valueOf() - weekTimeMilliseconds);
-        lastDayOdWeek = new Date(lastDayOdWeek.valueOf() - weekTimeMilliseconds); 
+        lastDayOfWeek = new Date(lastDayOfWeek.valueOf() - weekTimeMilliseconds); 
         let temp = new Date(firstDayOfWeek);
         [...numbersOfDates]
             .forEach(elem => {
@@ -39,6 +40,7 @@ export const renderAnotherWeek = event => {
             });
         counter--;
     }
+    renderTitleDate(firstDayOfWeek, lastDayOfWeek);
     if(counter === 0) renderCurrentWeek();
 };
 
