@@ -1,21 +1,18 @@
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
-const monthYear = document.querySelector('.nav__dateMonEar-today');
-
+export let startWeekYear, endWeekYear;
 
 export const renderCurrentWeek = () => {
     const currentFullDate = new Date();//full day
-    const currentYear = currentFullDate.getFullYear();
-    const currentMonth = currentFullDate.toDateString().split(' ')[1];
     const currentDate = currentFullDate.getDate();//date
     const currentDayOfWeek = currentFullDate.getDay();//day num
-    let arrToDown = [];
-    let arrToUp = [];
+    let countToDown = 0;
+    let countToUp = 0;
     [...numbersOfDates]
         .forEach((element,index) => {
             if(index < currentDayOfWeek){
-                arrToDown.push(element);
+                countToDown++;
             }else if(index > currentDayOfWeek){
-                arrToUp.push(element);
+                countToUp++;
             }
             if(currentDayOfWeek === index){
                 element.innerHTML = currentDate;
@@ -23,14 +20,25 @@ export const renderCurrentWeek = () => {
                 tempElem.classList.add('today__header__week-block_days');
             }
         });
-    let tempValueForDown = currentDate-(currentDayOfWeek+1);
-    let tempValueForUp = currentDate;
-    arrToDown
-        .forEach(elem => elem.innerHTML = ++tempValueForDown);
-    arrToUp
-        .forEach(elem => elem.innerHTML = ++tempValueForUp);
-
-    monthYear.innerHTML = `${currentMonth} ${currentYear}`;
     
+    countToDown = countToDown * 24 * 60 * 60 * 1000;
+    countToUp = countToUp * 24 * 60 * 60 * 1000; 
+    
+    startWeekYear = new Date(Date.now() - countToDown);
+    endWeekYear = new Date(Date.now() + countToUp);
+    
+    let tempBefore = new Date(currentFullDate - countToDown);
+    let tempAfter = new Date(currentFullDate);
+    tempAfter.setDate(tempAfter.getDate()+1);
+    for(let i = 0; i < [...numbersOfDates].length; i++){
+        if(i < currentDayOfWeek){
+            numbersOfDates[i].innerHTML = tempBefore.getDate();
+            tempBefore.setDate(tempBefore.getDate()+1);
+        }
+        if(i > currentDayOfWeek){
+            numbersOfDates[i].innerHTML = tempAfter.getDate();
+            tempAfter.setDate(tempAfter.getDate()+1);
+        }
+    }    
 }
 renderCurrentWeek();
