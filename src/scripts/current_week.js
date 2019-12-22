@@ -28,13 +28,16 @@ export const renderCurrentWeek = () => {
     endWeekYear = new Date(Date.now() + countToUp);
     
     let tempBefore = new Date(currentFullDate - countToDown);
+    let tempAfter = new Date(currentFullDate);
+    tempAfter.setDate(tempAfter.getDate()+1);
     for(let i = 0; i < [...numbersOfDates].length; i++){
         if(i < currentDayOfWeek){
             numbersOfDates[i].innerHTML = tempBefore.getDate();
             tempBefore.setDate(tempBefore.getDate()+1);
         }
         if(i > currentDayOfWeek){
-            numbersOfDates[i].innerHTML = ++currentDate;
+            numbersOfDates[i].innerHTML = tempAfter.getDate();
+            tempAfter.setDate(tempAfter.getDate()+1);
         }
     }    
 }
