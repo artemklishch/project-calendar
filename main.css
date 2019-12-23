@@ -197,6 +197,134 @@
   border-left: 1px solid #e0e5ea;
 }
 
+.display-none {
+  display: none;
+}
+
+.popup-layer {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #89898961;
+}
+
+.popup {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  height: 330px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px 16px 8px;
+  border-radius: 8px;
+  text-align: right;
+  background-color: #fff;
+}
+.popup__picker {
+  display: flex;
+  margin: 45px 0;
+  align-items: center;
+  position: relative;
+  left: 7px;
+}
+.popup__btn-close {
+  position: absolute;
+  right: 10px;
+  top: -3px;
+}
+
+.event__name {
+  border: none;
+  border-bottom: 2px solid #d5d5d5;
+  width: 90%;
+  font-size: 20px;
+  letter-spacing: 2px;
+  outline: none;
+  margin-top: 30px;
+}
+.event__description {
+  border: none;
+}
+.event__btn-save {
+  margin-top: 67px;
+  position: absolute;
+  right: 10px;
+  height: 35px;
+  padding-left: 25px;
+  padding-right: 25px;
+  background: royalblue;
+  color: white;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.event__date-start, .event__date-end {
+  padding: 2px;
+  margin-left: 18px;
+  border: none;
+  background-size: contain;
+  outline: none;
+  width: 150px;
+}
+.event__time-start, .event__time-end {
+  border: none;
+  background-size: contain;
+  outline: none;
+  padding: 2px;
+  background-color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.footer-popup {
+  position: relative;
+  height: 40px;
+  display: flex;
+}
+
+.clock {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+}
+
+.line {
+  left: 237px;
+  width: 8px;
+  margin: 0 5px;
+  border-top: 2px solid black;
+}
+
+.multiline {
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+}
+.multiline__text {
+  color: #353538;
+  padding-top: 7px;
+  margin-right: 145px;
+}
+
+.close {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  margin-top: 10px;
+}
+
+.bascket {
+  cursor: pointer;
+  margin-top: 70px;
+}
+
 * {
   box-sizing: border-box;
 }
