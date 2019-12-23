@@ -1,11 +1,11 @@
 const sidebarDaysBlock = document.querySelector('.main__sidebar_days');
 
 
-const generateDayPlace = () => {
+const generateHoursPlace = () => {
     let tempArrOfDays = [];
-    for(let i = 0; i < 7; i++){
+    for(let i = 0; i < 24; i++){
         let tempStr = `
-            <div class="main__sidebar_days_place" data-day-number="${i}"></div>
+            <div class="main__sidebar_days_hours" data-hour-number="${i}"></div>
         `;
         tempArrOfDays.push(tempStr);
     }
@@ -13,18 +13,18 @@ const generateDayPlace = () => {
 };
 
 
-export const sidebarDays = () => {
-    let tempArrOfPoints = [];
-    let tempArrOfDays = generateDayPlace();
-    for(let i = 0; i < 24; i++){
+export const generateDaysPlace = () => {
+    let tempArrOfDays = [];
+    let tempArrOfHours = generateHoursPlace();
+    for(let i = 0; i < 7; i++){
         let tempStr = `
-        <div class="main__sidebar_days_line" data-hour="${i}">
-            ${tempArrOfDays}
+        <div class="main__sidebar_days_line" data-day-number="${i}">
+            ${tempArrOfHours}
         </div>
         `;
-        tempArrOfPoints.push(tempStr);
+        tempArrOfDays.push(tempStr);
     }
-    const stringOfHTML = tempArrOfPoints.join('');
+    const stringOfHTML = tempArrOfDays.join('');
     sidebarDaysBlock.innerHTML = stringOfHTML;
 };
-sidebarDays();
+generateDaysPlace();
