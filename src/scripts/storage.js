@@ -18,4 +18,3 @@ export const eventsArray = [
         description: undefined,
     },
 ];
-console.log(eventsArray[0].startTime.toDateString());
