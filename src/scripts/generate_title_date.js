@@ -1,4 +1,4 @@
-import { startWeekYear, endWeekYear } from './current_week.js';
+import { arrDaysOfWeek } from './current_week.js';
 
 
 export const renderTitleDate = (startdate, enddate) => {
@@ -22,4 +22,4 @@ export const renderTitleDate = (startdate, enddate) => {
     }
 };
 
-renderTitleDate(startWeekYear, endWeekYear);
+renderTitleDate(arrDaysOfWeek[0], arrDaysOfWeek[6]);

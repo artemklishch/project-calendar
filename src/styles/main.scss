@@ -40,3 +40,17 @@
     }
 }
 
+
+.main__sidebar_day_object{
+    font-size: 12px;
+    background-color: $blueColor;
+    color: $backgroundColor;
+    height: 95%;
+    border-radius: 5px;
+    font-weight: 700;
+    padding: 4px;
+    h7, p{
+        margin: 0;
+        padding: 0;
+    }
+}
