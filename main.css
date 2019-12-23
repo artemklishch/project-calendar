@@ -325,6 +325,30 @@
   margin-top: 70px;
 }
 
+.redline {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  width: 20vh;
+  z-index: 10;
+}
+.redline__ball {
+  position: relative;
+  bottom: 6px;
+  right: 6px;
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+  background-color: red;
+}
+.redline__line {
+  position: relative;
+  bottom: 6px;
+  right: 6px;
+  width: 100%;
+  border-top: 2px solid red;
+}
+
 * {
   box-sizing: border-box;
 }
