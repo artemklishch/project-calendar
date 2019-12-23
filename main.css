@@ -189,14 +189,17 @@
   top: -1px;
 }
 .main__sidebar_days {
+  display: flex;
   flex: 1;
 }
 .main__sidebar_days_line {
   display: flex;
-}
-.main__sidebar_days_place {
-  height: 50px;
+  flex-direction: column;
   flex: 1;
+}
+.main__sidebar_days_hours {
+  height: 50px;
+  width: 100%;
   border-bottom: 1px solid #e0e5ea;
   border-left: 1px solid #e0e5ea;
 }
@@ -206,9 +209,11 @@
   background-color: #0851f6;
   color: #fff;
   height: 95%;
+  width: 93%;
   border-radius: 5px;
   font-weight: 700;
   padding: 4px;
+  position: relative;
 }
 .main__sidebar_day_object h7, .main__sidebar_day_object p {
   margin: 0;
