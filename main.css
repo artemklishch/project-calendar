@@ -134,10 +134,14 @@
   font-size: 12px;
 }
 .header__week-block_daydate {
-  display: inline-block;
   padding: 10px;
   border-radius: 50%;
-  margin-top: 5px;
+  margin: 5px auto 0 auto;
+  width: 30px;
+  height: 30px;
+  line-height: 12px;
+  display: flex;
+  justify-content: center;
 }
 .header__week-block_daydate:hover {
   background-color: #e8edf3;
@@ -195,6 +199,20 @@
   flex: 1;
   border-bottom: 1px solid #e0e5ea;
   border-left: 1px solid #e0e5ea;
+}
+
+.main__sidebar_day_object {
+  font-size: 12px;
+  background-color: #0851f6;
+  color: #fff;
+  height: 95%;
+  border-radius: 5px;
+  font-weight: 700;
+  padding: 4px;
+}
+.main__sidebar_day_object h7, .main__sidebar_day_object p {
+  margin: 0;
+  padding: 0;
 }
 
 * {

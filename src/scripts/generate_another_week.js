@@ -1,9 +1,9 @@
-import { startWeekYear, endWeekYear } from './current_week.js';
+import { arrDaysOfWeek } from './current_week.js';
 import { renderCurrentWeek } from './current_week.js';
 import { renderTitleDate } from './generate_title_date.js';
 
-let firstDayOfWeek = new Date(startWeekYear);
-let lastDayOfWeek = new Date(endWeekYear);
+let firstDayOfWeek = new Date(arrDaysOfWeek[0]);
+let lastDayOfWeek = new Date(arrDaysOfWeek[6]);
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
 let counter = 0;
 
@@ -12,12 +12,14 @@ export const renderAnotherWeek = event => {
     const checkArrow = certainArrow.classList.contains('nav__arow_left') 
         || certainArrow.classList.contains('nav__arow_right');  
     if(!checkArrow) return;
+    
     let weekTimeMilliseconds = 604800000;
     
     if(certainArrow.classList.contains('nav__arow_right')){
-        firstDayOfWeek = new Date(firstDayOfWeek.valueOf() + weekTimeMilliseconds);
-        lastDayOfWeek = new Date(lastDayOfWeek.valueOf() + weekTimeMilliseconds); 
-        let temp = new Date(firstDayOfWeek);
+        for(let i = 0; i < 7; i++){
+            arrDaysOfWeek[i] = new Date(arrDaysOfWeek[i].valueOf() + weekTimeMilliseconds);
+        }
+        let temp = new Date(arrDaysOfWeek[0]);
         [...numbersOfDates]
             .forEach(elem => {
                 let tempElem = elem.closest('.header__week-block_days');
@@ -28,9 +30,10 @@ export const renderAnotherWeek = event => {
         counter++;
     }
     if(certainArrow.classList.contains('nav__arow_left')){
-        firstDayOfWeek = new Date(firstDayOfWeek.valueOf() - weekTimeMilliseconds);
-        lastDayOfWeek = new Date(lastDayOfWeek.valueOf() - weekTimeMilliseconds); 
-        let temp = new Date(firstDayOfWeek);
+        for(let i = 0; i < 7; i++){
+            arrDaysOfWeek[i] = new Date(arrDaysOfWeek[i].valueOf() - weekTimeMilliseconds);
+        }
+        let temp = new Date(arrDaysOfWeek[0]);
         [...numbersOfDates]
             .forEach(elem => {
                 let tempElem = elem.closest('.header__week-block_days');
@@ -40,14 +43,14 @@ export const renderAnotherWeek = event => {
             });
         counter--;
     }
-    
+    renderTitleDate(arrDaysOfWeek[0], arrDaysOfWeek[6]);
     const todayButton = document.querySelector('.nav_day');
     todayButton.addEventListener('click', () => {
-        firstDayOfWeek = new Date(startWeekYear);
-        lastDayOfWeek = new Date(endWeekYear);
+        // firstDayOfWeek = new Date(arrDaysOfWeek[0]);
+        // lastDayOfWeek = new Date(arrDaysOfWeek[6]);
         counter = 0;
     });
-    renderTitleDate(firstDayOfWeek, lastDayOfWeek);
+    
     if(counter === 0) renderCurrentWeek();
 };
 
