@@ -17,4 +17,10 @@ export const eventsArray = [
         endTime: new Date(2019,11,24,19,30),
         description: undefined,
     },
+    {
+        header: 'Good night',
+        startTime: new Date(2019,11,28,23),
+        endTime: new Date(2019,11,28,23,45),
+        description: undefined,
+    },
 ];

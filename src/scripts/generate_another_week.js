@@ -2,6 +2,8 @@ import { arrDaysOfWeek } from './current_week.js';
 import { generateArrDaysOfWeek } from './current_week.js';
 import { renderCurrentWeek } from './current_week.js';
 import { renderTitleDate } from './generate_title_date.js';
+import { eventsArray } from './storage.js';
+import { renderEventObject } from './generate_event_object.js';
 
 let firstDayOfWeek = new Date(arrDaysOfWeek[0]);
 let lastDayOfWeek = new Date(arrDaysOfWeek[6]);

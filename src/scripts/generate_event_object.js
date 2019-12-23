@@ -155,6 +155,9 @@
 
 
 import { eventsArray } from './storage.js';
+import { arrDaysOfWeek } from './current_week.js';
+// let firstDayOfWeek = new Date(arrDaysOfWeek[0]);
+// let lastDayOfWeek = new Date(arrDaysOfWeek[6]);
 
 const fileOfHoures = document.querySelectorAll('.main__sidebar_days_line');
 
@@ -164,11 +167,11 @@ const fillDayPlaceForLongEvent = (dayObject) => {
 
     let startTimeHour = new Date(dayObject.accessStartTime).getHours();
     startTimeHour = transformHourFormat(startTimeHour);
-    let startTimeMinutes = new Date(dayObject.startTime).getMinutes();
+    let startTimeMinutes = new Date(dayObject.accessStartTime).getMinutes();
     
     let endTimeHour = new Date(dayObject.accessEndTime).getHours();
     endTimeHour = transformHourFormat(endTimeHour);
-    let endTimeMinutes = new Date(dayObject.endTime).getMinutes();
+    let endTimeMinutes = new Date(dayObject.accessEndTime).getMinutes();
     
     if(startTimeMinutes !== 0) {
         startTimeHour += `:${startTimeMinutes}`; 
@@ -296,11 +299,23 @@ const fillDayPlace = (dayObject) => {
    
 };
 
-export const renderEventObject = (eventsArray) => {    
-    eventsArray.forEach(elem => {
+export const renderEventObject = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {   
+    const firstDayYear = firstDayOfWeek.getFullYear();
+    const firstDayMonth = firstDayOfWeek.getMonth();
+    const firstDayDate = firstDayOfWeek.getDate();
+    let firstPoint = new Date(firstDayYear, firstDayMonth, firstDayDate);
+
+    const lastDayYear = lastDayOfWeek.getFullYear();
+    const lastDayMonth = lastDayOfWeek.getMonth();
+    const lastDayDate = lastDayOfWeek.getDate();
+    let lastPoint = new Date(lastDayYear, lastDayMonth, lastDayDate+1); 
+
+    eventsArray.filter(elem => elem.startTime >= firstPoint && elem.startTime < lastPoint)        
+        .forEach(elem => {
         if(elem.startTime.getDate() !== elem.endTime.getDate()){
             generateLongEvent(elem);
         }else fillDayPlace(elem);
     });
+    
 }; 
-renderEventObject(eventsArray);
+renderEventObject(eventsArray, arrDaysOfWeek[0], arrDaysOfWeek[6]);
