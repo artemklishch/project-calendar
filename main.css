@@ -215,9 +215,14 @@
   padding: 4px;
   position: relative;
 }
-.main__sidebar_day_object h7, .main__sidebar_day_object p {
+.main__sidebar_day_object h7,
+.main__sidebar_day_object p {
   margin: 0;
   padding: 0;
+}
+
+.main__sidebar_days_hours {
+  position: relative;
 }
 
 .display-none {
