@@ -2,6 +2,7 @@ import { eventsArray } from './storage.js';
 import { arrDaysOfWeek } from './current_week.js';
 
 const fileOfHoures = document.querySelectorAll('.main__sidebar_days_line');
+let firstPoint, lastPoint;
 
 export const clearFunc = () => {
     const arrOfHours = document.querySelectorAll('.main__sidebar_days_hours');
@@ -25,7 +26,7 @@ const fillDayPlaceForLongEvent = (dayObject) => {
     if(endTimeMinutes !== 0) {
         endTimeHour += `:${endTimeMinutes}`; 
     }
-    
+
     let certainLine = [...fileOfHoures]
         .find((elem,index) => index === new Date(dayObject.startTime).getDay());
     let certainDay = [...certainLine.children]
@@ -40,15 +41,25 @@ const fillDayPlaceForLongEvent = (dayObject) => {
     forHeight(dayObject, divElem);
     divElem.append(h7Elem, pElem);
     certainDay.append(divElem); 
-   
 };
+
+
+// const generateEventZeroInEnd = (object) => {
+//    //fillDayPlaceForLongEvent(object);
+//    const day = object.endTime.getDay();
+//    let a = [...fileOfHoures].find((elem,index) => index === day).children[0];
+//    a.style.backgroundColor = 'red';
+//    //a.children[0].style.display = 'none';
+//    console.log(a);
+
+// };
 
 const generateLongEvent = (object) => {
     const year = new Date(object.startTime).getFullYear();
     const month = new Date(object.startTime).getMonth();
     const date = new Date(object.startTime).getDate();
     const lastTimeThisDay = new Date(year,month,date,24,0);
-    const firstTimeNextDay = new Date(year,month,date+1,0,0);
+    const firstTimeNextDay = new Date(year,month,date+1);
     const identificator = Math.random().toFixed(10);
     const onePartEvent = {
         header:object.header,
@@ -68,7 +79,14 @@ const generateLongEvent = (object) => {
         accessStartTime: object.startTime,
         accessEndTime: object.endTime,
     };
-    [onePartEvent,twoPartEvent].forEach(element => fillDayPlaceForLongEvent(element));
+    if(object.endTime < lastPoint){
+        [onePartEvent,twoPartEvent].forEach(element => fillDayPlaceForLongEvent(element));
+    }else if(object.endTime.getHours() === 0){
+        fillDayPlaceForLongEvent(onePartEvent);
+    }else{
+        fillDayPlaceForLongEvent(onePartEvent);
+        eventsArray.push(twoPartEvent);
+    }
 };
 
 const forHeight = (object, elem) => {
@@ -149,19 +167,21 @@ const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
     let firstDayYear = firstDateInWeek.getFullYear();
     let firstDayMonth = firstDateInWeek.getMonth();
     let firstDayDate = firstDateInWeek.getDate();
-    let firstPoint = new Date(firstDayYear, firstDayMonth, firstDayDate);
+    firstPoint = new Date(firstDayYear, firstDayMonth, firstDayDate);
     
     let lastDateInWeek = new Date(lastDayOfWeek);
     let lastDayYear = lastDateInWeek.getFullYear();
     let lastDayMonth = lastDateInWeek.getMonth();
     let lastDayDate = lastDateInWeek.getDate();
-    let lastPoint = new Date(lastDayYear, lastDayMonth, lastDayDate+1); 
-    return eventsArray.filter(elem => elem.startTime >= firstPoint && elem.startTime < lastPoint);        
+    lastPoint = new Date(lastDayYear, lastDayMonth, lastDayDate+1); 
+    return eventsArray
+        .filter(elem => elem.startTime >= firstPoint && elem.startTime < lastPoint);        
 };
 
 export const renderEventObject = (eventsArray) => {
     let tempArr = filterCorrectDays(eventsArray, arrDaysOfWeek[0], arrDaysOfWeek[6]);
     tempArr.forEach(elem => {
+        //if(elem.endTime.getHours()===0)generateEventZeroInEnd(elem);
         if(elem.startTime.getDate() !== elem.endTime.getDate()){
             generateLongEvent(elem);
         }else fillDayPlace(elem);

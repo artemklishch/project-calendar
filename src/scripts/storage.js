@@ -6,6 +6,12 @@ export const eventsArray = [
         description: undefined,
     },
     {
+        header: 'second start header',
+        startTime: new Date(2019,11,24,23),
+        endTime: new Date(2019,11,24,24),
+        description: undefined,
+    },
+    {
         header: undefined,
         startTime: new Date(2019,11,25,9,30),
         endTime: new Date(2019,11,25,11,0),
@@ -20,7 +26,7 @@ export const eventsArray = [
     {
         header: 'Good night',
         startTime: new Date(2019,11,28,23),
-        endTime: new Date(2019,11,28,23,45),
+        endTime: new Date(2019,11,28,24),
         description: undefined,
     },
     {
