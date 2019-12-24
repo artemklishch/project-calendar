@@ -1,7 +1,7 @@
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
-export let startWeekYear, endWeekYear;
+export let arrDaysOfWeek = [];
 
-export const renderCurrentWeek = () => {
+export const generateArrDaysOfWeek = () => {
     const currentFullDate = new Date();//full day
     const currentDate = currentFullDate.getDate();//date
     const currentDayOfWeek = currentFullDate.getDay();//day num
@@ -24,10 +24,20 @@ export const renderCurrentWeek = () => {
     countToDown = countToDown * 24 * 60 * 60 * 1000;
     countToUp = countToUp * 24 * 60 * 60 * 1000; 
     
-    startWeekYear = new Date(Date.now() - countToDown);
-    endWeekYear = new Date(Date.now() + countToUp);
-    
-    let tempBefore = new Date(currentFullDate - countToDown);
+    let milliSeconds = 0;
+    for(let i = 0; i < 7; i++){
+        arrDaysOfWeek[i] = new Date(Date.now() - countToDown + milliSeconds);
+        milliSeconds += 86400000;
+    }
+    return arrDaysOfWeek;
+};
+generateArrDaysOfWeek();
+
+
+export const renderCurrentWeek = (arraydays) => {
+    const currentFullDate = new Date();
+    const currentDayOfWeek = currentFullDate.getDay();
+    let tempBefore = new Date(arraydays[0]);
     let tempAfter = new Date(currentFullDate);
     tempAfter.setDate(tempAfter.getDate()+1);
     for(let i = 0; i < [...numbersOfDates].length; i++){
@@ -41,4 +51,4 @@ export const renderCurrentWeek = () => {
         }
     }    
 }
-renderCurrentWeek();
+renderCurrentWeek(arrDaysOfWeek);
