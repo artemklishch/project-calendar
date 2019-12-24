@@ -318,4 +318,17 @@ export const renderEventObject = (eventsArray, firstDayOfWeek, lastDayOfWeek) =>
     });
     
 }; 
-renderEventObject(eventsArray, arrDaysOfWeek[0], arrDaysOfWeek[6]);
+
+renderEventObject(eventsArray);
+
+getCurWeekEvents() {
+    let dateStart = generateCurWeek()[0].getDay();
+    '22/12/2019T00:00:00'
+    let dateEnd = generateCurWeek()[6].getDay();  
+    '28/12/2019T23:59:00'
+    
+    eventsArray.filter(el => 
+    
+    
+}
+
