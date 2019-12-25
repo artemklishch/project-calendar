@@ -3,7 +3,8 @@ import { generateArrDaysOfWeek } from './current_week.js';
 import { renderCurrentWeek } from './current_week.js';
 import { renderTitleDate } from './generate_title_date.js';
 import { eventsArray } from './storage.js';
-import { renderEventObject,  clearFunc } from './generate_event_object.js';
+import { renderEventObject, clearFunc } from './generate_event_object.js';
+import { renderRedLIne } from './redline.js';
 
 
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
@@ -11,46 +12,47 @@ let counter = 0;
 
 export const renderAnotherWeek = event => {
     const certainArrow = event.target;
-    const checkArrow = certainArrow.classList.contains('nav__arow_left') 
-        || certainArrow.classList.contains('nav__arow_right');  
-    if(!checkArrow) return;
-    
+    const checkArrow = certainArrow.classList.contains('nav__arow_left') ||
+        certainArrow.classList.contains('nav__arow_right');
+    if (!checkArrow) return;
+
     clearFunc();
-    if(certainArrow.classList.contains('nav__arow_right')){
+    if (certainArrow.classList.contains('nav__arow_right')) {
         arrDaysOfWeek
-            .forEach(element => element.setDate(element.getDate()+7));
+            .forEach(element => element.setDate(element.getDate() + 7));
         let temp = new Date(arrDaysOfWeek[0]);
         [...numbersOfDates]
-            .forEach(elem => {
-                let tempElem = elem.closest('.header__week-block_days');
-                tempElem.classList.remove('today__header__week-block_days');
-                elem.innerHTML = temp.getDate();
-                temp.setDate(temp.getDate()+1);
-            });
+        .forEach(elem => {
+            let tempElem = elem.closest('.header__week-block_days');
+            tempElem.classList.remove('today__header__week-block_days');
+            elem.innerHTML = temp.getDate();
+            temp.setDate(temp.getDate() + 1);
+        });
         counter++;
         renderEventObject(eventsArray);
     }
-    if(certainArrow.classList.contains('nav__arow_left')){
+    if (certainArrow.classList.contains('nav__arow_left')) {
         arrDaysOfWeek
-            .forEach(element => element.setDate(element.getDate()-7));
+            .forEach(element => element.setDate(element.getDate() - 7));
         let temp = new Date(arrDaysOfWeek[0]);
         [...numbersOfDates]
-            .forEach(elem => {
-                let tempElem = elem.closest('.header__week-block_days');
-                tempElem.classList.remove('today__header__week-block_days');
-                elem.innerHTML = temp.getDate();
-                temp.setDate(temp.getDate()+1);
-            });
+        .forEach(elem => {
+            let tempElem = elem.closest('.header__week-block_days');
+            tempElem.classList.remove('today__header__week-block_days');
+            elem.innerHTML = temp.getDate();
+            temp.setDate(temp.getDate() + 1);
+        });
         counter--;
         renderEventObject(eventsArray);
     }
     renderTitleDate(arrDaysOfWeek[0], arrDaysOfWeek[6]);
-    
-    if(counter === 0) {
+
+    if (counter === 0) {
         const arr = generateArrDaysOfWeek();
         renderCurrentWeek(arr);
+        renderRedLIne();
     }
-   
+
 };
 
 const arrows = document.querySelector('.nav__arow');
