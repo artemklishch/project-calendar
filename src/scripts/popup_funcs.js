@@ -1,7 +1,14 @@
-import { funcForCreateButton } from './create_button.js';
-import { tempObj } from './create_button.js';
+import { eventsArray } from './storage.js';
+import { renderEventObject, clearFunc } from './generate_event_object.js';
 
 const popupBlock = document.querySelector('.popup-layer');
+const tempObj = {
+   header:undefined,
+   startTime: undefined,
+   endTime:undefined,
+   description:undefined,
+};
+
 
 const lockWindow = document.querySelector('.popup__btn-close');
 export const funcForLockWindow = () => {
@@ -9,17 +16,23 @@ export const funcForLockWindow = () => {
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 
+
+
 const titleInput = document.querySelector('.event__name');
 export const addTitleFunc = event => {
      tempObj.header = event.target.value;
 };
 titleInput.addEventListener('input', addTitleFunc);
 
+
+
 const startTimeInput = document.querySelector('.event__date-start');
 export const funcStartTimeInput = event => {
     tempObj.startTime = new Date(event.target.value);
 };
 startTimeInput.addEventListener('input', funcStartTimeInput);
+
+
 
 const endTimeInput = document.querySelector('.event__date-end');
 export const funcEndTimeInput = event => {
@@ -28,3 +41,14 @@ export const funcEndTimeInput = event => {
 endTimeInput.addEventListener('input', funcEndTimeInput);
 
 
+
+const saveButton = document.querySelector('.event__btn-save');
+const startInputDate = document.querySelector('.event__date-start');
+export const funcForSaveButton = () =>{
+    
+    console.log(tempObj);
+    // eventsArray.push(tempObj);
+    // clearFunc();
+    // renderEventObject(eventsArray);
+};
+saveButton.addEventListener('click', funcForSaveButton);
