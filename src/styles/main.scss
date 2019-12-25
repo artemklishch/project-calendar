@@ -1,40 +1,40 @@
-.main{
+.main {
     width: 100%;
     position: relative;
     top: 160px;
     display: flex;
-    &__sidebar_time{
+    &__sidebar_time {
         color: $textColorgrey;
         font-size: 12px;
     }
-    &__sidebar_timing{
+    &__sidebar_timing {
         width: 6%;
-        &_place{
+        &_place {
             height: 50px;
             position: relative;
-            span{
+            span {
                 position: absolute;
                 top: -8px;
             }
         }
-        &_place-bord{
+        &_place-bord {
             width: 15px;
             height: 1px;
-            background-color:$borderColor;
+            background-color: $borderColor;
             position: absolute;
             right: 0;
             top: -1px;
         }
     }
-    &__sidebar_days{
+    &__sidebar_days {
         display: flex;
         flex: 1;
-        &_line{
+        &_line {
             display: flex;
             flex-direction: column;
             flex: 1;
         }
-        &_hours{
+        &_hours {
             height: 50px;
             width: 100%;
             border-bottom: 1px solid $borderColor;
@@ -43,8 +43,7 @@
     }
 }
 
-
-.main__sidebar_day_object{
+.main__sidebar_day_object {
     font-size: 12px;
     background-color: $blueColor;
     color: $backgroundColor;
@@ -54,8 +53,13 @@
     font-weight: 700;
     padding: 4px;
     position: relative;
-    h7, p{
+    h7,
+    p {
         margin: 0;
         padding: 0;
     }
+}
+
+.main__sidebar_days_hours {
+    position: relative;
 }
