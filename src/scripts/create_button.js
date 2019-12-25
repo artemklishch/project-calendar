@@ -1,5 +1,6 @@
 const createButton = document.querySelector('.nav__button');
 const popupBlock = document.querySelector('.popup-layer');
+
     
 const funcForTimeOptions = () => {
     const hours = document.querySelectorAll('.hours');

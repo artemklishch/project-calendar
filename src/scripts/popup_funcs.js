@@ -43,12 +43,7 @@ endTimeInput.addEventListener('input', funcEndTimeInput);
 
 
 const saveButton = document.querySelector('.event__btn-save');
-const startInputDate = document.querySelector('.event__date-start');
-export const funcForSaveButton = () =>{
-    
-    console.log(tempObj);
-    // eventsArray.push(tempObj);
-    // clearFunc();
-    // renderEventObject(eventsArray);
+export const funcForSaveButton = () => {
+    console.log('fdgdfgfdgdg');
 };
 saveButton.addEventListener('click', funcForSaveButton);
