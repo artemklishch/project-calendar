@@ -11,10 +11,7 @@ const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
 let counter = 0;
 
 export const renderAnotherWeek = event => {
-
-
     const certainArrow = event.target;
-    certainArrow.removeEventListener('click', renderRedLIne);
     const checkArrow = certainArrow.classList.contains('nav__arow_left') ||
         certainArrow.classList.contains('nav__arow_right');
     if (!checkArrow) return;
