@@ -7,3 +7,4 @@ import { todayButtonFunc } from './today_button.js';
 import { renderEventObject } from './generate_event_object.js';
 //import { renderEventOnClick } from './event_on_click.js';
 import { funcForCreateButton } from './create_button.js';
+import { addTitleFunc, funcForLockWindow } from './popup_funcs.js';
