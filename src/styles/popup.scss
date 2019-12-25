@@ -9,7 +9,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    //background-color: #89898961;
+    z-index: 11;
 }
 
 .popup {
@@ -49,6 +49,9 @@
     }
     &__description {
         border: none;
+    }
+    &__btn-delete{
+        display: none;
     }
     &__btn-save {
         margin-top: 67px;
@@ -133,3 +136,15 @@
     cursor: pointer;
     margin-top: 70px;
 } 
+
+
+.select{
+    display: inline-block;
+    border: none;
+    overflow: hidden;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 20px;
+    width: 30px;
+    margin-left: 5px;
+}
