@@ -47,6 +47,12 @@ export const eventsArray = [
         endTime: new Date(2019,11,4,2),
         description: undefined,
     },
+    {
+        header: 'another last day',
+        startTime: new Date(2019,11,30,23),
+        endTime: new Date(2019,11,30,24),
+        description: undefined,
+    },
 ];
 
 

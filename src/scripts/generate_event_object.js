@@ -43,17 +43,6 @@ const fillDayPlaceForLongEvent = (dayObject) => {
     certainDay.append(divElem); 
 };
 
-
-// const generateEventZeroInEnd = (object) => {
-//    //fillDayPlaceForLongEvent(object);
-//    const day = object.endTime.getDay();
-//    let a = [...fileOfHoures].find((elem,index) => index === day).children[0];
-//    a.style.backgroundColor = 'red';
-//    //a.children[0].style.display = 'none';
-//    console.log(a);
-
-// };
-
 const generateLongEvent = (object) => {
     const year = new Date(object.startTime).getFullYear();
     const month = new Date(object.startTime).getMonth();
@@ -71,18 +60,21 @@ const generateLongEvent = (object) => {
         accessEndTime: object.endTime,
     };
     const twoPartEvent = {
-        header:object.header,
-        startTime:firstTimeNextDay,
-        endTime:object.endTime,
-        description:object.description,
-        id:identificator,
-        accessStartTime: object.startTime,
-        accessEndTime: object.endTime,
+      header:object.header,
+      startTime:firstTimeNextDay,
+      endTime:object.endTime,
+      description:object.description,
+      id:identificator,
+      accessStartTime:object.startTime,
+      accessEndTime:object.endTime,
     };
-    if(object.endTime < lastPoint){
+    if(object.endTime > 0){
+      
+    }
+    if(object.endTime.getHours() === 0){
+        [onePartEvent].forEach(element => fillDayPlaceForLongEvent(element));
+    }else if(object.endTime < lastPoint){
         [onePartEvent,twoPartEvent].forEach(element => fillDayPlaceForLongEvent(element));
-    }else if(object.endTime.getHours() === 0){
-        fillDayPlaceForLongEvent(onePartEvent);
     }else{
         fillDayPlaceForLongEvent(onePartEvent);
         eventsArray.push(twoPartEvent);
@@ -181,7 +173,6 @@ const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
 export const renderEventObject = (eventsArray) => {
     let tempArr = filterCorrectDays(eventsArray, arrDaysOfWeek[0], arrDaysOfWeek[6]);
     tempArr.forEach(elem => {
-        //if(elem.endTime.getHours()===0)generateEventZeroInEnd(elem);
         if(elem.startTime.getDate() !== elem.endTime.getDate()){
             generateLongEvent(elem);
         }else fillDayPlace(elem);
