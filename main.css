@@ -338,6 +338,10 @@
   color: #353538;
   padding-top: 7px;
   margin-right: 145px;
+  border: none;
+}
+.multiline__text:hover {
+  background-color: #e3e8ed;
 }
 
 .close {

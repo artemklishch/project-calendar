@@ -115,6 +115,10 @@
         color: rgb(53, 53, 56);
         padding-top: 7px;
         margin-right: 145px;
+        border: none;
+    }
+    &__text:hover{
+        background-color: $colorForHoverInputs;
     }
 }
 
