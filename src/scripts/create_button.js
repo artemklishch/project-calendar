@@ -1,7 +1,29 @@
-import { funcForTimeOptions } from './popup_funcs.js';
 const createButton = document.querySelector('.nav__button');
 const popupBlock = document.querySelector('.popup-layer');
-export const tempObj = {};
+    
+const funcForTimeOptions = () => {
+    const hours = document.querySelectorAll('.hours');
+    let hourArr = [];
+    for(let i = 0; i <= 24; i++){
+        let temp = `
+        <option class="opt-hr">${i}</option>
+        `;
+        hourArr.push(temp);
+    }
+    [...hours].forEach(elem => elem.innerHTML = hourArr.join(''));
+    const minutes = document.querySelectorAll('.minutes');
+    let minArr = [];
+    let counterMin = 0;
+    while(counterMin < 60){
+        let temp = `
+        <option class="opt-min">${counterMin}</option>
+        `;
+        minArr.push(temp);
+        counterMin += 15;
+    }
+    [...minutes].forEach(elem => elem.innerHTML = minArr.join(''));
+}; 
+
 
 export const funcForCreateButton = () => {
     funcForTimeOptions();
