@@ -26,7 +26,7 @@ export const eventsArray = [
     {
         header: 'Good night',
         startTime: new Date(2019,11,28,23),
-        endTime: new Date(2019,11,28,24),
+        endTime: new Date(2019,11,29,2),
         description: undefined,
     },
     {
