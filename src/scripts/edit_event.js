@@ -1,6 +1,6 @@
 const blockOfDays = document.querySelector('.main__sidebar_days');
 
-const funcForEditEvent = event => {
+export const funcForEditEvent = event => {
     const blockOfEvent = event.target;
     console.log(blockOfEvent);
 };
