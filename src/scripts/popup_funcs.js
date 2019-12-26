@@ -44,7 +44,8 @@ endTimeInput.addEventListener('input', funcEndTimeInput);
 
 
 const saveButton = document.querySelector('.event__btn-save');
-export const funcForSaveButton = () => {
+export const funcForSaveButton = event => {
+    event.preventDefault();
     console.log('fdgdfgfdgdg');
 };
 saveButton.addEventListener('click', funcForSaveButton);
