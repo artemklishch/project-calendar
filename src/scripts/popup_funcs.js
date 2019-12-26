@@ -1,8 +1,9 @@
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 
+
 const popupBlock = document.querySelector('.popup-layer');
-const tempObj = {
+export const tempObj = {
    header:undefined,
    startTime: undefined,
    endTime:undefined,
@@ -43,12 +44,7 @@ endTimeInput.addEventListener('input', funcEndTimeInput);
 
 
 const saveButton = document.querySelector('.event__btn-save');
-const startInputDate = document.querySelector('.event__date-start');
-export const funcForSaveButton = () =>{
-    
-    console.log(tempObj);
-    // eventsArray.push(tempObj);
-    // clearFunc();
-    // renderEventObject(eventsArray);
+export const funcForSaveButton = () => {
+    console.log('fdgdfgfdgdg');
 };
 saveButton.addEventListener('click', funcForSaveButton);

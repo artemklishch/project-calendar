@@ -8,3 +8,4 @@ import { renderRedLIne } from './redline.js';
 import { renderEventObject } from './generate_event_object.js';
 import { funcForCreateButton } from './create_button.js';
 import { funcForSaveButton } from './popup_funcs.js';
+import { renderEventOnClick } from './event_on_click.js';

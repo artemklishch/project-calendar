@@ -1,7 +1,8 @@
 const createButton = document.querySelector('.nav__button');
 const popupBlock = document.querySelector('.popup-layer');
+
     
-const funcForTimeOptions = () => {
+export const funcForTimeOptions = () => {
     const hours = document.querySelectorAll('.hours');
     let hourArr = [];
     for(let i = 0; i <= 24; i++){
