@@ -6,6 +6,8 @@ const popupBlock = document.querySelector('.popup-layer');
 
 export const renderEventOnClick = event => {
     const clickedHour = event.target;
+    if(!clickedHour.classList.contains('main__sidebar_days_hours')) return;
+
     const hourNumber = +clickedHour.dataset.hourNumber;
     const dayNumber = clickedHour.closest('.main__sidebar_days_line').dataset.dayNumber;
     const currentYear = arrDaysOfWeek[dayNumber].getFullYear();
