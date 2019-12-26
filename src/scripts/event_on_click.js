@@ -1,17 +1,11 @@
 import { eventsArray } from './storage.js';
 import { arrDaysOfWeek } from './current_week.js';
 import { renderEventObject,  clearFunc } from './generate_event_object.js';
-//import { funcForLockWindow } from './popup_funcs.js';
+import { funcForLockWindow } from './popup_funcs.js';
 import { funcForTimeOptions } from './create_button.js';
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
-
-
-
-// export const removeFuncRenderEventOnClick = () => {
-//     return blockOfDays.removeEventListener('click', renderEventOnClick);
-// };
 
 export const renderEventOnClick = event => {
     const clickedHour = event.target;
@@ -30,6 +24,8 @@ export const renderEventOnClick = event => {
     popupBlock.style.display = 'block';
     funcForTimeOptions();
     const myDate = document.querySelectorAll('.specialDate');
+
+
     // const certainDate1 = new Date(tempObj.startTime.setDate(tempObj.startTime.getDate()+1));
     // const certainDate2 = new Date(tempObj.endTime.setDate(tempObj.endTime.getDate()+1));
     const certainDate1 = new Date(tempObj.startTime);
@@ -40,7 +36,7 @@ export const renderEventOnClick = event => {
     eventsArray.push(tempObj);
     clearFunc();
     renderEventObject(eventsArray);
-    
+    blockOfDays.removeEventListener('click', renderEventOnClick);
     
 };
 blockOfDays.addEventListener('click', renderEventOnClick);
