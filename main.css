@@ -214,6 +214,7 @@
   font-weight: 700;
   padding: 4px;
   position: relative;
+  z-index: 1;
 }
 .main__sidebar_day_object h7,
 .main__sidebar_day_object p {
@@ -376,7 +377,7 @@
   position: absolute;
   align-items: center;
   width: 20vh;
-  z-index: 1;
+  z-index: 2;
 }
 .redline__ball {
   position: relative;
