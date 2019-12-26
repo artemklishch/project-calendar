@@ -51,7 +51,7 @@ export const renderAnotherWeek = event => {
     if (counter === 0) {
         const arr = generateArrDaysOfWeek();
         renderCurrentWeek(arr);
-        renderRedLIne();
+        renderRedLIne();    
     }
 };
 
