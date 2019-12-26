@@ -50,6 +50,7 @@ const generateLongEvent = (object) => {
     const lastTimeThisDay = new Date(year,month,date,24,0);
     const firstTimeNextDay = new Date(year,month,date+1);
     const identificator = Math.random().toFixed(10);
+    const identificator2 = Math.random().toFixed(10);
     const onePartEvent = {
         header:object.header,
         startTime:object.startTime,
@@ -65,19 +66,23 @@ const generateLongEvent = (object) => {
       endTime:object.endTime,
       description:object.description,
       id:identificator,
+      id2:undefined,
       accessStartTime:object.startTime,
       accessEndTime:object.endTime,
     };
-    if(object.endTime > 0){
-      
-    }
     if(object.endTime.getHours() === 0){
         [onePartEvent].forEach(element => fillDayPlaceForLongEvent(element));
     }else if(object.endTime < lastPoint){
         [onePartEvent,twoPartEvent].forEach(element => fillDayPlaceForLongEvent(element));
-    }else{
+    }else{ 
+        eventsArray.forEach((elem,index) => {
+            if(elem.id2 !== undefined){
+                eventsArray.splice(index,1);
+            }
+        });
+        twoPartEvent.id2 = identificator2;
+        eventsArray.push(twoPartEvent); 
         fillDayPlaceForLongEvent(onePartEvent);
-        eventsArray.push(twoPartEvent);
     }
 };
 
@@ -177,6 +182,5 @@ export const renderEventObject = (eventsArray) => {
             generateLongEvent(elem);
         }else fillDayPlace(elem);
     });
-    
 }; 
 renderEventObject(eventsArray);
