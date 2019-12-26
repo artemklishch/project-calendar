@@ -15,15 +15,9 @@ function createRedLine() {
 }
 
 export const renderRedLIne = () => {
-
-    const date = new Date();
-    const day = date.getDay();
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
-
-    const hourDiv = document.querySelector('div[data-day-number="' + day + '"] > ' +
-        'div[data-hour-number="' + hour + '"]');
-
+    const hourDiv = document.querySelector('div[data-day-number="' + new Date().getDay() + '"] > ' +
+        'div[data-hour-number="' + new Date().getHours() + '"]');
+    
     const hourRect = hourDiv.getClientRects()[0];
     let redLine = document.getElementById('red');
 
@@ -34,11 +28,14 @@ export const renderRedLIne = () => {
         redLine.parentNode.removeChild(redLine);
     }
 
-    let position = (hourRect.height / 60) * minutes;
+    let position = (hourRect.height / 60) * new Date().getMinutes();
     redLine.style.top = position + "px";
     hourDiv.appendChild(redLine);
 }
 
-setInterval(renderRedLIne, 60 * 1000);
+export const intervalFunc = () => {
+    return setInterval(renderRedLIne, 60 * 1000);
+};
+intervalFunc(); 
 
 renderRedLIne();

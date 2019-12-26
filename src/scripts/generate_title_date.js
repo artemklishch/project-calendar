@@ -1,5 +1,5 @@
 import { arrDaysOfWeek } from './current_week.js';
-import { renderRedLIne } from './redline.js';
+
 
 
 export const renderTitleDate = (startdate, enddate) => {

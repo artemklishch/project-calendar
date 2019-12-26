@@ -4,7 +4,7 @@ import { renderCurrentWeek } from './current_week.js';
 import { renderTitleDate } from './generate_title_date.js';
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
-import { renderRedLIne } from './redline.js';
+import { renderRedLIne, intervalFunc } from './redline.js';
 
 
 
@@ -57,3 +57,5 @@ export const renderAnotherWeek = event => {
 
 const arrows = document.querySelector('.nav__arow');
 arrows.addEventListener('click', renderAnotherWeek);
+arrows.removeEventListener('click', renderRedLIne);
+arrows.removeEventListener('click', intervalFunc);
