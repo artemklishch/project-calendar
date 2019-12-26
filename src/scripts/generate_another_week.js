@@ -7,6 +7,7 @@ import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
 
 
+
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
 let counter = 0;
 
@@ -51,6 +52,7 @@ export const renderAnotherWeek = event => {
         const arr = generateArrDaysOfWeek();
         renderCurrentWeek(arr);
     }
+    renderRedLIne();
 
 };
 
