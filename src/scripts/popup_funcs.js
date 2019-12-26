@@ -1,8 +1,9 @@
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 
+
 const popupBlock = document.querySelector('.popup-layer');
-const tempObj = {
+export const tempObj = {
    header:undefined,
    startTime: undefined,
    endTime:undefined,
