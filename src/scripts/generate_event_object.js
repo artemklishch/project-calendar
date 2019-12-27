@@ -9,6 +9,23 @@ export const clearFunc = () => {
 
 
 
+const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
+    let firstDateInWeek = new Date(firstDayOfWeek);
+    let firstDayYear = firstDateInWeek.getFullYear();
+    let firstDayMonth = firstDateInWeek.getMonth();
+    let firstDayDate = firstDateInWeek.getDate();
+    firstPoint = new Date(firstDayYear, firstDayMonth, firstDayDate);
+    
+    let lastDateInWeek = new Date(lastDayOfWeek);
+    let lastDayYear = lastDateInWeek.getFullYear();
+    let lastDayMonth = lastDateInWeek.getMonth();
+    let lastDayDate = lastDateInWeek.getDate();
+    lastPoint = new Date(lastDayYear, lastDayMonth, lastDayDate+1); 
+    return eventsArray
+        .filter(elem => elem.startTime >= firstPoint && elem.startTime < lastPoint);        
+};
+
+
 const transformObjectFunc = (element) => {
     const endYearForObj1 = new Date(element.startTime).getFullYear();
     const endMonthForObj1 = new Date(element.startTime).getMonth();
@@ -40,13 +57,14 @@ const transformObjectFunc = (element) => {
 };
 
 const forChangingEventsArray = (eventsArray) => {
-    eventsArray.forEach((element,index) => {
+    let tempArr = filterCorrectDays(eventsArray,arrDaysOfWeek[0],arrDaysOfWeek[6]);
+    tempArr.forEach((element,index) => {
         if(element.startTime.getDate() !== element.endTime.getDate() && element.endTime.getHours() > 0){
             eventsArray.splice(index,1);
             transformObjectFunc(element);
         }
     });
-    console.log(eventsArray);
+    console.log(tempArr);
 };
 
 export const renderEventObject = () => {
