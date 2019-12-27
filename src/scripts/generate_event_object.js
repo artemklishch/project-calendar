@@ -2,12 +2,16 @@ import { eventsArray } from './storage.js';
 import { arrDaysOfWeek } from './current_week.js';
 import { addintionalIndexOfElem } from './edit_event.js';
 
+
+
+export let firstPoint, lastPoint;
+
+
+
 export const clearFunc = () => {
     const arrOfHours = document.querySelectorAll('.main__sidebar_days_hours');
     [...arrOfHours].forEach(elem => elem.innerHTML = '');
 };
-
-
 
 const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
     let firstDateInWeek = new Date(firstDayOfWeek);
@@ -25,7 +29,6 @@ const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
         .filter(elem => elem.startTime >= firstPoint && elem.startTime < lastPoint);        
 };
 
-
 const transformObjectFunc = (element) => {
     const endYearForObj1 = new Date(element.startTime).getFullYear();
     const endMonthForObj1 = new Date(element.startTime).getMonth();
@@ -37,7 +40,6 @@ const transformObjectFunc = (element) => {
     const endDateForObj2 = new Date(element.endTime).getDate();
     const startTimeForObj2 = new Date(startYearForObj2,startMonthForObj2,endDateForObj2);
     const indentificator = Math.random().toFixed(10);
-
 
     const obj1 = {
         header: element.header,
@@ -56,16 +58,23 @@ const transformObjectFunc = (element) => {
     eventsArray.push(obj1, obj2);        
 };
 
+
+const funcForFillPlaces = () => {
+    const filteredArray = forChangingEventsArray(eventsArray);
+    
+};
+
 const forChangingEventsArray = (eventsArray) => {
     let tempArr = filterCorrectDays(eventsArray,arrDaysOfWeek[0],arrDaysOfWeek[6]);
-    tempArr.forEach((element,index) => {
+    return tempArr.forEach((element,index) => {
         if(element.startTime.getDate() !== element.endTime.getDate() && element.endTime.getHours() > 0){
             eventsArray.splice(index,1);
             transformObjectFunc(element);
         }
     });
-    console.log(tempArr);
 };
+
+
 
 export const renderEventObject = () => {
     return forChangingEventsArray(eventsArray);    
