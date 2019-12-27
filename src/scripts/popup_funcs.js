@@ -2,6 +2,8 @@ import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderEventOnClick } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
+import { funcToMakeMarkNull } from './edit_event.js';
+
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
@@ -11,6 +13,7 @@ const lockWindow = document.querySelector('.popup__btn-close');
 export const funcForLockWindow = () => {
     popupBlock.style.display = 'none';
     blockOfDays.addEventListener('click', renderEventOnClick);
+    funcToMakeMarkNull();
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 
@@ -19,7 +22,6 @@ const saveButton = document.querySelector('.event__btn-save');
 export const funcForSaveButton = event => {
     event.preventDefault();
 
-
     const tempObj = {
         header: undefined,
         startTime: undefined,
@@ -27,7 +29,6 @@ export const funcForSaveButton = event => {
         description: undefined,
         ident: Math.random().toFixed(10),
     };
-
 
     const titleInput = document.querySelector('.event__name');
     tempObj.header = titleInput.value;
