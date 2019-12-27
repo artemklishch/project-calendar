@@ -2,6 +2,7 @@ import { eventsArray } from './storage.js';
 import { arrDaysOfWeek } from './current_week.js';
 
 const fileOfHoures = document.querySelectorAll('.main__sidebar_days_line');
+
 export let firstPoint, lastPoint;
 
 export const clearFunc = () => {
@@ -58,7 +59,6 @@ const generateLongEvent = (object) => {
         endTime:lastTimeThisDay,
         description:object.description,
         ident:identificator,
-        id2:undefined,
         accessStartTime: object.startTime,
         accessEndTime: object.endTime,
     };
@@ -69,6 +69,7 @@ const generateLongEvent = (object) => {
       description:object.description,
       ident:identificator,
       id2:undefined,
+      additionalId2:undefined,
       accessStartTime:object.startTime,
       accessEndTime:object.endTime,
     };
@@ -82,8 +83,9 @@ const generateLongEvent = (object) => {
                 eventsArray.splice(index,1);
             }
         });
-        onePartEvent.id2 = identificator2;
+        object.id2 = identificator2;
         twoPartEvent.id2 = identificator2;
+        twoPartEvent.additionalId2 = identificator2;
         eventsArray.push(twoPartEvent); 
         fillDayPlaceForLongEvent(onePartEvent);
     }

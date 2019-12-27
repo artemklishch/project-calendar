@@ -1,4 +1,5 @@
-import { indexOfElement } from './edit_event.js';
+import { indexOfElement, addintionalIndexOfElem } from './edit_event.js';
+import { funcToMakeMarkNull } from './edit_event.js';
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
@@ -15,5 +16,6 @@ export const funcForDeleteEvene = () => {
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
     renderRedLIne();
+    funcToMakeMarkNull();
 };
 deleteBasket.addEventListener('click', funcForDeleteEvene);
