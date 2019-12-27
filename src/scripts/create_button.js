@@ -1,6 +1,6 @@
 const createButton = document.querySelector('.nav__button');
 const popupBlock = document.querySelector('.popup-layer');
-
+const saveBtn = document.querySelector('.event__btn-save');
     
 export const funcForTimeOptions = () => {
     const hours = document.querySelectorAll('.hours');
@@ -43,6 +43,7 @@ export const funcForCreateButton = () => {
         }
     });
     popupBlock.style.display = 'block';
+    saveBtn.style.display = 'block';
 
     const myDate = document.querySelectorAll('.specialDate');
     const today = new Date();

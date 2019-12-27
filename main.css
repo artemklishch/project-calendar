@@ -94,7 +94,7 @@
 .header__week-block_line {
   flex: 1;
   display: flex;
-  border-bottom: 1px solid #e0e5ea;
+  border-bottom: 1px solid #c4cad0;
 }
 .header__week-block_days {
   flex: 1;
@@ -109,7 +109,7 @@
   bottom: 0;
   height: 30px;
   width: 1px;
-  background-color: #e0e5ea;
+  background-color: #c4cad0;
 }
 .header__week-block_gmt-cell {
   padding-right: 2%;
@@ -121,7 +121,7 @@
 .header__week-block_gmt-cell_part-bord {
   width: 15px;
   height: 1px;
-  background-color: #e0e5ea;
+  background-color: #c4cad0;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -183,7 +183,7 @@
 .main__sidebar_timing_place-bord {
   width: 15px;
   height: 1px;
-  background-color: #e0e5ea;
+  background-color: #c4cad0;
   position: absolute;
   right: 0;
   top: -1px;
@@ -200,8 +200,8 @@
 .main__sidebar_days_hours {
   height: 50px;
   width: 100%;
-  border-bottom: 1px solid #e0e5ea;
-  border-left: 1px solid #e0e5ea;
+  border-bottom: 1px solid #c4cad0;
+  border-left: 1px solid #c4cad0;
 }
 
 .main__sidebar_day_object {
@@ -280,20 +280,6 @@
 .event__btn-delete {
   display: none;
 }
-.event__btn-save {
-  margin-top: 67px;
-  position: absolute;
-  right: 10px;
-  height: 35px;
-  padding-left: 25px;
-  padding-right: 25px;
-  background: royalblue;
-  color: white;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 .event__date-start, .event__date-end {
   padding: 2px;
   margin-left: 18px;
@@ -370,6 +356,29 @@
   height: 20px;
   width: 30px;
   margin-left: 5px;
+}
+
+.btn_save {
+  margin-top: 67px;
+  position: absolute;
+  right: 10px;
+  height: 35px;
+  padding-left: 25px;
+  padding-right: 25px;
+  background: royalblue;
+  color: white;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.event__btn-save {
+  display: none;
+}
+
+.event__btn-save_after_edit {
+  display: none;
 }
 
 .redline {

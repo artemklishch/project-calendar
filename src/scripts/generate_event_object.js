@@ -2,7 +2,7 @@ import { eventsArray } from './storage.js';
 import { arrDaysOfWeek } from './current_week.js';
 
 const fileOfHoures = document.querySelectorAll('.main__sidebar_days_line');
-let firstPoint, lastPoint;
+export let firstPoint, lastPoint;
 
 export const clearFunc = () => {
     const arrOfHours = document.querySelectorAll('.main__sidebar_days_hours');
@@ -27,9 +27,9 @@ const fillDayPlaceForLongEvent = (dayObject) => {
         endTimeHour += `:${endTimeMinutes}`; 
     }
 
-    let certainLine = [...fileOfHoures]
+    let certainDay = [...fileOfHoures]
         .find((elem,index) => index === new Date(dayObject.startTime).getDay());
-    let certainDay = [...certainLine.children]
+    let certainPlace = [...certainDay.children]
         .find((elem,index) => index === certainHour);
     
     const divElem = document.createElement('div');
@@ -38,9 +38,10 @@ const fillDayPlaceForLongEvent = (dayObject) => {
     const pElem = document.createElement('p');
     pElem.innerHTML = `${startTimeHour} PM - ${endTimeHour} AM`;
     divElem.classList.add('main__sidebar_day_object');
+    divElem.setAttribute('data-id', dayObject.ident);
     forHeight(dayObject, divElem);
     divElem.append(h7Elem, pElem);
-    certainDay.append(divElem); 
+    certainPlace.append(divElem); 
 };
 
 const generateLongEvent = (object) => {
@@ -49,14 +50,15 @@ const generateLongEvent = (object) => {
     const date = new Date(object.startTime).getDate();
     const lastTimeThisDay = new Date(year,month,date,24,0);
     const firstTimeNextDay = new Date(year,month,date+1);
-    const identificator = Math.random().toFixed(10);
+    const identificator = object.ident;
     const identificator2 = Math.random().toFixed(10);
     const onePartEvent = {
         header:object.header,
         startTime:object.startTime,
         endTime:lastTimeThisDay,
         description:object.description,
-        id:identificator,
+        ident:identificator,
+        id2:undefined,
         accessStartTime: object.startTime,
         accessEndTime: object.endTime,
     };
@@ -65,7 +67,7 @@ const generateLongEvent = (object) => {
       startTime:firstTimeNextDay,
       endTime:object.endTime,
       description:object.description,
-      id:identificator,
+      ident:identificator,
       id2:undefined,
       accessStartTime:object.startTime,
       accessEndTime:object.endTime,
@@ -80,6 +82,7 @@ const generateLongEvent = (object) => {
                 eventsArray.splice(index,1);
             }
         });
+        onePartEvent.id2 = identificator2;
         twoPartEvent.id2 = identificator2;
         eventsArray.push(twoPartEvent); 
         fillDayPlaceForLongEvent(onePartEvent);
@@ -129,9 +132,9 @@ const fillDayPlace = (dayObject) => {
         endTimeHour += `:${endTimeMinutes}`; 
     }
    
-    let certainLine = [...fileOfHoures]
+    let certainDay = [...fileOfHoures]
         .find((elem,index) => index === new Date(dayObject.startTime).getDay());
-    let certainDay = [...certainLine.children]
+    let certainPlace = [...certainDay.children]
         .find((elem,index) => index === certainHour);
     let tempNum = 12;
     let tempVal;
@@ -153,9 +156,10 @@ const fillDayPlace = (dayObject) => {
     const pElem = document.createElement('p');
     pElem.innerHTML = tempVal;
     divElem.classList.add('main__sidebar_day_object');
+    divElem.setAttribute('data-id', dayObject.ident);
     forHeight(dayObject, divElem);
     divElem.append(h7Elem, pElem);
-    certainDay.append(divElem); 
+    certainPlace.append(divElem); 
 };
 
 

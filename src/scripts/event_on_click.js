@@ -3,6 +3,7 @@ import { funcForTimeOptions } from './create_button.js';
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
+const saveBtn = document.querySelector('.event__btn-save');
 
 export const renderEventOnClick = event => {
     const clickedHour = event.target;
@@ -20,6 +21,7 @@ export const renderEventOnClick = event => {
     : endTime = new Date(currentYear, currentMonth, currentDate, hourNumber+1);
 
     popupBlock.style.display = 'block';
+    saveBtn.style.display = 'block';
     funcForTimeOptions();
      
     const myDate = document.querySelectorAll('.specialDate');

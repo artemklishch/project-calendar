@@ -9,3 +9,5 @@ import { renderEventObject } from './generate_event_object.js';
 import { funcForCreateButton } from './create_button.js';
 import { funcForSaveButton } from './popup_funcs.js';
 import { renderEventOnClick } from './event_on_click.js';
+import { funcForEditEvent } from './edit_event.js';
+import { funcForDeleteEvene } from './delete_event.js';

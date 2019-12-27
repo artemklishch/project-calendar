@@ -25,6 +25,7 @@ export const funcForSaveButton = event => {
         startTime: undefined,
         endTime: undefined,
         description: undefined,
+        ident: Math.random().toFixed(10),
     };
 
 
