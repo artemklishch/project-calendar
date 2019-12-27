@@ -58,20 +58,69 @@ const transformObjectFunc = (element) => {
     eventsArray.push(obj1, obj2);        
 };
 
+const fillDayPlace = (dayObject) => {
+    let certainHour = new Date(dayObject.startTime).getHours();
 
-const funcForFillPlaces = () => {
-    const filteredArray = forChangingEventsArray(eventsArray);
+    let startTimeHour = new Date(dayObject.startTime).getHours();
+    startTimeHour = transformHourFormat(startTimeHour);
+    let startTimeMinutes = new Date(dayObject.startTime).getMinutes();
     
+    let endTimeHour = new Date(dayObject.endTime).getHours();
+    endTimeHour = transformHourFormat(endTimeHour);
+    let endTimeMinutes = new Date(dayObject.endTime).getMinutes();
+    
+    if(startTimeMinutes !== 0) {
+        startTimeHour += `:${startTimeMinutes}`; 
+    }
+    if(endTimeMinutes !== 0) {
+        endTimeHour += `:${endTimeMinutes}`; 
+    }
+   
+    let certainDay = [...fileOfHoures]
+        .find((elem,index) => index === new Date(dayObject.startTime).getDay());
+    let certainPlace = [...certainDay.children]
+        .find((elem,index) => index === certainHour);
+    let tempNum = 12;
+    let tempVal;
+    [...fileOfHoures].forEach(() => {
+        if(new Date(dayObject.startTime).getHours() <= tempNum && new Date(dayObject.endTime).getHours() <= tempNum){
+            tempVal = `${startTimeHour} - ${endTimeHour} AM`;
+        }
+        if(new Date(dayObject.startTime).getHours() <= tempNum && new Date(dayObject.endTime).getHours() > tempNum){
+            tempVal = `${startTimeHour} AM - ${endTimeHour} PM`;
+        }
+        if(new Date(dayObject.startTime).getHours() > tempNum){
+            tempVal = `${startTimeHour} - ${endTimeHour} PM`;
+        }
+    });
+    
+    const divElem = document.createElement('div');
+    const h7Elem = document.createElement('h7');
+    dayObject.header ? h7Elem.innerHTML = dayObject.header : h7Elem.innerHTML = "without of header";
+    const pElem = document.createElement('p');
+    pElem.innerHTML = tempVal;
+    divElem.classList.add('main__sidebar_day_object');
+    divElem.setAttribute('data-id', dayObject.ident);
+    forHeight(dayObject, divElem);
+    divElem.append(h7Elem, pElem);
+    certainPlace.append(divElem); 
 };
 
-const forChangingEventsArray = (eventsArray) => {
-    let tempArr = filterCorrectDays(eventsArray,arrDaysOfWeek[0],arrDaysOfWeek[6]);
-    return tempArr.forEach((element,index) => {
+
+const funcForFillPlaces = (filtArr) => {
+    filtArr.forEach(elem => fillDayPlace(elem));
+};
+
+
+const forChangingEventsArray = (array) => {
+    let tempArr = filterCorrectDays(array,arrDaysOfWeek[0],arrDaysOfWeek[6]);
+    tempArr.map((element,index) => {
         if(element.startTime.getDate() !== element.endTime.getDate() && element.endTime.getHours() > 0){
-            eventsArray.splice(index,1);
+            array.splice(index,1);
             transformObjectFunc(element);
         }
     });
+    funcForFillPlaces(tempArr);
 };
 
 
