@@ -22,7 +22,6 @@ const saveButton = document.querySelector('.event__btn-save');
 export const funcForSaveButton = event => {
     event.preventDefault();
 
-
     const tempObj = {
         header: undefined,
         startTime: undefined,
@@ -30,7 +29,6 @@ export const funcForSaveButton = event => {
         description: undefined,
         ident: Math.random().toFixed(10),
     };
-
 
     const titleInput = document.querySelector('.event__name');
     tempObj.header = titleInput.value;

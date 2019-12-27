@@ -161,11 +161,11 @@ export const funcForEditEvent = event => {
             currentObject = elem;
             indexOfElement = index;
         }
-        if(elem.hasOwnProperty('additionalId2')){
+        if(elem.additionalId2 !== undefined){
             addintionalIndexOfElem = index;
         }
     });
-    if(currentObject.endTime > lastPoint || currentObject.hasOwnProperty('additionalId2')){
+    if(currentObject.endTime > lastPoint && currentObject.additionalId2 !== undefined){
         markVariable = 1;
         editEventToNextWeek();
     } else {
@@ -182,12 +182,10 @@ export const funcForEditEvent = event => {
 
         const startDate = document.querySelector('.event__date-start');
         startDate.value = new Date(currentObject.startTime).toISOString().substr(0, 10);
-        
-        
+            
         const endDate = document.querySelector('.event__date-end');
         endDate.value = new Date(currentObject.endTime).toISOString().substr(0, 10);
         
-
         const startHour = document.querySelector('.event__time-start');
         startHour.value = +new Date(currentObject.startTime).getHours();
         const startMin = document.querySelector('.event__time-min-start');
@@ -207,16 +205,11 @@ blockOfDays.addEventListener('click', funcForEditEvent);
 
 
 
-const funcForSaveButtonAfterEditLastEvent = () => {
-        eventsArray.splice(indexOfElement,1);
-        eventsArray.splice(addintionalIndexOfElem,1);
-};
+
 export const funcForSaveButtonAfterEdit = event => {
     event.preventDefault();
 
-    // if(markVariable === 1){
-    //     funcForSaveButtonAfterEditLastEvent();
-    // }
+    
        eventsArray.splice(indexOfElement,1);
 
         const tempObj = {
@@ -260,7 +253,5 @@ export const funcForSaveButtonAfterEdit = event => {
         popupBlock.style.display = 'none';
         saveBtnForEdit.style.display = 'none';
         renderRedLIne();
-        funcToMakeMarkNull();
-        console.log(markVariable);
 };
 saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
