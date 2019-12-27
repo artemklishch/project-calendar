@@ -5,6 +5,7 @@ import { addintionalIndexOfElem } from './edit_event.js';
 
 
 export let firstPoint, lastPoint;
+const fileOfHoures = document.querySelectorAll('.main__sidebar_days_line');
 
 
 
