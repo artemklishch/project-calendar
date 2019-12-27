@@ -10,7 +10,7 @@ import { funcForTimeOptions } from './create_button.js';
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
-import { firstPoint, lastPoint } from './generate_event_object.js';
+//import { firstPoint, lastPoint } from './generate_event_object.js';
 
 // export const funcForEditEvent = event => {
 //     const blockOfEvent = event.target;
