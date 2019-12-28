@@ -2,7 +2,6 @@ import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderEventOnClick } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
-import { funcToMakeMarkNull } from './edit_event.js';
 
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
@@ -13,7 +12,6 @@ const lockWindow = document.querySelector('.popup__btn-close');
 export const funcForLockWindow = () => {
     popupBlock.style.display = 'none';
     blockOfDays.addEventListener('click', renderEventOnClick);
-    funcToMakeMarkNull();
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 
