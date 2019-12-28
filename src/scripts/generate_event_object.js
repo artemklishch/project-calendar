@@ -1,98 +1,46 @@
 import { eventsArray } from './storage.js';
 import { arrDaysOfWeek } from './current_week.js';
-import { addintionalIndexOfElem } from './edit_event.js';
 
-const fileOfHoures = document.querySelectorAll('.main__sidebar_days_line');
 
 export let firstPoint, lastPoint;
+const fileOfHoures = document.querySelectorAll('.main__sidebar_days_line');
 
 export const clearFunc = () => {
     const arrOfHours = document.querySelectorAll('.main__sidebar_days_hours');
     [...arrOfHours].forEach(elem => elem.innerHTML = '');
 };
 
-const fillDayPlaceForLongEvent = (dayObject) => {
-    let certainHour = new Date(dayObject.startTime).getHours();
 
-    let startTimeHour = new Date(dayObject.accessStartTime).getHours();
-    startTimeHour = transformHourFormat(startTimeHour);
-    let startTimeMinutes = new Date(dayObject.accessStartTime).getMinutes();
-    
-    let endTimeHour = new Date(dayObject.accessEndTime).getHours();
-    endTimeHour = transformHourFormat(endTimeHour);
-    let endTimeMinutes = new Date(dayObject.accessEndTime).getMinutes();
-    
-    if(startTimeMinutes !== 0) {
-        startTimeHour += `:${startTimeMinutes}`; 
-    }
-    if(endTimeMinutes !== 0) {
-        endTimeHour += `:${endTimeMinutes}`; 
-    }
 
-    let certainDay = [...fileOfHoures]
-        .find((elem,index) => index === new Date(dayObject.startTime).getDay());
-    let certainPlace = [...certainDay.children]
-        .find((elem,index) => index === certainHour);
+const transformObjectFunc = (element) => {
+    const endYearForObj1 = new Date(element.startTime).getFullYear();
+    const endMonthForObj1 = new Date(element.startTime).getMonth();
+    const endDateForObj1 = new Date(element.startTime).getDate();
+    let endTimeForObj1 = new Date(endYearForObj1,endMonthForObj1,endDateForObj1,24);
     
-    const divElem = document.createElement('div');
-    const h7Elem = document.createElement('h7');
-    dayObject.header ? h7Elem.innerHTML = dayObject.header : h7Elem.innerHTML = "without of header";
-    const pElem = document.createElement('p');
-    pElem.innerHTML = `${startTimeHour} PM - ${endTimeHour} AM`;
-    divElem.classList.add('main__sidebar_day_object');
-    divElem.setAttribute('data-id', dayObject.ident);
-    forHeight(dayObject, divElem);
-    divElem.append(h7Elem, pElem);
-    certainPlace.append(divElem); 
+    const startYearForObj2 = new Date(element.endTime).getFullYear();
+    const startMonthForObj2 = new Date(element.endTime).getMonth();
+    const endDateForObj2 = new Date(element.endTime).getDate();
+    const startTimeForObj2 = new Date(startYearForObj2,startMonthForObj2,endDateForObj2);
+    const indentificator = Math.random().toFixed(10);
+
+    const obj1 = {
+        header: element.header,
+        startTime:element.startTime,
+        endTime: endTimeForObj1,
+        description:element.description,
+        ident: indentificator,
+    };
+    const obj2 = {
+        header: element.header,
+        startTime:startTimeForObj2,
+        endTime: element.endTime,
+        description:element.description,
+        ident: indentificator,
+    };
+    eventsArray.push(obj1, obj2);  
 };
 
-const generateLongEvent = (object) => {
-    const year = new Date(object.startTime).getFullYear();
-    const month = new Date(object.startTime).getMonth();
-    const date = new Date(object.startTime).getDate();
-    const lastTimeThisDay = new Date(year,month,date,24,0);
-    const firstTimeNextDay = new Date(year,month,date+1);
-    const identificator = object.ident;
-    const identificator2 = Math.random().toFixed(10);
-    const onePartEvent = {
-        header:object.header,
-        startTime:object.startTime,
-        endTime:lastTimeThisDay,
-        description:object.description,
-        ident:identificator,
-        accessStartTime: object.startTime,
-        accessEndTime: object.endTime,
-    };
-    const twoPartEvent = {
-      header:object.header,
-      startTime:firstTimeNextDay,
-      endTime:object.endTime,
-      description:object.description,
-      ident:identificator,
-      id2:undefined,
-      additionalId2:undefined,
-      accessStartTime:object.startTime,
-      accessEndTime:object.endTime,
-    };
-    if(object.endTime.getHours() === 0){
-        [onePartEvent].forEach(element => fillDayPlaceForLongEvent(element));
-    }else if(object.endTime < lastPoint){
-        [onePartEvent,twoPartEvent].forEach(element => fillDayPlaceForLongEvent(element));
-    }else{ 
-        eventsArray.forEach((elem,index) => {
-            if(elem.additionalId2 !== undefined){
-                eventsArray.splice(index,1);
-                eventsArray.splice(addintionalIndexOfElem,1);
-            }
-        });
-        object.id2 = identificator2;
-        const tempObj = {...twoPartEvent};
-        tempObj.id2 = identificator2;
-        tempObj.additionalId2 = identificator2;
-        fillDayPlaceForLongEvent(onePartEvent);
-        eventsArray.push(tempObj); 
-    }
-};
 
 const forHeight = (object, elem) => {
     if(object.startTime.getMinutes() === 15)elem.style.top = '25%';
@@ -120,15 +68,18 @@ const transformHourFormat = (hour) => {
 };
 
 const fillDayPlace = (dayObject) => {
-    let certainHour = new Date(dayObject.startTime).getHours();
+    const startTime = new Date(dayObject.startTime);
+    const endTime = new Date(dayObject.endTime);
 
-    let startTimeHour = new Date(dayObject.startTime).getHours();
+    let certainHour = startTime.getHours();
+  
+    let startTimeHour = startTime.getHours();
     startTimeHour = transformHourFormat(startTimeHour);
-    let startTimeMinutes = new Date(dayObject.startTime).getMinutes();
-    
-    let endTimeHour = new Date(dayObject.endTime).getHours();
+    let startTimeMinutes = startTime.getMinutes();
+  
+    let endTimeHour = endTime.getHours();
     endTimeHour = transformHourFormat(endTimeHour);
-    let endTimeMinutes = new Date(dayObject.endTime).getMinutes();
+    let endTimeMinutes = endTime.getMinutes();
     
     if(startTimeMinutes !== 0) {
         startTimeHour += `:${startTimeMinutes}`; 
@@ -144,13 +95,13 @@ const fillDayPlace = (dayObject) => {
     let tempNum = 12;
     let tempVal;
     [...fileOfHoures].forEach(() => {
-        if(new Date(dayObject.startTime).getHours() <= tempNum && new Date(dayObject.endTime).getHours() <= tempNum){
+        if(startTime.getHours() <= tempNum && endTime.getHours() <= tempNum){
             tempVal = `${startTimeHour} - ${endTimeHour} AM`;
         }
-        if(new Date(dayObject.startTime).getHours() <= tempNum && new Date(dayObject.endTime).getHours() > tempNum){
+        if(startTime.getHours() <= tempNum && endTime.getHours() > tempNum){
             tempVal = `${startTimeHour} AM - ${endTimeHour} PM`;
         }
-        if(new Date(dayObject.startTime).getHours() > tempNum){
+        if(startTime.getHours() > tempNum){
             tempVal = `${startTimeHour} - ${endTimeHour} PM`;
         }
     });
@@ -166,6 +117,7 @@ const fillDayPlace = (dayObject) => {
     divElem.append(h7Elem, pElem);
     certainPlace.append(divElem); 
 };
+
 
 
 const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
@@ -184,12 +136,22 @@ const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
         .filter(elem => elem.startTime >= firstPoint && elem.startTime < lastPoint);        
 };
 
-export const renderEventObject = (eventsArray) => {
-    let tempArr = filterCorrectDays(eventsArray, arrDaysOfWeek[0], arrDaysOfWeek[6]);
-    tempArr.forEach(elem => {
-        if(elem.startTime.getDate() !== elem.endTime.getDate()){
-            generateLongEvent(elem);
-        }else fillDayPlace(elem);
+const forChangingEventsArray = (array) => {
+    array.map((element,index) => {
+        if(element.startTime.getDate() !== element.endTime.getDate() && element.endTime.getHours() > 0){
+            array.splice(index,1);
+            transformObjectFunc(element);
+        }
     });
-}; 
+    let tempArr = filterCorrectDays(array,arrDaysOfWeek[0],arrDaysOfWeek[6]);
+    tempArr.forEach(elem => fillDayPlace(elem));
+};
+
+
+
+
+
+export const renderEventObject = (array) => {
+    return forChangingEventsArray(array);    
+};
 renderEventObject(eventsArray);

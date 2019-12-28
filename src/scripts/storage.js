@@ -16,7 +16,7 @@ export const eventsArray = [
     {
         header: undefined,
         startTime: new Date(2019,11,25,9,30),
-        endTime: new Date(2019,11,25,11,0),
+        endTime: new Date(2019,11,25,11),
         description: undefined,
         ident:Math.random().toFixed(10),
     },
