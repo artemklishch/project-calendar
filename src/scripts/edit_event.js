@@ -115,8 +115,8 @@ export const funcForSaveButtonAfterEdit = event => {
     const descriptionInput = document.querySelector('.multiline__text');
     tempObj.description = descriptionInput.value;
 
+    funcForCheckIntersectionOfEvents(tempObj);
     eventsArray.push(tempObj);
-    //funcForCheckIntersectionOfEvents(eventsArray);
     clearFunc();
     renderEventObject(eventsArray);
     funcForMakeMarkVariableNull();
