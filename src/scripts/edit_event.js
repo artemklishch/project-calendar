@@ -127,6 +127,7 @@ export const funcForSaveButtonAfterEdit = event => {
     renderEventObject(eventsArray);
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
+    iconDelete.style.display = 'none';
     funcForMakeMarkValuableNull();
     renderRedLIne();
 };
