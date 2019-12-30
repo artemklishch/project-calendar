@@ -22,6 +22,6 @@ export const funcForDeleteEvene = () => {
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
     funcForMakeMarkValuableNull();
-    renderRedLIne();
+    renderRedLIne(); 
 };
 deleteBasket.addEventListener('click', funcForDeleteEvene);
