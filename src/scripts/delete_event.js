@@ -20,6 +20,7 @@ export const funcForDeleteEvene = () => {
     renderEventObject(eventsArray);
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
+    deleteBasket.style.display = 'none';
     funcForMakeMarkValuableNull();
     renderRedLIne();
 };   
