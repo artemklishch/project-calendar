@@ -2,14 +2,12 @@ import { funcForTimeOptions } from './create_button.js';
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
-import { funcForCheckIntersectionOfEvents } from './validate.js';
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 let currentObject = [];
-export let markVariable = 0;
 export let indexOfElement = 0; 
 export let markValuable = 0;
 
@@ -19,9 +17,6 @@ export const funcForMakeMarkValuableNull = () => {
 
 export const funcForMakeindexOfElementNull = () => {
     indexOfElement = 0;
-};
-export const funcForMakeMarkVariableNull = () => {
-    markVariable = 0;
 };
 
 export const funcForEditEvent = event => {
@@ -70,7 +65,6 @@ export const funcForEditEvent = event => {
         endHour.value = +new Date(currentObject[1].endTime).getHours();
         endMin.value = +new Date(currentObject[1].endTime).getMinutes();
         markValuable = 1;
-        markVariable = 1;
     }
 
 };
@@ -127,7 +121,6 @@ export const funcForSaveButtonAfterEdit = event => {
     renderEventObject(eventsArray);
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
-    iconDelete.style.display = 'none';
     funcForMakeMarkValuableNull();
     renderRedLIne();
 };
