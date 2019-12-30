@@ -120,7 +120,7 @@ const fillDayPlace = (dayObject) => {
 
 
 
-const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
+export const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) => {
     let firstDateInWeek = new Date(firstDayOfWeek);
     let firstDayYear = firstDateInWeek.getFullYear();
     let firstDayMonth = firstDateInWeek.getMonth();
