@@ -23,5 +23,5 @@ export const funcForDeleteEvene = () => {
     deleteBasket.style.display = 'none';
     funcForMakeMarkValuableNull();
     renderRedLIne();
-};   
+};
 deleteBasket.addEventListener('click', funcForDeleteEvene);
