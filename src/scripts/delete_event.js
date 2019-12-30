@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { indexOfElement, markValuable } from './edit_event.js';
 import { funcForMakeindexOfElementNull, funcForMakeMarkValuableNull } from './edit_event.js';
-=======
-import { indexOfElement, markVariable } from './edit_event.js';
-import { funcForMakeindexOfElementNull, funcForMakeMarkVariableNull } from './edit_event.js';
->>>>>>> master
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
