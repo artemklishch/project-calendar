@@ -9,6 +9,11 @@ const iconDelete = document.querySelector('.event__btn-delete');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 let currentObject = [];
 export let indexOfElement = 0; 
+export let markValuable = 0;
+
+export const funcForMakeMarkValuableNull = () => {
+    markValuable = 0;
+};
 
 export const funcForMakeindexOfElementNull = () => {
     indexOfElement = 0;
@@ -59,6 +64,7 @@ export const funcForEditEvent = event => {
     }else{
         endHour.value = +new Date(currentObject[1].endTime).getHours();
         endMin.value = +new Date(currentObject[1].endTime).getMinutes();
+        markValuable = 1;
     }
 
 };
@@ -68,8 +74,11 @@ blockOfDays.addEventListener('click', funcForEditEvent);
 export const funcForSaveButtonAfterEdit = event => {
     event.preventDefault();
     
-    eventsArray.splice(indexOfElement,1);
-    eventsArray.splice(indexOfElement-1,1);
+    if(markValuable !== 0){
+        eventsArray.splice(indexOfElement,1);
+        eventsArray.splice(indexOfElement-1,1);
+    }else eventsArray.splice(indexOfElement,1);
+    
     funcForMakeindexOfElementNull();
     
     const tempObj = {
@@ -112,6 +121,7 @@ export const funcForSaveButtonAfterEdit = event => {
     renderEventObject(eventsArray);
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
+    funcForMakeMarkValuableNull();
     renderRedLIne();
 };
 saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
