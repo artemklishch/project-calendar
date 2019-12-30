@@ -78,26 +78,26 @@
 
             </div> 
             <div class="popup-layer">
-                <form class="popup event" data-id-event="">
+                <form class="popup event" id="popup">
                     <span class="popup__btn-close"><img class="close"
                             src="https://img.icons8.com/color/48/000000/close-window.png"></span>
                     <input class="event__name" name="eventName" type="text" placeholder="Add title ">
                     <div class="popup__picker">
                         <img class="clock" src="https://img.icons8.com/pastel-glyph/64/000000/time.png">
                         <input class="event__date-start specialDate" name="eventDateStart" required type="date">
-                        <select class="event__time-start hours select"  size="1" name="eventTimeStart"></select>
+                        <select class="event__time-start hours select" size="1" name="eventTimeStart"></select>
                         <span>:</span>
                         <select class="event__time-min-start minutes select" size="1" name="eventTimeStartMin"></select>
                         <span class='line'></span>
                         <select class="event__time-end hours select" name="eventTimeEnd"></select>
                         <span>:</span>
-                        <select class="event__time-min-end minutes select" size="1" name="eventTimeStartMin" ></select>
+                        <select class="event__time-min-end minutes select" size="1" name="eventTimeEndMin"></select>
                         <input class="event__date-end specialDate" name="eventDateEnd" required type="date">
-
                     </div>
                     <img class="multiline" src="https://img.icons8.com/windows/32/000000/multiline-text.png">
-                    <input type="text" class="multiline__text" placeholder="add description">  
+                    <input type="text" name="desciption" class="multiline__text" placeholder="add description">
                     <div class="footer-popup">
+                        <p class="validate_string"></p>
                         <span class="event__btn-delete"><img class="bascket"
                                 src="https://img.icons8.com/windows/32/000000/trash.png"></span>
                         <button class="event__btn-save btn_save">Save</button>
