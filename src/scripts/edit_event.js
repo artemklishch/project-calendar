@@ -85,10 +85,6 @@ export const funcForSaveButtonAfterEdit = event => {
         eventsArray.splice(indexOfElement-1,1);
     }else eventsArray.splice(indexOfElement,1);
     
-    if(markVariable === 1){
-        eventsArray.splice(indexOfElement,1);
-        eventsArray.splice(indexOfElement-1,1);
-    }else eventsArray.splice(indexOfElement,1);
     funcForMakeindexOfElementNull();
     
     const tempObj = {
@@ -126,11 +122,9 @@ export const funcForSaveButtonAfterEdit = event => {
     const descriptionInput = document.querySelector('.multiline__text');
     tempObj.description = descriptionInput.value;
 
-    funcForCheckIntersectionOfEvents(tempObj);
     eventsArray.push(tempObj);
     clearFunc();
     renderEventObject(eventsArray);
-    funcForMakeMarkVariableNull();
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
     funcForMakeMarkValuableNull();
