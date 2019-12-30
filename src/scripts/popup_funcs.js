@@ -4,8 +4,19 @@ import { renderEventOnClick } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
 
 
-const popupBlock = document.querySelector('#popup');
+const blockOfDays = document.querySelector('.main__sidebar_days');
+const popupBlock = document.querySelector('.popup-layer');
 
+
+const lockWindow = document.querySelector('.popup__btn-close');
+export const funcForLockWindow = () => {
+    popupBlock.style.display = 'none';
+    blockOfDays.addEventListener('click', renderEventOnClick);
+};
+lockWindow.addEventListener('click', funcForLockWindow);
+
+
+const saveButton = document.querySelector('.event__btn-save');
 export const funcForSaveButton = event => {
     event.preventDefault();
 
@@ -45,31 +56,9 @@ export const funcForSaveButton = event => {
 
     eventsArray.push(tempObj);
     clearFunc();
-    blockOfDays.addEventListener('click', renderEventOnClick);
     renderEventObject(eventsArray);
     popupBlock.style.display = 'none';
+    blockOfDays.addEventListener('click', renderEventOnClick);
     renderRedLIne();
 };
-
-
-
-
-
-
-
-
-const blockOfDays = document.querySelector('.main__sidebar_days');
-
-
-const lockWindow = document.querySelector('.popup__btn-close');
-export const funcForLockWindow = () => {
-
-    document.querySelector('.popup-layer').style.display = 'none';
-    blockOfDays.addEventListener('click', renderEventOnClick);
-};
-lockWindow.addEventListener('click', funcForLockWindow);
-
-
-const saveButton = document.querySelector('.event__btn-save');
-
 saveButton.addEventListener('click', funcForSaveButton);
