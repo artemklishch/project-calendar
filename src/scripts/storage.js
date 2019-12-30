@@ -22,7 +22,7 @@ export const eventsArray = [
     },
     {
         header: 'Dinner with friends',
-        startTime: new Date(2019,11,29,18,0),
+        startTime: new Date(2019,11,29,18),
         endTime: new Date(2019,11,29,19,30),
         description: undefined,
         ident:Math.random().toFixed(10),

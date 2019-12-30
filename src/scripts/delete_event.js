@@ -11,13 +11,14 @@ const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 
 export const funcForDeleteEvene = () => {
     if(markValuable !== 0){
+    if(markVariable === 1){
         eventsArray.splice(indexOfElement,1);
         eventsArray.splice(indexOfElement-1,1);
     }else eventsArray.splice(indexOfElement,1);
     funcForMakeindexOfElementNull();
-
     clearFunc();
     renderEventObject(eventsArray);
+    funcForMakeMarkVariableNull();
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
     funcForMakeMarkValuableNull();
