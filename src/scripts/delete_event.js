@@ -16,7 +16,7 @@ export const funcForDeleteEvene = () => {
     }else eventsArray.splice(indexOfElement,1);
     funcForMakeindexOfElementNull();
     clearFunc();
-    renderEventObject(eventsArray);
+    renderEventObject(eventsArray); 
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
     funcForMakeMarkValuableNull();
