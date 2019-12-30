@@ -5,7 +5,7 @@ import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
 
 
-const deleteBasket = document.querySelector('.bascket');
+const iconDelete = document.querySelector('.event__btn-delete');
 const popupBlock = document.querySelector('.popup-layer');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 
@@ -19,7 +19,8 @@ export const funcForDeleteEvene = () => {
     renderEventObject(eventsArray); 
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
+    iconDelete.style.display = 'none';
     funcForMakeMarkValuableNull();
     renderRedLIne(); 
 };
-deleteBasket.addEventListener('click', funcForDeleteEvene);
+iconDelete.addEventListener('click', funcForDeleteEvene);
