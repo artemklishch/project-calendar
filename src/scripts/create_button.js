@@ -14,7 +14,7 @@ export const funcForTimeOptions = () => {
     [...hours].forEach(elem => elem.innerHTML = hourArr.join(''));
     const minutes = document.querySelectorAll('.minutes');
     let minArr = [];
-    let counterMin = '00';
+    let counterMin = '0';
     while (counterMin < 60) {
         let temp = `
         <option class="opt-min">${counterMin}</option>
