@@ -11,14 +11,26 @@ export const funcForSaveButton = event => {
 
     const formDataPopup = [...new FormData(popupBlock)]
         .reduce((acc, [faild, value]) => ({...acc, [faild]: value }), {});
+    console.log(formDataPopup);
+
+    let startHour = parseInt(formDataPopup.eventTimeStart);
+    if (startHour < 10) {
+        startHour = '0' + '' + startHour;
+    }
+
+    let endHour = parseInt(formDataPopup.eventTimeEnd);
+    if (endHour < 10) {
+        endHour = '0' + '' + endHour;
+    }
 
     const tempObj = {
         header: formDataPopup.eventName,
-        startTime: new Date(formDataPopup.eventDateStart + 'T' + formDataPopup.eventTimeStart + ':' + formDataPopup.eventTimeStartMin + ':00'),
-        endTime: new Date(formDataPopup.eventDateEnd + 'T' + formDataPopup.eventTimeEnd + ':' + formDataPopup.eventTimeEndMin + ':00'),
+        startTime: new Date(formDataPopup.eventDateStart + 'T' + startHour + ':' + formDataPopup.eventTimeStartMin + ':00'),
+        endTime: new Date(formDataPopup.eventDateEnd + 'T' + endHour + ':' + formDataPopup.eventTimeEndMin + ':00'),
         description: formDataPopup.description,
         ident: Math.random().toFixed(10)
     };
+    console.log(tempObj);
 
     eventsArray.push(tempObj);
     clearFunc();
