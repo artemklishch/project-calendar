@@ -9,6 +9,7 @@ const deleteBasket = document.querySelector('.event__btn-delete');
 const popupBlock = document.querySelector('.popup-layer');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 
+
 export const funcForDeleteEvene = () => {
     if(markValuable !== 0){
         eventsArray.splice(indexOfElement,1);
@@ -23,5 +24,6 @@ export const funcForDeleteEvene = () => {
     deleteBasket.style.display = 'none';
     funcForMakeMarkValuableNull();
     renderRedLIne();
+    
 };
 deleteBasket.addEventListener('click', funcForDeleteEvene);

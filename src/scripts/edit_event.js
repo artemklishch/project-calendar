@@ -1,4 +1,3 @@
-import { funcForTimeOptions } from './create_button.js';
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
@@ -27,14 +26,12 @@ export const funcForEditEvent = event => {
     saveBtnForEdit.style.display = 'block';
     iconDelete.style.display = 'block';
 
-    funcForTimeOptions();
 
     const dataId = blockOfEvent.dataset.id;
     eventsArray.forEach((element,index) => {
         if(element.ident === dataId) indexOfElement = index;
     })
     currentObject = eventsArray.filter(elem => elem.ident === dataId);
-
 
     const title = document.querySelector('.event__name');
     currentObject[0].header !== undefined
@@ -51,22 +48,27 @@ export const funcForEditEvent = event => {
     : endDate.value = new Date(currentObject[1].endTime).toISOString().substr(0, 10);
     
 
-    const startHour = document.querySelector('.event__time-start');
-    startHour.value = +new Date(currentObject[0].startTime).getHours();
-    const startMin = document.querySelector('.event__time-min-start');
-    startMin.value = +new Date(currentObject[0].startTime).getMinutes();
-
-    const endHour = document.querySelector('.event__time-end');
-    const endMin = document.querySelector('.event__time-min-end');
+    const startTimePlace = document.querySelector('.startTime_place');
+    let startHour = new Date(currentObject[0].startTime).getHours(); 
+    startHour < 10 ? startHour = `0${startHour}` : startHour;
+    let startMin = new Date(currentObject[0].startTime).getMinutes(); 
+    startMin < 10 ? startMin = `0${startMin}` : startMin;
+    startTimePlace.value = `${startHour}:${startMin}`;
+    
+    const endTimePlace = document.querySelector('.endTime_place');
     if(currentObject.length === 1){
-        endHour.value = +new Date(currentObject[0].endTime).getHours();
-        endMin.value = +new Date(currentObject[0].endTime).getMinutes();
-    }else{
-        endHour.value = +new Date(currentObject[1].endTime).getHours();
-        endMin.value = +new Date(currentObject[1].endTime).getMinutes();
-        markValuable = 1;
+        let endHour = new Date(currentObject[0].endTime).getHours(); 
+        endHour < 10 ? endHour = `0${endHour}` : endHour;
+        let endMin = new Date(currentObject[0].endTime).getMinutes(); 
+        endMin < 10 ? endMin = `0${endMin}` : endMin;
+        endTimePlace.value = `${endHour}:${endMin}`;
+    }else {
+        let endHour = new Date(currentObject[1].endTime).getHours(); 
+        endHour < 10 ? endHour = `0${endHour}` : endHour;
+        let endMin = new Date(currentObject[1].endTime).getMinutes(); 
+        endMin < 10 ? endMin = `0${endMin}` : endMin;
+        endTimePlace.value = `${endHour}:${endMin}`;
     }
-
 };
 blockOfDays.addEventListener('click', funcForEditEvent);
 
@@ -78,9 +80,8 @@ export const funcForSaveButtonAfterEdit = event => {
         eventsArray.splice(indexOfElement,1);
         eventsArray.splice(indexOfElement-1,1);
     }else eventsArray.splice(indexOfElement,1);
-    
     funcForMakeindexOfElementNull();
-    
+
     const tempObj = {
         header: undefined,
         startTime: undefined,
@@ -88,7 +89,6 @@ export const funcForSaveButtonAfterEdit = event => {
         description: undefined,
         ident: Math.random().toFixed(10),
     };
-
 
     const titleInput = document.querySelector('.event__name');
     tempObj.header = titleInput.value;
@@ -124,5 +124,8 @@ export const funcForSaveButtonAfterEdit = event => {
     iconDelete.style.display = 'none';
     funcForMakeMarkValuableNull();
     renderRedLIne();
+   
+    validateMessageElem.innerHTML = '';
+    currentObject = [];
 };
 saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);

@@ -115,9 +115,7 @@ const fillDayPlace = (dayObject) => {
     divElem.classList.add('main__sidebar_day_object');
     divElem.setAttribute('data-id', dayObject.ident);
     forHeight(dayObject, divElem);
-    if(divElem.style.height < '50%'){
-        divElem.append(pElem);
-    }else divElem.append(h7Elem, pElem);
+    divElem.append(h7Elem, pElem);
     certainPlace.append(divElem); 
 };
 
@@ -149,9 +147,6 @@ const forChangingEventsArray = (array) => {
     let tempArr = filterCorrectDays(array,arrDaysOfWeek[0],arrDaysOfWeek[6]);
     tempArr.forEach(elem => fillDayPlace(elem));
 };
-
-
-
 
 
 export const renderEventObject = (array) => {

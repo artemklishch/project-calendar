@@ -382,6 +382,10 @@
   display: none;
 }
 
+.validate_message {
+  color: red;
+}
+
 .redline {
   display: flex;
   position: absolute;
