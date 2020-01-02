@@ -49,6 +49,7 @@ const forHeight = (object, elem) => {
 
     let timesOfRange = (object.endTime - object.startTime)/1000/60/15;
     elem.style.height = (timesOfRange*24) + '%';
+    if(timesOfRange < 4) elem.style.padding = 0;
 }
 
 const transformHourFormat = (hour) => {
@@ -114,7 +115,9 @@ const fillDayPlace = (dayObject) => {
     divElem.classList.add('main__sidebar_day_object');
     divElem.setAttribute('data-id', dayObject.ident);
     forHeight(dayObject, divElem);
-    divElem.append(h7Elem, pElem);
+    if(divElem.style.height < '50%'){
+        divElem.append(pElem);
+    }else divElem.append(h7Elem, pElem);
     certainPlace.append(divElem); 
 };
 

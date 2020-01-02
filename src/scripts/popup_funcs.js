@@ -2,6 +2,7 @@ import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderEventOnClick } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
+import { funcForCheckIntersectionOfEvents } from './validate.js';
 
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
@@ -54,6 +55,12 @@ export const funcForSaveButton = event => {
     const descriptionInput = document.querySelector('.multiline__text');
     tempObj.description = descriptionInput.value;
 
+
+    if(!funcForCheckIntersectionOfEvents(tempObj)){
+        console.log(funcForCheckIntersectionOfEvents(tempObj));
+        return;
+    };
+    
     eventsArray.push(tempObj);
     clearFunc();
     renderEventObject(eventsArray);

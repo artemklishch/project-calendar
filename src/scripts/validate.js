@@ -1,20 +1,30 @@
-import { arrDaysOfWeek } from './current_week.js';
-import { filterCorrectDays } from './generate_event_object.js';
 import { eventsArray } from './storage.js';
 
-//const validateString = document.querySelector('.validate_string');
-const btnSave = document.querySelector('.event__btn-save');
-const btnSaveAfterEdit = document.querySelector('.event__btn-save_after_edit');
-
-export const funcForCheckIntersectionOfEvents = (array) => {
-    let tempArr = filterCorrectDays(array,arrDaysOfWeek[0],arrDaysOfWeek[6])
-        .sort((a, b) => a.startTime - b.startTime);
-    let x = true;
+export const funcForCheckIntersectionOfEvents = (object) => {
+    let withoutIntersecttion = true;
+    let tempArr = eventsArray
+        .filter(elem => elem.startTime.getFullYear() === object.startTime.getFullYear())
+        .filter(elem => elem.startTime.getMonth() === object.startTime.getMonth())
+        .filter(elem => elem.startTime.getDate() === object.startTime.getDate());
     for(let i = 0; i < tempArr.length; i++){
-        if(tempArr[i].endTime > tempArr[i++].startTime){
-            x = false;
+        if(object.startTime.valueOf() === tempArr[i].startTime.valueOf()){
+            withoutIntersecttion = false;
             break;
-        } 
+        }
+        if(object.startTime.valueOf() > tempArr[i].startTime.valueOf()
+        && object.startTime.valueOf() < tempArr[i].endTime.valueOf()){
+            withoutIntersecttion = false;
+            break;
+        }
+        if(object.endTime.valueOf() === tempArr[i].endTime.valueOf()){
+            withoutIntersecttion = false;
+            break;
+        }
+        if(object.endTime.valueOf() < tempArr[i].endTime.valueOf()
+        && object.endTime.valueOf() > tempArr[i].startTime.valueOf()){
+            withoutIntersecttion = false;
+            break;
+        }
     }
-    return x;
+    return withoutIntersecttion;  
 };
