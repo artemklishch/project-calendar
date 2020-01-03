@@ -6,13 +6,17 @@ import { renderRedLIne } from './redline.js';
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
-
+const iconDelete = document.querySelector('.event__btn-delete');
+const saveBtn = document.querySelector('.event__btn-save');
+const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 
 const lockWindow = document.querySelector('.popup__btn-close');
 export const funcForLockWindow = () => {
     popupBlock.style.display = 'none';
+    saveBtnForEdit.style.display = 'none';
+    iconDelete.style.display = 'none';
+    saveBtn.style.display = 'block';
     blockOfDays.addEventListener('click', renderEventOnClick);
-    //validateMessageElem.innerHTML = '';
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 

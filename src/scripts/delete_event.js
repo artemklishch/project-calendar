@@ -7,6 +7,7 @@ import { renderRedLIne } from './redline.js';
 const deleteBasket = document.querySelector('.event__btn-delete');
 const popupBlock = document.querySelector('.popup-layer');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
+const saveBtn = document.querySelector('.event__btn-save');
 
 export const funcForDeleteEvene = () => {
     if(markValuable !== 0){
@@ -19,6 +20,7 @@ export const funcForDeleteEvene = () => {
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
     deleteBasket.style.display = 'none';
+    saveBtn.style.display = 'block';
     funcForMakeMarkValuableNull();
     renderRedLIne(); 
 };
