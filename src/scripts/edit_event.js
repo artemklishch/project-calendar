@@ -5,6 +5,7 @@ import { renderRedLIne } from './redline.js';
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
+const saveBtn = document.querySelector('.event__btn-save');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 let currentObject = [];
 export let indexOfElement = 0; 
@@ -25,6 +26,7 @@ export const funcForEditEvent = event => {
     popupBlock.style.display = 'block';
     saveBtnForEdit.style.display = 'block';
     iconDelete.style.display = 'block';
+    saveBtn.style.display = 'none';
 
     const dataId = blockOfEvent.dataset.id;
     eventsArray.forEach((element,index) => {
@@ -76,12 +78,11 @@ blockOfDays.addEventListener('click', funcForEditEvent);
 export const funcForSaveButtonAfterEdit = event => {
     event.preventDefault();
     
-    // if(markValuable !== 0){
-    //     eventsArray.splice(indexOfElement,1);
-    //     eventsArray.splice(indexOfElement-1,1);
-    // }else eventsArray.splice(indexOfElement,1);
-    // funcForMakeindexOfElementNull();
-    
+    if(markValuable !== 0){
+        eventsArray.splice(indexOfElement,1);
+        eventsArray.splice(indexOfElement-1,1);
+    }else eventsArray.splice(indexOfElement,1);
+    funcForMakeindexOfElementNull();
     
     const tempObj = {
         header: undefined,
@@ -91,45 +92,40 @@ export const funcForSaveButtonAfterEdit = event => {
         ident: Math.random().toFixed(10),
     };
 
-    console.log(tempObj);
-
-//     const titleInput = document.querySelector('.event__name');
-//     tempObj.header = titleInput.value;
-
-//     const startTimeInput = document.querySelector('.event__date-start');
-//     const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
-//     const firstStartDate_month = new Date(startTimeInput.value).getMonth();
-//     const firstStartDate_date = new Date(startTimeInput.value).getDate();
-//     const firstStartDate_hours = +document.querySelector('.startTime_place').value.split(':')[0];
-//     const firstStartDate_minutes = +document.querySelector('.event__time-min-start').value;
-//     tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
-//         firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
-
-
-//     const endTimeInput = document.querySelector('.event__date-end');
-//     const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
-//     const firstEndDate_month = new Date(endTimeInput.value).getMonth();
-//     const firstEndDate_date = new Date(endTimeInput.value).getDate();
-//     const firstEndDate_hours = +document.querySelector('.endTime_place').value.split(':')[0];
-//     const firstEndDate_minutes = +document.querySelector('.endTime_place').value.split(':')[1];
-//     tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
-//         firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
-
-
-//     const descriptionInput = document.querySelector('.multiline__text');
-//     tempObj.description = descriptionInput.value;
+    const titleInput = document.querySelector('.event__name');
+    tempObj.header = titleInput.value;
     
-//     console.log(eventsArray);
-//     eventsArray.push(tempObj);
-//     clearFunc();
-//     renderEventObject(eventsArray);
-//     popupBlock.style.display = 'none';
-//     saveBtnForEdit.style.display = 'none';
-//     iconDelete.style.display = 'none';
-//     funcForMakeMarkValuableNull();
-//     renderRedLIne();
-   
-//    // validateMessageElem.innerHTML = '';
-//     currentObject = [];
+    const startTimeInput = document.querySelector('.event__date-start');
+    const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
+    const firstStartDate_month = new Date(startTimeInput.value).getMonth();
+    const firstStartDate_date = new Date(startTimeInput.value).getDate();
+    const firstStartDate_hours = +document.querySelector('.startTime_place').value.split(':')[0];
+    const firstStartDate_minutes = +document.querySelector('.startTime_place').value.split(':')[1];
+    tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
+        firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
+
+    const endTimeInput = document.querySelector('.event__date-end');
+    const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
+    const firstEndDate_month = new Date(endTimeInput.value).getMonth();
+    const firstEndDate_date = new Date(endTimeInput.value).getDate();
+    const firstEndDate_hours = +document.querySelector('.endTime_place').value.split(':')[0];
+    const firstEndDate_minutes = +document.querySelector('.endTime_place').value.split(':')[1];
+    tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
+        firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
+
+    const descriptionInput = document.querySelector('.multiline__text');
+    tempObj.description = descriptionInput.value;
+
+    
+    eventsArray.push(tempObj);
+    clearFunc();
+    renderEventObject(eventsArray);
+    popupBlock.style.display = 'none';
+    saveBtnForEdit.style.display = 'none';
+    iconDelete.style.display = 'none';
+    saveBtn.style.display = 'block';
+    funcForMakeMarkValuableNull();
+    renderRedLIne();
+    currentObject = [];
 };
 saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
