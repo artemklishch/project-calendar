@@ -21,7 +21,6 @@ export const funcForLockWindow = () => {
 lockWindow.addEventListener('click', funcForLockWindow);
 
 
-const saveButton = document.querySelector('.event__btn-save');
 const form = document.querySelector('.popup');
 export const funcForSaveButton = event => {
     event.preventDefault();
