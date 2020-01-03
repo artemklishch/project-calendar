@@ -75,17 +75,16 @@ export function onInputValidate(){
     tempObj.endTime = [...tempObj.endTime.split('-')];
     tempObj.endTime.push(endDate_hours, endDate_min);
     tempObj.endTime = new Date(...tempObj.endTime);
-
-    if(!funcForCheckIntersectionOfEvents(tempObj)){
-        validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
-        saveButton.removeEventListener('submit', funcForSaveButton);
-        saveBtnForEdit.removeEventListener('submit', funcForSaveButtonAfterEdit);
-    }else{
-        validateMessageElem.innerHTML = '';
-        saveButton.addEventListener('submit', funcForSaveButton);
-        saveBtnForEdit.addEventListener('submit', funcForSaveButtonAfterEdit);
-    };
     
+    // if(!funcForCheckIntersectionOfEvents(tempObj)){
+    //     validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
+    //     saveButton.removeEventListener('click', funcForSaveButton);
+    //     saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+    // }else{
+    //     validateMessageElem.innerHTML = '';
+    //     saveButton.addEventListener('click', funcForSaveButton);
+    //     saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+    // };
 }
 
 

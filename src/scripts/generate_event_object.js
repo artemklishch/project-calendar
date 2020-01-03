@@ -88,7 +88,7 @@ const fillDayPlace = (dayObject) => {
     if(endTimeMinutes !== 0) {
         endTimeHour += `:${endTimeMinutes}`; 
     }
-   
+    
     let certainDay = [...fileOfHoures]
         .find((elem,index) => index === new Date(dayObject.startTime).getDay());
     let certainPlace = [...certainDay.children]
@@ -106,7 +106,7 @@ const fillDayPlace = (dayObject) => {
             tempVal = `${startTimeHour} - ${endTimeHour} PM`;
         }
     });
-    
+   
     const divElem = document.createElement('div');
     const h7Elem = document.createElement('h7');
     dayObject.header ? h7Elem.innerHTML = dayObject.header : h7Elem.innerHTML = "without of header";
@@ -133,6 +133,7 @@ export const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) =>
     let lastDayMonth = lastDateInWeek.getMonth();
     let lastDayDate = lastDateInWeek.getDate();
     lastPoint = new Date(lastDayYear, lastDayMonth, lastDayDate+1); 
+    
     return eventsArray
         .filter(elem => elem.startTime >= firstPoint && elem.startTime < lastPoint);        
 };

@@ -21,26 +21,57 @@ export const funcForLockWindow = () => {
 lockWindow.addEventListener('click', funcForLockWindow);
 
 
-const form = document.querySelector('.popup');
+
+const saveButton = document.querySelector('.event__btn-save');
+
 export const funcForSaveButton = event => {
     event.preventDefault();
 
-    const tempObj = [...new FormData(form)]
-        .reduce((acc,[field,value]) => ({...acc, [field]:value}),{});
-    const startDate_hours = tempObj.startTimePlace.split(':')[0];
-    const startDate_min = tempObj.startTimePlace.split(':')[1];
-    tempObj.startTime = [...tempObj.startTime.split('-')];
-    tempObj.startTime.push(startDate_hours, startDate_min);
-    tempObj.startTime = new Date(...tempObj.startTime);
-    
-    const endDate_hours = tempObj.endTimePlace.split(':')[0];
-    const endDate_min = tempObj.endTimePlace.split(':')[1];
-    tempObj.endTime = [...tempObj.endTime.split('-')];
-    tempObj.endTime.push(endDate_hours, endDate_min);
-    tempObj.endTime = new Date(...tempObj.endTime);
+    const tempObj = {
+        header:undefined,
+        startTime:undefined,
+        endTime:undefined,
+        ident:Math.random().toFixed(10), 
+        description:undefined,
+    };
 
-    delete tempObj.startTimePlace;
-    delete tempObj.endTimePlace;
+    const headerElem = document.querySelector('.event__name');
+    tempObj.header = headerElem.value;
+    
+    const startDate = document.querySelector('.event__date-start').value.split('-');
+    let startHours = document.querySelector('.startTime_place').value.split(':')[0];
+    let startMinutes = document.querySelector('.startTime_place').value.split(':')[1];
+    startDate.push(startHours, startMinutes);
+    tempObj.startTime = new Date(...startDate);
+
+    const endDate = document.querySelector('.event__date-end').value.split('-');
+    let endHours = document.querySelector('.endTime_place').value.split(':')[0];
+    let endMinutes = document.querySelector('.endTime_place').value.split(':')[1];
+    endDate.push(endHours, endMinutes);
+    tempObj.endTime = new Date(...endDate);
+
+    const descriptionElem = document.querySelector('.multiline__text').value;
+    tempObj.description = descriptionElem;
+
+    // const form = document.querySelector('.popup');    
+    // const tempObj = [...new FormData(form)]
+    //     .reduce((acc,[field,value]) => ({...acc, [field]:value}),{});
+    // const startDate_hours = tempObj.startTimePlace.split(':')[0];
+    // const startDate_min = tempObj.startTimePlace.split(':')[1];
+    // tempObj.startTime = [...tempObj.startTime.split('-')];
+    // tempObj.startTime.push(startDate_hours, startDate_min);
+    // tempObj.startTime = new Date(...tempObj.startTime);
+    
+    // const endDate_hours = tempObj.endTimePlace.split(':')[0];
+    // const endDate_min = tempObj.endTimePlace.split(':')[1];
+    // tempObj.endTime = [...tempObj.endTime.split('-')];
+    // tempObj.endTime.push(endDate_hours, endDate_min);
+    // tempObj.endTime = new Date(...tempObj.endTime);
+
+    // tempObj.ident = Math.random().toFixed(10);
+
+    // delete tempObj.startTimePlace;
+    // delete tempObj.endTimePlace;
     
     eventsArray.push(tempObj);
     clearFunc();
@@ -49,4 +80,4 @@ export const funcForSaveButton = event => {
     blockOfDays.addEventListener('click', renderEventOnClick);
     renderRedLIne();
 };
-form.addEventListener('submit', funcForSaveButton);
+saveButton.addEventListener('click', funcForSaveButton);
