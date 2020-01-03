@@ -1,4 +1,5 @@
 import { arrDaysOfWeek } from './current_week.js';
+import { onInputValidate } from './validate.js';
 
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
@@ -43,6 +44,8 @@ export const renderEventOnClick = event => {
     if(startHour === 23)endTimePlace.value = [`00`, '00'].join(':');
 
     blockOfDays.removeEventListener('click', renderEventOnClick);
+
+    onInputValidate();
     
 };
 blockOfDays.addEventListener('click', renderEventOnClick);

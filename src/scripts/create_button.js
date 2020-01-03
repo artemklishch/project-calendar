@@ -1,3 +1,4 @@
+import { onInputValidate } from './validate.js';
 const createButton = document.querySelector('.nav__button');
 const popupBlock = document.querySelector('.popup-layer');
 const saveBtn = document.querySelector('.event__btn-save');
@@ -21,5 +22,7 @@ export const funcForCreateButton = () => {
     const myDate = document.querySelectorAll('.specialDate');
     const today = new Date();
     [...myDate].forEach(elem => elem.value = today.toISOString().substr(0, 10));
+
+    onInputValidate();
 };
 createButton.addEventListener('click', funcForCreateButton);

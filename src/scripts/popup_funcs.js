@@ -22,43 +22,27 @@ lockWindow.addEventListener('click', funcForLockWindow);
 
 
 const saveButton = document.querySelector('.event__btn-save');
+const form = document.querySelector('.popup');
 export const funcForSaveButton = event => {
     event.preventDefault();
 
-    const tempObj = {
-        header: undefined,
-        startTime: undefined,
-        endTime: undefined,
-        description: undefined,
-        ident: Math.random().toFixed(10),
-    };
+    const tempObj = [...new FormData(form)]
+        .reduce((acc,[field,value]) => ({...acc, [field]:value}),{});
+    const startDate_hours = tempObj.startTimePlace.split(':')[0];
+    const startDate_min = tempObj.startTimePlace.split(':')[1];
+    tempObj.startTime = [...tempObj.startTime.split('-')];
+    tempObj.startTime.push(startDate_hours, startDate_min);
+    tempObj.startTime = new Date(...tempObj.startTime);
+    
+    const endDate_hours = tempObj.endTimePlace.split(':')[0];
+    const endDate_min = tempObj.endTimePlace.split(':')[1];
+    tempObj.endTime = [...tempObj.endTime.split('-')];
+    tempObj.endTime.push(endDate_hours, endDate_min);
+    tempObj.endTime = new Date(...tempObj.endTime);
 
-    const titleInput = document.querySelector('.event__name');
-    tempObj.header = titleInput.value;
-
-    const startTimeInput = document.querySelector('.event__date-start');
-    const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
-    const firstStartDate_month = new Date(startTimeInput.value).getMonth();
-    const firstStartDate_date = new Date(startTimeInput.value).getDate();
-    const firstStartDate_hours = +document.querySelector('.startTime_place').value.split(':')[0];
-    const firstStartDate_minutes = +document.querySelector('.startTime_place').value.split(':')[1];
-    tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
-        firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
-
-
-    const endTimeInput = document.querySelector('.event__date-end');
-    const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
-    const firstEndDate_month = new Date(endTimeInput.value).getMonth();
-    const firstEndDate_date = new Date(endTimeInput.value).getDate();
-    const firstEndDate_hours = +document.querySelector('.endTime_place').value.split(':')[0];
-    const firstEndDate_minutes = +document.querySelector('.endTime_place').value.split(':')[1];
-    tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
-        firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
-
-
-    const descriptionInput = document.querySelector('.multiline__text');
-    tempObj.description = descriptionInput.value;
-
+    delete tempObj.startTimePlace;
+    delete tempObj.endTimePlace;
+    
     eventsArray.push(tempObj);
     clearFunc();
     renderEventObject(eventsArray);
@@ -66,4 +50,4 @@ export const funcForSaveButton = event => {
     blockOfDays.addEventListener('click', renderEventOnClick);
     renderRedLIne();
 };
-saveButton.addEventListener('click', funcForSaveButton);
+form.addEventListener('submit', funcForSaveButton);

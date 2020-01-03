@@ -1,108 +1,91 @@
 import { eventsArray } from './storage.js';
+import { funcForSaveButton } from './popup_funcs.js';
+import { funcForSaveButtonAfterEdit } from './edit_event.js';
 
 const validateMessageElem = document.querySelector('.validate_message');
+const saveButton = document.querySelector('.event__btn-save');
+const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 
 const allDateInputs = document.querySelectorAll('.input');
 for(let i = 0; i < [...allDateInputs].length; i++){
     allDateInputs[i].oninput = onInputValidate;
 }
+
+
+const funcForCheckIntersectionOfEvents = (object) => {
+    let withoutIntersecttion = true;
+    for(let i = 0; i < eventsArray.length; i++){
+        
+        if(object.startTime.getHours() === eventsArray[i].startTime.getHours()
+            && object.startTime.getMinutes() === eventsArray[i].startTime.getMinutes()){
+            withoutIntersecttion = false;
+            break;
+        }
+
+        if(
+            (object.startTime.getHours() > eventsArray[i].startTime.getHours()
+                && object.startTime.getMinutes() > eventsArray[i].startTime.getMinutes())
+        && (object.startTime.getHours() < eventsArray[i].endTime.getHours()
+            && object.startTime.getMinutes() < eventsArray[i].endTime.getMinutes())
+        ){
+            withoutIntersecttion = false;
+            break;
+        }
+
+        if(object.endTime.getHours() === eventsArray[i].endTime.getHours()
+            && object.endTime.getMinutes() === eventsArray[i].endTime.getMinutes()){
+            withoutIntersecttion = false;
+            break;
+        }
+
+        if((object.endTime.getHours() < eventsArray[i].endTime.getHours()
+            && object.endTime.getMinutes() < eventsArray[i].endTime.getMinutes())
+        && (object.endTime.getHours() > eventsArray[i].startTime.getHours()
+            && object.endTime.getMinutes() > eventsArray[i].startTime.getMinutes())
+        ){
+            withoutIntersecttion = false;
+            break;
+        }
+
+        if((object.startTime.getHours() < eventsArray[i].startTime.getHours()
+            && object.startTime.getMinutes() < eventsArray[i].startTime.getMinutes())
+        && (object.endTime.getHours() > eventsArray[i].endTime.getHours()
+            && object.endTime.getMinutes() > eventsArray[i].endTime.getMinutes())
+        ){
+            withoutIntersecttion = false;
+            break;
+        }
+    }
+    return withoutIntersecttion;  
+};
+
 export function onInputValidate(){
-    const tempObj = {
-        startTime: undefined,
-        endTime: undefined,
+    const form = document.querySelector('.popup');
+    const tempObj = [...new FormData(form)]
+        .reduce((acc,[field,value]) => ({...acc, [field]:value}),{});
+    
+    const startDate_hours = tempObj.startTimePlace.split(':')[0];
+    const startDate_min = tempObj.startTimePlace.split(':')[1];
+    tempObj.startTime = [...tempObj.startTime.split('-')];
+    tempObj.startTime.push(startDate_hours, startDate_min);
+    tempObj.startTime = new Date(...tempObj.startTime);
+    
+    const endDate_hours = tempObj.endTimePlace.split(':')[0];
+    const endDate_min = tempObj.endTimePlace.split(':')[1];
+    tempObj.endTime = [...tempObj.endTime.split('-')];
+    tempObj.endTime.push(endDate_hours, endDate_min);
+    tempObj.endTime = new Date(...tempObj.endTime);
+
+    if(!funcForCheckIntersectionOfEvents(tempObj)){
+        validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
+        saveButton.removeEventListener('submit', funcForSaveButton);
+        saveBtnForEdit.removeEventListener('submit', funcForSaveButtonAfterEdit);
+    }else{
+        validateMessageElem.innerHTML = '';
+        saveButton.addEventListener('submit', funcForSaveButton);
+        saveBtnForEdit.addEventListener('submit', funcForSaveButtonAfterEdit);
     };
-    const startTimeInput = document.querySelector('.event__date-start');
-    const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
-    const firstStartDate_month = new Date(startTimeInput.value).getMonth();
-    const firstStartDate_date = new Date(startTimeInput.value).getDate();
-    const firstStartDate_hours = +document.querySelector('.startTime_place').value.split(':')[0];
-    const firstStartDate_minutes = +document.querySelector('.startTime_place').value.split(':')[1];
-    tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
-        firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
-
-
-    const endTimeInput = document.querySelector('.event__date-end');
-    const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
-    const firstEndDate_month = new Date(endTimeInput.value).getMonth();
-    const firstEndDate_date = new Date(endTimeInput.value).getDate();
-    const firstEndDate_hours = +document.querySelector('.endTime_place').value.split(':')[0];
-    const firstEndDate_minutes = +document.querySelector('.endTime_place').value.split(':')[1];
-    tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
-        firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
-            
+    
 }
 
 
-// const blockOfDateInputs = document.querySelector('.popup__picker');
-// export const onInputDateValidation = event => {
-//     event.preventDefault();
-//     const currentInput = event.target;
-//     if(!currentInput.classList.contains('input')) return;
-//     const tempObj = {
-//         startTime: undefined,
-//         endTime: undefined,
-//     };
-//     const startTimeInput = document.querySelector('.event__date-start');
-//     const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
-//     const firstStartDate_month = new Date(startTimeInput.value).getMonth();
-//     const firstStartDate_date = new Date(startTimeInput.value).getDate();
-//     const firstStartDate_hours = +document.querySelector('.startTime_place').value.split(':')[0];
-//     const firstStartDate_minutes = +document.querySelector('.startTime_place').value.split(':')[1];
-//     tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
-//         firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
-
-
-//     const endTimeInput = document.querySelector('.event__date-end');
-//     const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
-//     const firstEndDate_month = new Date(endTimeInput.value).getMonth();
-//     const firstEndDate_date = new Date(endTimeInput.value).getDate();
-//     const firstEndDate_hours = +document.querySelector('.endTime_place').value.split(':')[0];
-//     const firstEndDate_minutes = +document.querySelector('.endTime_place').value.split(':')[1];
-//     tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
-//         firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
-//     console.log(tempObj);
-// };
-// blockOfDateInputs.addEventListener('input', onInputDateValidation);
-
-
-
-
-
-
-
-
-
-//export const funcForCheckIntersectionOfEvents = (object) => {
-//     let withoutIntersecttion = true;
-//     for(let i = 0; i < eventsArray.length; i++){
-//         if(object.startTime.valueOf() === eventsArray[i].startTime.valueOf()){
-//             withoutIntersecttion = false;
-//             validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
-//             break;
-//         }
-//         if(object.startTime.valueOf() > eventsArray[i].startTime.valueOf()
-//         && object.startTime.valueOf() < eventsArray[i].endTime.valueOf()){
-//             withoutIntersecttion = false;
-//             validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
-//             break;
-//         }
-//         if(object.endTime.valueOf() === eventsArray[i].endTime.valueOf()){
-//             withoutIntersecttion = false;
-//             validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
-//             break;
-//         }
-//         if(object.endTime.valueOf() < eventsArray[i].endTime.valueOf()
-//         && object.endTime.valueOf() > eventsArray[i].startTime.valueOf()){
-//             withoutIntersecttion = false;
-//             validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
-//             break;
-//         }
-//         if(object.startTime.valueOf() < eventsArray[i].startTime.valueOf()
-//         && object.endTime.valueOf() > eventsArray[i].endTime.valueOf()){
-//             withoutIntersecttion = false;
-//             validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
-//             break;
-//         }
-//     }
-//     return withoutIntersecttion;  
-//};

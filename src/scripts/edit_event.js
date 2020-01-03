@@ -128,4 +128,4 @@ export const funcForSaveButtonAfterEdit = event => {
     renderRedLIne();
     currentObject = [];
 };
-saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+saveBtnForEdit.addEventListener('submit', funcForSaveButtonAfterEdit);
