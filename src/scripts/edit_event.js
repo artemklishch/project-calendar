@@ -76,13 +76,13 @@ blockOfDays.addEventListener('click', funcForEditEvent);
 export const funcForSaveButtonAfterEdit = event => {
     event.preventDefault();
     
-    if(markValuable !== 0){
-        eventsArray.splice(indexOfElement,1);
-        eventsArray.splice(indexOfElement-1,1);
-    }else eventsArray.splice(indexOfElement,1);
-    funcForMakeindexOfElementNull();
-    funcForMakeMarkValuableNull();
-
+    // if(markValuable !== 0){
+    //     eventsArray.splice(indexOfElement,1);
+    //     eventsArray.splice(indexOfElement-1,1);
+    // }else eventsArray.splice(indexOfElement,1);
+    // funcForMakeindexOfElementNull();
+    
+    
     const tempObj = {
         header: undefined,
         startTime: undefined,
@@ -91,43 +91,45 @@ export const funcForSaveButtonAfterEdit = event => {
         ident: Math.random().toFixed(10),
     };
 
-    const titleInput = document.querySelector('.event__name');
-    tempObj.header = titleInput.value;
+    console.log(tempObj);
 
-    const startTimeInput = document.querySelector('.event__date-start');
-    const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
-    const firstStartDate_month = new Date(startTimeInput.value).getMonth();
-    const firstStartDate_date = new Date(startTimeInput.value).getDate();
-    const firstStartDate_hours = +document.querySelector('.event__time-start').value;
-    const firstStartDate_minutes = +document.querySelector('.event__time-min-start').value;
-    tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
-        firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
+//     const titleInput = document.querySelector('.event__name');
+//     tempObj.header = titleInput.value;
 
-
-    const endTimeInput = document.querySelector('.event__date-end');
-    const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
-    const firstEndDate_month = new Date(endTimeInput.value).getMonth();
-    const firstEndDate_date = new Date(endTimeInput.value).getDate();
-    const firstEndDate_hours = +document.querySelector('.event__time-end').value;
-    const firstEndDate_minutes = +document.querySelector('.event__time-min-end').value;
-    tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
-        firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
+//     const startTimeInput = document.querySelector('.event__date-start');
+//     const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
+//     const firstStartDate_month = new Date(startTimeInput.value).getMonth();
+//     const firstStartDate_date = new Date(startTimeInput.value).getDate();
+//     const firstStartDate_hours = +document.querySelector('.startTime_place').value.split(':')[0];
+//     const firstStartDate_minutes = +document.querySelector('.event__time-min-start').value;
+//     tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
+//         firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
 
 
-    const descriptionInput = document.querySelector('.multiline__text');
-    tempObj.description = descriptionInput.value;
+//     const endTimeInput = document.querySelector('.event__date-end');
+//     const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
+//     const firstEndDate_month = new Date(endTimeInput.value).getMonth();
+//     const firstEndDate_date = new Date(endTimeInput.value).getDate();
+//     const firstEndDate_hours = +document.querySelector('.endTime_place').value.split(':')[0];
+//     const firstEndDate_minutes = +document.querySelector('.endTime_place').value.split(':')[1];
+//     tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
+//         firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
+
+
+//     const descriptionInput = document.querySelector('.multiline__text');
+//     tempObj.description = descriptionInput.value;
     
-    console.log(eventsArray);
-    eventsArray.push(tempObj);
-    clearFunc();
-    renderEventObject(eventsArray);
-    popupBlock.style.display = 'none';
-    saveBtnForEdit.style.display = 'none';
-    iconDelete.style.display = 'none';
-    
-    renderRedLIne();
+//     console.log(eventsArray);
+//     eventsArray.push(tempObj);
+//     clearFunc();
+//     renderEventObject(eventsArray);
+//     popupBlock.style.display = 'none';
+//     saveBtnForEdit.style.display = 'none';
+//     iconDelete.style.display = 'none';
+//     funcForMakeMarkValuableNull();
+//     renderRedLIne();
    
-   // validateMessageElem.innerHTML = '';
-    currentObject = [];
+//    // validateMessageElem.innerHTML = '';
+//     currentObject = [];
 };
 saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
