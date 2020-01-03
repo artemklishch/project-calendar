@@ -26,7 +26,6 @@ export const funcForEditEvent = event => {
     saveBtnForEdit.style.display = 'block';
     iconDelete.style.display = 'block';
 
-
     const dataId = blockOfEvent.dataset.id;
     eventsArray.forEach((element,index) => {
         if(element.ident === dataId) indexOfElement = index;
@@ -68,6 +67,7 @@ export const funcForEditEvent = event => {
         let endMin = new Date(currentObject[1].endTime).getMinutes(); 
         endMin < 10 ? endMin = `0${endMin}` : endMin;
         endTimePlace.value = `${endHour}:${endMin}`;
+        markValuable = 1;
     }
 };
 blockOfDays.addEventListener('click', funcForEditEvent);
@@ -81,6 +81,7 @@ export const funcForSaveButtonAfterEdit = event => {
         eventsArray.splice(indexOfElement-1,1);
     }else eventsArray.splice(indexOfElement,1);
     funcForMakeindexOfElementNull();
+    funcForMakeMarkValuableNull();
 
     const tempObj = {
         header: undefined,
@@ -115,17 +116,18 @@ export const funcForSaveButtonAfterEdit = event => {
 
     const descriptionInput = document.querySelector('.multiline__text');
     tempObj.description = descriptionInput.value;
-
+    
+    console.log(eventsArray);
     eventsArray.push(tempObj);
     clearFunc();
     renderEventObject(eventsArray);
     popupBlock.style.display = 'none';
     saveBtnForEdit.style.display = 'none';
     iconDelete.style.display = 'none';
-    funcForMakeMarkValuableNull();
+    
     renderRedLIne();
    
-    validateMessageElem.innerHTML = '';
+   // validateMessageElem.innerHTML = '';
     currentObject = [];
 };
 saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
