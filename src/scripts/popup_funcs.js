@@ -21,46 +21,61 @@ export const funcForLockWindow = () => {
 lockWindow.addEventListener('click', funcForLockWindow);
 
 
-
 const saveButton = document.querySelector('.event__btn-save');
-
 export const funcForSaveButton = event => {
     event.preventDefault();
 
-    const form = document.querySelector('.popup');
-    // let tempObj = eventsArray
-    //     .reduce((...acc, [field,value]) => acc,field:value,{});
-    // const tempObj = {
-    //     header:undefined,
-    //     startTime:undefined,
-    //     endTime:undefined,
-    //     ident:Math.random().toFixed(10), 
-    //     description:undefined,
-    // };
+    // const form = document.querySelector('.popup');
+    // let tempObj = [...new FormData(form)]
+    //     .reduce((acc, [field,value]) => ({...acc,[field]:value}),{});
+    // tempObj.startTime = tempObj.startTime.split('-');
+    // tempObj.startTimePlace = tempObj.startTimePlace.split(':');
+    // //tempObj.startTime = [...tempObj.startTime, ...tempObj.startTimePlace];
+    // tempObj.startTime = tempObj.startTime.concat(tempObj.startTimePlace);
+    // tempObj.startTime = new Date(...tempObj.startTime);
 
-    // const titleInput = document.querySelector('.event__name');
-    // tempObj.header = titleInput.value;
+    // tempObj.endTime = tempObj.endTime.split('-');
+    // tempObj.endTimePlace = tempObj.endTimePlace.split(':');
+    // //tempObj.endTime = [...tempObj.endTime, ...tempObj.endTimePlace];
+    // tempObj.endTime = tempObj.endTime.concat(tempObj.endTimePlace);
+    // tempObj.endTime = new Date(...tempObj.endTime);
 
-    // const startTimeInput = document.querySelector('.event__date-start');
-    // const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
-    // const firstStartDate_month = new Date(startTimeInput.value).getMonth();
-    // const firstStartDate_date = new Date(startTimeInput.value).getDate();
-    // const firstStartDate_hours = document.querySelector('.startTime_place').value.split(':')[0];
-    // const firstStartDate_minutes = document.querySelector('.startTime_place').value.split(':')[1];
-    // tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
-    //     firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
+    // delete tempObj.startTimePlace;
+    // delete tempObj.endTimePlace;
 
-    // const endTimeInput = document.querySelector('.event__date-end');
-    // const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
-    // const firstEndDate_month = new Date(endTimeInput.value).getMonth();
-    // const firstEndDate_date = new Date(endTimeInput.value).getDate();
-    // const firstEndDate_hours = document.querySelector('.endTime_place').value.split(':')[0];
-    // const firstEndDate_minutes = document.querySelector('.endTime_place').value.split(':')[1];
-    // tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
-    //     firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
 
-    // const descriptionElem = document.querySelector('.multiline__text').value;
-    // tempObj.description = descriptionElem;
+
+    const tempObj = {
+        header:undefined,
+        startTime:undefined,
+        endTime:undefined,
+        ident:Math.random().toFixed(10), 
+        description:undefined,
+    };
+
+    const titleInput = document.querySelector('.event__name');
+    tempObj.header = titleInput.value;
+
+    const startTimeInput = document.querySelector('.event__date-start');
+    const firstStartDate_year = new Date(startTimeInput.value).getFullYear();
+    const firstStartDate_month = new Date(startTimeInput.value).getMonth();
+    const firstStartDate_date = new Date(startTimeInput.value).getDate();
+    const firstStartDate_hours = document.querySelector('.startTime_place').value.split(':')[0];
+    const firstStartDate_minutes = document.querySelector('.startTime_place').value.split(':')[1];
+    tempObj.startTime = new Date(firstStartDate_year, firstStartDate_month,
+        firstStartDate_date, firstStartDate_hours, firstStartDate_minutes);
+
+    const endTimeInput = document.querySelector('.event__date-end');
+    const firstEndDate_year = new Date(endTimeInput.value).getFullYear();
+    const firstEndDate_month = new Date(endTimeInput.value).getMonth();
+    const firstEndDate_date = new Date(endTimeInput.value).getDate();
+    const firstEndDate_hours = document.querySelector('.endTime_place').value.split(':')[0];
+    const firstEndDate_minutes = document.querySelector('.endTime_place').value.split(':')[1];
+    tempObj.endTime = new Date(firstEndDate_year, firstEndDate_month,
+        firstEndDate_date, firstEndDate_hours, firstEndDate_minutes);
+
+    const descriptionElem = document.querySelector('.multiline__text').value;
+    tempObj.description = descriptionElem;
 
     eventsArray.push(tempObj);
     clearFunc();

@@ -13,9 +13,10 @@ for(let i = 0; i < [...allDateInputs].length; i++){
 
 
 const funcForCheckIntersectionOfEvents = (object) => {
+    
     let withoutIntersecttion = true;
     for(let i = 0; i < eventsArray.length; i++){
-        
+
         if(object.startTime.getHours() === eventsArray[i].startTime.getHours()
             && object.startTime.getMinutes() === eventsArray[i].startTime.getMinutes()){
             withoutIntersecttion = false;
@@ -58,6 +59,16 @@ const funcForCheckIntersectionOfEvents = (object) => {
     }
     return withoutIntersecttion;  
 };
+
+
+
+
+const onCheckEventLength = (object) => {
+    let startMinutes = object.startTime.getMinutes();
+    let endMinutes = 
+};
+
+
 
 export function onInputValidate(){
     const form = document.querySelector('.popup');
