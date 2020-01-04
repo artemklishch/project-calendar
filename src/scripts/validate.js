@@ -1,10 +1,12 @@
 import { eventsArray } from './storage.js';
 import { funcForSaveButton } from './popup_funcs.js';
 import { funcForSaveButtonAfterEdit } from './edit_event.js';
+import { funcForDeleteEvene } from './delete_event.js';
 
 const validateMessageElem = document.querySelector('.validate_message');
 const saveButton = document.querySelector('.event__btn-save');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
+const deleteBasket = document.querySelector('.event__btn-delete');
 
 const allDateInputs = document.querySelectorAll('.input');
 for(let i = 0; i < [...allDateInputs].length; i++){
@@ -15,60 +17,68 @@ for(let i = 0; i < [...allDateInputs].length; i++){
 const funcForCheckIntersectionOfEvents = (object) => {
     
     let withoutIntersecttion = true;
-    for(let i = 0; i < eventsArray.length; i++){
+    // for(let i = 0; i < eventsArray.length; i++){
 
-        if(object.startTime.getHours() === eventsArray[i].startTime.getHours()
-            && object.startTime.getMinutes() === eventsArray[i].startTime.getMinutes()){
-            withoutIntersecttion = false;
-            break;
-        }
+    //     if(object.startTime.getHours() === eventsArray[i].startTime.getHours()
+    //         && object.startTime.getMinutes() === eventsArray[i].startTime.getMinutes()){
+    //         withoutIntersecttion = false;
+    //         break;
+    //     }
 
-        if(
-            (object.startTime.getHours() > eventsArray[i].startTime.getHours()
-                && object.startTime.getMinutes() > eventsArray[i].startTime.getMinutes())
-        && (object.startTime.getHours() < eventsArray[i].endTime.getHours()
-            && object.startTime.getMinutes() < eventsArray[i].endTime.getMinutes())
-        ){
-            withoutIntersecttion = false;
-            break;
-        }
+    //     if(
+    //         (object.startTime.getHours() > eventsArray[i].startTime.getHours()
+    //             && object.startTime.getMinutes() > eventsArray[i].startTime.getMinutes())
+    //     && (object.startTime.getHours() < eventsArray[i].endTime.getHours()
+    //         && object.startTime.getMinutes() < eventsArray[i].endTime.getMinutes())
+    //     ){
+    //         withoutIntersecttion = false;
+    //         break;
+    //     }
 
-        if(object.endTime.getHours() === eventsArray[i].endTime.getHours()
-            && object.endTime.getMinutes() === eventsArray[i].endTime.getMinutes()){
-            withoutIntersecttion = false;
-            break;
-        }
+    //     if(object.endTime.getHours() === eventsArray[i].endTime.getHours()
+    //         && object.endTime.getMinutes() === eventsArray[i].endTime.getMinutes()){
+    //         withoutIntersecttion = false;
+    //         break;
+    //     }
 
-        if((object.endTime.getHours() < eventsArray[i].endTime.getHours()
-            && object.endTime.getMinutes() < eventsArray[i].endTime.getMinutes())
-        && (object.endTime.getHours() > eventsArray[i].startTime.getHours()
-            && object.endTime.getMinutes() > eventsArray[i].startTime.getMinutes())
-        ){
-            withoutIntersecttion = false;
-            break;
-        }
+    //     if((object.endTime.getHours() < eventsArray[i].endTime.getHours()
+    //         && object.endTime.getMinutes() < eventsArray[i].endTime.getMinutes())
+    //     && (object.endTime.getHours() > eventsArray[i].startTime.getHours()
+    //         && object.endTime.getMinutes() > eventsArray[i].startTime.getMinutes())
+    //     ){
+    //         withoutIntersecttion = false;
+    //         break;
+    //     }
 
-        if((object.startTime.getHours() < eventsArray[i].startTime.getHours()
-            && object.startTime.getMinutes() < eventsArray[i].startTime.getMinutes())
-        && (object.endTime.getHours() > eventsArray[i].endTime.getHours()
-            && object.endTime.getMinutes() > eventsArray[i].endTime.getMinutes())
-        ){
-            withoutIntersecttion = false;
-            break;
-        }
-    }
+    //     if((object.startTime.getHours() < eventsArray[i].startTime.getHours()
+    //         && object.startTime.getMinutes() < eventsArray[i].startTime.getMinutes())
+    //     && (object.endTime.getHours() > eventsArray[i].endTime.getHours()
+    //         && object.endTime.getMinutes() > eventsArray[i].endTime.getMinutes())
+    //     ){
+    //         withoutIntersecttion = false;
+    //         break;
+    //     }
+    // }
+
+
     return withoutIntersecttion;  
 };
 
 
 
 
+
 const onCheckEventLength = (object) => {
-    let startMinutes = object.startTime.getMinutes();
-    let endMinutes = 
+    const maxLength = 21600000;
+    const objectLength = object.endTime - object.startTime;
+    return objectLength <= maxLength || false; 
 };
 
-
+const onCheckMinutes = (object) => {
+    let startMinutes = object.startTime.getMinutes();
+    let endMinutes = object.endTime.getMinutes();
+    return startMinutes % 15 !== 0 || endMinutes % 15 !== 0 ? false : true;
+};
 
 export function onInputValidate(){
     const form = document.querySelector('.popup');
@@ -88,7 +98,7 @@ export function onInputValidate(){
     tempObj.endTime = new Date(...tempObj.endTime);
     
     // if(!funcForCheckIntersectionOfEvents(tempObj)){
-    //     validateMessageElem.innerHTML = 'Error! Events can\'t intersect';
+    //     validateMessageElem.innerHTML += ' Error! Events can\'t intersect';
     //     saveButton.removeEventListener('click', funcForSaveButton);
     //     saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
     // }else{
@@ -96,6 +106,45 @@ export function onInputValidate(){
     //     saveButton.addEventListener('click', funcForSaveButton);
     //     saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
     // };
+
+
+    if(!onCheckEventLength(tempObj)){
+        validateMessageElem.innerHTML += ' Error! Event can`t be more than 6 hours';
+        saveButton.removeEventListener('click', funcForSaveButton);
+        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+    }else{
+        validateMessageElem.innerHTML = '';
+        saveButton.addEventListener('click', funcForSaveButton);
+        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+    };
+
+    if(!onCheckMinutes(tempObj)){
+        validateMessageElem.innerHTML += ' Error! Minuts must be a multiple of fifteen';
+        saveButton.removeEventListener('click', funcForSaveButton);
+        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+    }else{
+        validateMessageElem.innerHTML = '';
+        saveButton.addEventListener('click', funcForSaveButton);
+        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+    };
 }
+
+
+
+export const onCheckLateEffortOfDeleteOrEdite = (object) => {
+    const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60; 
+    if(timeToEvent <= 15){
+        validateMessageElem.innerHTML += ' Error! You can`t change or delete event after 15 minutes to event';
+        saveButton.removeEventListener('click', funcForSaveButton);
+        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+        deleteBasket.removeEventListener('click', funcForDeleteEvene);
+    }else{
+        validateMessageElem.innerHTML = '';
+        saveButton.addEventListener('click', funcForSaveButton);
+        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+        deleteBasket.addEventListener('click', funcForDeleteEvene);
+    };
+};
+
 
 
