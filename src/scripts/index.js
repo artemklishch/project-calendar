@@ -11,4 +11,4 @@ import { funcForSaveButton } from './popup_funcs.js';
 import { renderEventOnClick } from './event_on_click.js';
 import { funcForEditEvent } from './edit_event.js';
 import { funcForDeleteEvene } from './delete_event.js';
-import { onInputValidateOnMinutes } from './validate.js';
+import { onInputValidateOnMinutes, onInputValidateOnLong } from './validate.js';
