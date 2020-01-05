@@ -107,17 +107,6 @@ export function onInputValidate(){
     //     saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
     // };
 
-
-    if(!onCheckEventLength(tempObj)){
-        validateMessageElem.innerHTML += ' Error! Event can`t be more than 6 hours';
-        saveButton.removeEventListener('click', funcForSaveButton);
-        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-    }else{
-        validateMessageElem.innerHTML = '';
-        saveButton.addEventListener('click', funcForSaveButton);
-        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-    };
-
     if(!onCheckMinutes(tempObj)){
         validateMessageElem.innerHTML += ' Error! Minuts must be a multiple of fifteen';
         saveButton.removeEventListener('click', funcForSaveButton);
@@ -127,6 +116,16 @@ export function onInputValidate(){
         saveButton.addEventListener('click', funcForSaveButton);
         saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
     };
+
+    // if(!onCheckEventLength(tempObj)){
+    //     validateMessageElem.innerHTML += ' Error! Event can`t be more than 6 hours';
+    //     saveButton.removeEventListener('click', funcForSaveButton);
+    //     saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+    // }else{
+    //     validateMessageElem.innerHTML = '';
+    //     saveButton.addEventListener('click', funcForSaveButton);
+    //     saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+    // };
 }
 
 
