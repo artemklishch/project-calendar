@@ -5,65 +5,103 @@ import { funcForDeleteEvene } from './delete_event.js';
 
 const validateMessageElem1 = document.querySelector('.validate_message_1');
 const validateMessageElem2 = document.querySelector('.validate_message_2');
+const validateMessageElem3 = document.querySelector('.validate_message_3');
+//const validateMessageElem4 = document.querySelector('.validate_message_4');
 const saveButton = document.querySelector('.event__btn-save');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 const deleteBasket = document.querySelector('.event__btn-delete');
 
-// const allDateInputs = document.querySelectorAll('.input');
-// for(let i = 0; i < [...allDateInputs].length; i++){
-//     allDateInputs[i].oninput = onInputValidate;
-// }
+// const onCheckOneOption = (curStH,curStM,stH,stM) => {
+//     let accessVal1 = 0;
+//     if(curStH === stH && curStM === stM){
+//         accessVal1 = 1;
+//     }else accessVal1 = 0;
+//     return accessVal1 === 1 || false;
+// };
+// const onCheckTwoOption = (curStH,curStM,stH,stM,edH,edM) => {
+//     let accessVal1 = 0, accessVal2 = 0;
+//     if(curStH > stH && curStM > stM){
+//         accessVal1 = 1;
+//     }else accessVal1 = 0;
+//     if(curStH < edH && curStM < edM){
+//         accessVal2 = 1;
+//     }else accessVal2 = 0;
+//     return accessVal1 === accessVal2 || false;
+// };
+// const onCheckThreeOption = (curEdH,curEdM,edH,edM) => {
+//     let accessVal1 = 0, accessVal2 = 0;
+//     if(curEdH === edH && curEdM === edM){
+//         accessVal1 = 1;
+//         accessVal2 = 1;
+//     }else{
+//         accessVal1 = 0;
+//         accessVal2 = 0;
+//     } 
+//     return accessVal1 === accessVal2 || false;
+// };
+// const onCheckFourOption = (curEdH,curEdM,edH,edM,stH,stM) => {
+//     let accessVal1 = 0, accessVal2 = 0;
+//     if(curEdH < edH && curEdM < edM){
+//         accessVal1 = 1;
+//     }else accessVal1 = 0;
+//     if(curEdH > stH && curEdM > stM){
+//         accessVal2 = 1;
+//     }else accessVal2 = 0;
+//     return accessVal1 === accessVal2 || false;
+// };
+// const onCheckFiveOption = (curStH,curStM,curEdH,curEdM,stH,stM,edH,edM) => {
+//     let accessVal1 = 0, accessVal2 = 0;
+//     if(curStH < stH && curStM < stM){
+//         accessVal1 = 1;
+//     }else accessVal1 = 0;
+//     if(curEdH > edH && curEdM > edM){
+//         accessVal2 = 1;
+//     }else accessVal2 = 0;
+//     return accessVal1 === accessVal2 || false;
+// };
 
+// const onCheckIntersectionEvents = (object) => {
+//     let withoutIntersecttion = true;
+//     const currentStHours = object.startTime.getHours();
+//     const currentStMinutes = object.startTime.getMinutes();
+//     const currentEdHours = object.endTime.getHours();
+//     const currentEdMinutes = object.endTime.getMinutes();
+//     for(let i = 0; i < eventsArray.length; i++){
+//         const checkedStHours = eventsArray[i].startTime.getHours();
+//         const checkedStMinutes = eventsArray[i].startTime.getMinutes(); 
+//         const checkedEndHours = eventsArray[i].endTime.getHours();
+//         const checkedEndMinutes = eventsArray[i].endTime.getMinutes();
 
-const funcForCheckIntersectionOfEvents = (object) => {
-    
-    let withoutIntersecttion = true;
-    // for(let i = 0; i < eventsArray.length; i++){
+//         if(!onCheckOneOption(currentStHours,currentStMinutes,checkedStHours,checkedStMinutes)){
+//             withoutIntersecttion = false;
+//             break;
+//         }else withoutIntersecttion = true;
 
-    //     if(object.startTime.getHours() === eventsArray[i].startTime.getHours()
-    //         && object.startTime.getMinutes() === eventsArray[i].startTime.getMinutes()){
-    //         withoutIntersecttion = false;
-    //         break;
-    //     }
+//         if(onCheckTwoOption(currentStHours,currentStMinutes,checkedStHours,checkedStMinutes,
+//             checkedEndHours,checkedEndMinutes)){
+//                 withoutIntersecttion = false;
+//                 break;
+//         }else withoutIntersecttion = true;
 
-    //     if(
-    //         (object.startTime.getHours() > eventsArray[i].startTime.getHours()
-    //             && object.startTime.getMinutes() > eventsArray[i].startTime.getMinutes())
-    //     && (object.startTime.getHours() < eventsArray[i].endTime.getHours()
-    //         && object.startTime.getMinutes() < eventsArray[i].endTime.getMinutes())
-    //     ){
-    //         withoutIntersecttion = false;
-    //         break;
-    //     }
+//         if(onCheckThreeOption(currentEdHours,currentEdMinutes,checkedEndHours,checkedEndMinutes)){
+//             withoutIntersecttion = false;
+//             break;
+//         }else withoutIntersecttion = true;
+        
+//         if(onCheckFourOption(currentEdHours,currentEdMinutes,checkedEndHours,checkedEndMinutes,
+//             checkedStHours,checkedStMinutes)){
+//                 withoutIntersecttion = false;
+//                 break;
+//         }else withoutIntersecttion = true;
 
-    //     if(object.endTime.getHours() === eventsArray[i].endTime.getHours()
-    //         && object.endTime.getMinutes() === eventsArray[i].endTime.getMinutes()){
-    //         withoutIntersecttion = false;
-    //         break;
-    //     }
-
-    //     if((object.endTime.getHours() < eventsArray[i].endTime.getHours()
-    //         && object.endTime.getMinutes() < eventsArray[i].endTime.getMinutes())
-    //     && (object.endTime.getHours() > eventsArray[i].startTime.getHours()
-    //         && object.endTime.getMinutes() > eventsArray[i].startTime.getMinutes())
-    //     ){
-    //         withoutIntersecttion = false;
-    //         break;
-    //     }
-
-    //     if((object.startTime.getHours() < eventsArray[i].startTime.getHours()
-    //         && object.startTime.getMinutes() < eventsArray[i].startTime.getMinutes())
-    //     && (object.endTime.getHours() > eventsArray[i].endTime.getHours()
-    //         && object.endTime.getMinutes() > eventsArray[i].endTime.getMinutes())
-    //     ){
-    //         withoutIntersecttion = false;
-    //         break;
-    //     }
-    // }
-
-
-    return withoutIntersecttion;  
-};
+//         if(onCheckFiveOption(currentStHours,currentStMinutes,currentEdHours, currentEdMinutes,checkedStHours,checkedStMinutes,
+//             checkedEndHours,checkedEndMinutes)){
+//                 withoutIntersecttion = false;
+//                 break;
+//         }else withoutIntersecttion = true;
+//     }
+//     return withoutIntersecttion;  
+// };
 
 
 const onCheckEventLength = (object) => {
@@ -132,16 +170,40 @@ export const onInputValidateOnLong = event => {
 }
 form.addEventListener('input', onInputValidateOnLong);
 
+// export const onInputValidateOnIntersection = event => {
+//     if(!event.target.classList.contains('input')) return;
+
+//     const tempObj = onMakeObjectFromValuesInForm();
+    
+//     if(!onCheckIntersectionEvents(tempObj)){
+//         validateMessageElem4.innerHTML = 'Error! Event can`t intersect';
+//         saveButton.removeEventListener('click', funcForSaveButton);
+//         saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+//     }else{
+//         validateMessageElem4.innerHTML = '';
+//         saveButton.addEventListener('click', funcForSaveButton);
+//         saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+//     };
+// }
+// form.addEventListener('input', onInputValidateOnIntersection);
+
+
+
+
+
+
+
+
 
 export const onCheckLateEffortOfDeleteOrEdite = (object) => {
     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60; 
     if(timeToEvent <= 15){
-        validateMessageElem.innerHTML = 'Error! You can`t change or delete event after 15 minutes to event';
+        validateMessageElem3.innerHTML = 'You can`t change or delete event after 15 minutes to event';
         saveButton.removeEventListener('click', funcForSaveButton);
         saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
         deleteBasket.removeEventListener('click', funcForDeleteEvene);
     }else{
-        validateMessageElem.innerHTML = '';
+        validateMessageElem3.innerHTML = '';
         saveButton.addEventListener('click', funcForSaveButton);
         saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
         deleteBasket.addEventListener('click', funcForDeleteEvene);

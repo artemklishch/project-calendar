@@ -48,7 +48,7 @@ const forHeight = (object, elem) => {
     if(object.startTime.getMinutes() === 45)elem.style.top = '75%';
 
     let timesOfRange = (object.endTime - object.startTime)/1000/60/15;
-    elem.style.height = (timesOfRange*24) + '%';
+    elem.style.height = (timesOfRange*24.5) + '%';
     if(timesOfRange < 4) elem.style.padding = 0;
 }
 
