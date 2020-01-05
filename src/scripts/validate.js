@@ -3,15 +3,16 @@ import { funcForSaveButton } from './popup_funcs.js';
 import { funcForSaveButtonAfterEdit } from './edit_event.js';
 import { funcForDeleteEvene } from './delete_event.js';
 
-const validateMessageElem = document.querySelector('.validate_message');
+const validateMessageElem1 = document.querySelector('.validate_message_1');
+const validateMessageElem2 = document.querySelector('.validate_message_2');
 const saveButton = document.querySelector('.event__btn-save');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 const deleteBasket = document.querySelector('.event__btn-delete');
 
-const allDateInputs = document.querySelectorAll('.input');
-for(let i = 0; i < [...allDateInputs].length; i++){
-    allDateInputs[i].oninput = onInputValidate;
-}
+// const allDateInputs = document.querySelectorAll('.input');
+// for(let i = 0; i < [...allDateInputs].length; i++){
+//     allDateInputs[i].oninput = onInputValidate;
+// }
 
 
 const funcForCheckIntersectionOfEvents = (object) => {
@@ -65,9 +66,6 @@ const funcForCheckIntersectionOfEvents = (object) => {
 };
 
 
-
-
-
 const onCheckEventLength = (object) => {
     const maxLength = 21600000;
     const objectLength = object.endTime - object.startTime;
@@ -80,8 +78,7 @@ const onCheckMinutes = (object) => {
     return startMinutes % 15 !== 0 || endMinutes % 15 !== 0 ? false : true;
 };
 
-export function onInputValidate(){
-    const form = document.querySelector('.popup');
+const onMakeObjectFromValuesInForm = () => {
     const tempObj = [...new FormData(form)]
         .reduce((acc,[field,value]) => ({...acc, [field]:value}),{});
     
@@ -96,44 +93,50 @@ export function onInputValidate(){
     tempObj.endTime = [...tempObj.endTime.split('-')];
     tempObj.endTime.push(endDate_hours, endDate_min);
     tempObj.endTime = new Date(...tempObj.endTime);
-    
-    // if(!funcForCheckIntersectionOfEvents(tempObj)){
-    //     validateMessageElem.innerHTML += ' Error! Events can\'t intersect';
-    //     saveButton.removeEventListener('click', funcForSaveButton);
-    //     saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-    // }else{
-    //     validateMessageElem.innerHTML = '';
-    //     saveButton.addEventListener('click', funcForSaveButton);
-    //     saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-    // };
 
+    return tempObj;
+};
+
+const form = document.querySelector('.popup');
+export const onInputValidateOnMinutes = event => {
+    if(!event.target.classList.contains('input')) return;
+
+    const tempObj = onMakeObjectFromValuesInForm();
+    
     if(!onCheckMinutes(tempObj)){
-        validateMessageElem.innerHTML += ' Error! Minuts must be a multiple of fifteen';
+        validateMessageElem1.innerHTML = ' Error! Minuts must be a multiple of fifteen';
         saveButton.removeEventListener('click', funcForSaveButton);
         saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
     }else{
-        validateMessageElem.innerHTML = '';
+        validateMessageElem1.innerHTML = '';
         saveButton.addEventListener('click', funcForSaveButton);
         saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
     };
-
-    // if(!onCheckEventLength(tempObj)){
-    //     validateMessageElem.innerHTML += ' Error! Event can`t be more than 6 hours';
-    //     saveButton.removeEventListener('click', funcForSaveButton);
-    //     saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-    // }else{
-    //     validateMessageElem.innerHTML = '';
-    //     saveButton.addEventListener('click', funcForSaveButton);
-    //     saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-    // };
 }
+form.addEventListener('input', onInputValidateOnMinutes);
 
+export const onInputValidateOnLong = event => {
+    if(!event.target.classList.contains('input')) return;
+
+    const tempObj = onMakeObjectFromValuesInForm();
+    
+    if(!onCheckEventLength(tempObj)){
+        validateMessageElem2.innerHTML = 'Error! Event can`t be more than 6 hours';
+        saveButton.removeEventListener('click', funcForSaveButton);
+        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+    }else{
+        validateMessageElem2.innerHTML = '';
+        saveButton.addEventListener('click', funcForSaveButton);
+        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+    };
+}
+form.addEventListener('input', onInputValidateOnLong);
 
 
 export const onCheckLateEffortOfDeleteOrEdite = (object) => {
     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60; 
     if(timeToEvent <= 15){
-        validateMessageElem.innerHTML += ' Error! You can`t change or delete event after 15 minutes to event';
+        validateMessageElem.innerHTML = 'Error! You can`t change or delete event after 15 minutes to event';
         saveButton.removeEventListener('click', funcForSaveButton);
         saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
         deleteBasket.removeEventListener('click', funcForDeleteEvene);

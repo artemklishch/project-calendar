@@ -1,6 +1,4 @@
 import { arrDaysOfWeek } from './current_week.js';
-import { onInputValidate } from './validate.js';
-
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
@@ -45,7 +43,7 @@ export const renderEventOnClick = event => {
 
     blockOfDays.removeEventListener('click', renderEventOnClick);
 
-    onInputValidate();
+    //onInputValidate();
     
 };
 blockOfDays.addEventListener('click', renderEventOnClick);
