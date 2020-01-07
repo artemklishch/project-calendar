@@ -77,7 +77,7 @@ export const funcForEditEvent = event => {
 };
 blockOfDays.addEventListener('click', funcForEditEvent);
 
-
+const form = document.querySelector('.popup');
 export const funcForSaveButtonAfterEdit = event => {
     event.preventDefault();
     
@@ -130,4 +130,4 @@ export const funcForSaveButtonAfterEdit = event => {
     renderRedLIne();
     currentObject = [];
 };
-saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+form.addEventListener('submit', funcForSaveButtonAfterEdit);

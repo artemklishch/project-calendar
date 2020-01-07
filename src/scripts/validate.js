@@ -6,103 +6,90 @@ import { funcForDeleteEvene } from './delete_event.js';
 const validateMessageElem1 = document.querySelector('.validate_message_1');
 const validateMessageElem2 = document.querySelector('.validate_message_2');
 const validateMessageElem3 = document.querySelector('.validate_message_3');
-//const validateMessageElem4 = document.querySelector('.validate_message_4');
+const validateMessageElem4 = document.querySelector('.validate_message_4');
+const validateMessageElem5 = document.querySelector('.validate_message_5');
 const saveButton = document.querySelector('.event__btn-save');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 const deleteBasket = document.querySelector('.event__btn-delete');
 
-// const onCheckOneOption = (curStH,curStM,stH,stM) => {
-//     let accessVal1 = 0;
-//     if(curStH === stH && curStM === stM){
-//         accessVal1 = 1;
-//     }else accessVal1 = 0;
-//     return accessVal1 === 1 || false;
-// };
-// const onCheckTwoOption = (curStH,curStM,stH,stM,edH,edM) => {
-//     let accessVal1 = 0, accessVal2 = 0;
-//     if(curStH > stH && curStM > stM){
-//         accessVal1 = 1;
-//     }else accessVal1 = 0;
-//     if(curStH < edH && curStM < edM){
-//         accessVal2 = 1;
-//     }else accessVal2 = 0;
-//     return accessVal1 === accessVal2 || false;
-// };
-// const onCheckThreeOption = (curEdH,curEdM,edH,edM) => {
-//     let accessVal1 = 0, accessVal2 = 0;
-//     if(curEdH === edH && curEdM === edM){
-//         accessVal1 = 1;
-//         accessVal2 = 1;
-//     }else{
-//         accessVal1 = 0;
-//         accessVal2 = 0;
-//     } 
-//     return accessVal1 === accessVal2 || false;
-// };
-// const onCheckFourOption = (curEdH,curEdM,edH,edM,stH,stM) => {
-//     let accessVal1 = 0, accessVal2 = 0;
-//     if(curEdH < edH && curEdM < edM){
-//         accessVal1 = 1;
-//     }else accessVal1 = 0;
-//     if(curEdH > stH && curEdM > stM){
-//         accessVal2 = 1;
-//     }else accessVal2 = 0;
-//     return accessVal1 === accessVal2 || false;
-// };
-// const onCheckFiveOption = (curStH,curStM,curEdH,curEdM,stH,stM,edH,edM) => {
-//     let accessVal1 = 0, accessVal2 = 0;
-//     if(curStH < stH && curStM < stM){
-//         accessVal1 = 1;
-//     }else accessVal1 = 0;
-//     if(curEdH > edH && curEdM > edM){
-//         accessVal2 = 1;
-//     }else accessVal2 = 0;
-//     return accessVal1 === accessVal2 || false;
-// };
+export const onClearValidateMessages = () => {
+    validateMessageElem1.innerHTML = '';
+    validateMessageElem2.innerHTML = '';
+    validateMessageElem3.innerHTML = '';
+    validateMessageElem4.innerHTML = '';
+    validateMessageElem5.innerHTML = '';
+};
 
-// const onCheckIntersectionEvents = (object) => {
-//     let withoutIntersecttion = true;
-//     const currentStHours = object.startTime.getHours();
-//     const currentStMinutes = object.startTime.getMinutes();
-//     const currentEdHours = object.endTime.getHours();
-//     const currentEdMinutes = object.endTime.getMinutes();
-//     for(let i = 0; i < eventsArray.length; i++){
-//         const checkedStHours = eventsArray[i].startTime.getHours();
-//         const checkedStMinutes = eventsArray[i].startTime.getMinutes(); 
-//         const checkedEndHours = eventsArray[i].endTime.getHours();
-//         const checkedEndMinutes = eventsArray[i].endTime.getMinutes();
+const onCheckOneOption = (curStT,stT) => {
+    let accessVal = 0;
+    curStT === stT ? accessVal = 1 : accessVal = 0;
+    return accessVal === 1 || false;
+};
+const onCheckTwoOption = (curStT,stT,endT) => {
+    let accessVal = 0;
+    curStT > stT && curStT < endT
+    ? accessVal = 1
+    : accessVal = 0;
+    return accessVal === 1 || false;
+};
+const onCheckThreeOption = (curEndT,endT) => {
+    let accessVal = 0;
+    curEndT === endT ? accessVal = 1 : accessVal = 0;
+    return accessVal === 1 || false;
+};
+const onCheckFourOption = (curEndT,endT,stT) => {
+    let accessVal = 0;
+    curEndT < endT && curEndT > stT
+    ? accessVal = 1
+    : accessVal = 0;
+    return accessVal === 1 || false;
+};
+const onCheckFiveOption = (curStT,curEndT,stT,endT) => {
+    let accessVal = 0;
+    curStT < stT && curEndT < endT
+    ? accessVal = 1
+    : accessVal = 0;
+    return accessVal === 1 || false;
+};
 
-//         if(!onCheckOneOption(currentStHours,currentStMinutes,checkedStHours,checkedStMinutes)){
-//             withoutIntersecttion = false;
-//             break;
-//         }else withoutIntersecttion = true;
+const onCheckIntersectionEvents = (object) => {
+    let withoutIntersecttion = true;
+    const currentStTime = object.startTime.getDate();
+    const currentEndTime = object.endTime.getDate();
+    for(let i = 0; i < eventsArray.length; i++){
+        let checkedStTime = eventsArray[i].startTime.getDate();
+        let checkedEndTime = eventsArray[i].endTime.getDate();
 
-//         if(onCheckTwoOption(currentStHours,currentStMinutes,checkedStHours,checkedStMinutes,
-//             checkedEndHours,checkedEndMinutes)){
-//                 withoutIntersecttion = false;
-//                 break;
-//         }else withoutIntersecttion = true;
+        if(onCheckOneOption(currentStTime, checkedStTime)){
+            withoutIntersecttion = false;
+            break;
+        }else withoutIntersecttion = true;
 
-//         if(onCheckThreeOption(currentEdHours,currentEdMinutes,checkedEndHours,checkedEndMinutes)){
-//             withoutIntersecttion = false;
-//             break;
-//         }else withoutIntersecttion = true;
+        if(onCheckTwoOption(currentStTime,checkedStTime,checkedEndTime)){
+                withoutIntersecttion = false;
+                break;
+        }else withoutIntersecttion = true;
+
+        if(onCheckThreeOption(currentEndTime,checkedEndTime)){
+            withoutIntersecttion = false;
+            break;
+        }else withoutIntersecttion = true;
         
-//         if(onCheckFourOption(currentEdHours,currentEdMinutes,checkedEndHours,checkedEndMinutes,
-//             checkedStHours,checkedStMinutes)){
-//                 withoutIntersecttion = false;
-//                 break;
-//         }else withoutIntersecttion = true;
+        if(onCheckFourOption(currentEndTime,checkedEndTime,checkedStTime)){
+                withoutIntersecttion = false;
+                break;
+        }else withoutIntersecttion = true;
 
-//         if(onCheckFiveOption(currentStHours,currentStMinutes,currentEdHours, currentEdMinutes,checkedStHours,checkedStMinutes,
-//             checkedEndHours,checkedEndMinutes)){
-//                 withoutIntersecttion = false;
-//                 break;
-//         }else withoutIntersecttion = true;
-//     }
-//     return withoutIntersecttion;  
-// };
+        if(onCheckFiveOption(currentStTime,currentEndTime,checkedStTime,checkedEndTime)){
+                withoutIntersecttion = false;
+                break;
+        }else withoutIntersecttion = true;
+    }
+    return withoutIntersecttion;  
+};
 
+
+const onCheckCorrectDates = (object) => object.endTime > object.startTime || false;
 
 const onCheckEventLength = (object) => {
     const maxLength = 21600000;
@@ -136,6 +123,12 @@ const onMakeObjectFromValuesInForm = () => {
 };
 
 const form = document.querySelector('.popup');
+
+
+
+
+
+
 export const onInputValidateOnMinutes = event => {
     if(!event.target.classList.contains('input')) return;
 
@@ -152,6 +145,10 @@ export const onInputValidateOnMinutes = event => {
     };
 }
 form.addEventListener('input', onInputValidateOnMinutes);
+
+
+
+
 
 export const onInputValidateOnLong = event => {
     if(!event.target.classList.contains('input')) return;
@@ -170,22 +167,42 @@ export const onInputValidateOnLong = event => {
 }
 form.addEventListener('input', onInputValidateOnLong);
 
-// export const onInputValidateOnIntersection = event => {
-//     if(!event.target.classList.contains('input')) return;
+export const onInputCorrectDates = event => {
+    if(!event.target.classList.contains('input')) return;
 
-//     const tempObj = onMakeObjectFromValuesInForm();
+    const tempObj = onMakeObjectFromValuesInForm();
+
+    if(!onCheckCorrectDates(tempObj)){
+        validateMessageElem5.innerHTML = 'Error! End date can`t be ealier than start date';
+        saveButton.removeEventListener('click', funcForSaveButton);
+        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+    }else{
+        validateMessageElem5.innerHTML = '';
+        saveButton.addEventListener('click', funcForSaveButton);
+        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+    };    
+};
+form.addEventListener('input', onInputCorrectDates);
+
+
+
+
+export const onInputValidateOnIntersection = event => {
+    if(!event.target.classList.contains('input')) return;
+
+    const tempObj = onMakeObjectFromValuesInForm();
     
-//     if(!onCheckIntersectionEvents(tempObj)){
-//         validateMessageElem4.innerHTML = 'Error! Event can`t intersect';
-//         saveButton.removeEventListener('click', funcForSaveButton);
-//         saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-//     }else{
-//         validateMessageElem4.innerHTML = '';
-//         saveButton.addEventListener('click', funcForSaveButton);
-//         saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-//     };
-// }
-// form.addEventListener('input', onInputValidateOnIntersection);
+    if(!onCheckIntersectionEvents(tempObj)){
+        validateMessageElem4.innerHTML = 'Error! Event can`t intersect';
+        saveButton.removeEventListener('click', funcForSaveButton);
+        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+    }else{
+        validateMessageElem4.innerHTML = '';
+        saveButton.addEventListener('click', funcForSaveButton);
+        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+    };
+}
+form.addEventListener('input', onInputValidateOnIntersection);
 
 
 
