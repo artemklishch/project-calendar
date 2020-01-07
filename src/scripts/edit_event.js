@@ -1,14 +1,12 @@
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
-import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
+//import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
 
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
-const saveBtn = document.querySelector('.event__btn-save');
-const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 let currentObject = [];
 export let indexOfElement = 0; 
 export let markValuable = 0;
@@ -26,9 +24,7 @@ export const funcForEditEvent = event => {
     if(!blockOfEvent.classList.contains('main__sidebar_day_object')) return;
 
     popupBlock.style.display = 'block';
-    saveBtnForEdit.style.display = 'block';
     iconDelete.style.display = 'block';
-    saveBtn.style.display = 'none';
 
     const dataId = blockOfEvent.dataset.id;
     eventsArray.forEach((element,index) => {
@@ -73,7 +69,7 @@ export const funcForEditEvent = event => {
         endTimePlace.value = `${endHour}:${endMin}`;
         markValuable = 1;
     }
-    onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
+    //onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
 };
 blockOfDays.addEventListener('click', funcForEditEvent);
 
@@ -86,6 +82,27 @@ export const funcForSaveButtonAfterEdit = event => {
         eventsArray.splice(indexOfElement-1,1);
     }else eventsArray.splice(indexOfElement,1);
     funcForMakeindexOfElementNull();
+    
+
+    // let tempObj = [...new FormData(form)]
+    //     .reduce((acc, [field,value]) => ({...acc,[field]:value}),{});
+    // tempObj.startTime = tempObj.startTime.split('-');
+    // tempObj.startTimePlace = tempObj.startTimePlace.split(':');
+    // //tempObj.startTime = [...tempObj.startTime, ...tempObj.startTimePlace];
+    // tempObj.startTime = tempObj.startTime.concat(tempObj.startTimePlace);
+    // tempObj.startTime = new Date(...tempObj.startTime);
+
+    // tempObj.endTime = tempObj.endTime.split('-');
+    // tempObj.endTimePlace = tempObj.endTimePlace.split(':');
+    // //tempObj.endTime = [...tempObj.endTime, ...tempObj.endTimePlace];
+    // tempObj.endTime = tempObj.endTime.concat(tempObj.endTimePlace);
+    // tempObj.endTime = new Date(...tempObj.endTime);
+
+    // tempObj.ident = Math.random().toFixed(10);
+
+    // delete tempObj.startTimePlace;
+    // delete tempObj.endTimePlace;
+
     
     const tempObj = {
         header: undefined,
@@ -123,9 +140,7 @@ export const funcForSaveButtonAfterEdit = event => {
     clearFunc();
     renderEventObject(eventsArray);
     popupBlock.style.display = 'none';
-    saveBtnForEdit.style.display = 'none';
     iconDelete.style.display = 'none';
-    saveBtn.style.display = 'block';
     funcForMakeMarkValuableNull();
     renderRedLIne();
     currentObject = [];

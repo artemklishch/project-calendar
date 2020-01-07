@@ -374,15 +374,7 @@
   cursor: pointer;
 }
 
-.event__btn-save {
-  display: none;
-}
-
-.event__btn-save_after_edit {
-  display: none;
-}
-
-.validate_tag {
+.message_validation {
   color: red;
 }
 

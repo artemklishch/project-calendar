@@ -2,106 +2,158 @@ import { eventsArray } from './storage.js';
 import { funcForSaveButton } from './popup_funcs.js';
 import { funcForSaveButtonAfterEdit } from './edit_event.js';
 import { funcForDeleteEvene } from './delete_event.js';
+import { arrDaysOfWeek } from './current_week.js';
 
-const validateMessageElem1 = document.querySelector('.validate_message_1');
-const validateMessageElem2 = document.querySelector('.validate_message_2');
-const validateMessageElem3 = document.querySelector('.validate_message_3');
-const validateMessageElem4 = document.querySelector('.validate_message_4');
-const validateMessageElem5 = document.querySelector('.validate_message_5');
+let validateMessageElem = document.querySelector('.message_validation');
 const saveButton = document.querySelector('.event__btn-save');
 const saveBtnForEdit = document.querySelector('.event__btn-save_after_edit');
 const deleteBasket = document.querySelector('.event__btn-delete');
 
-export const onClearValidateMessages = () => {
-    validateMessageElem1.innerHTML = '';
-    validateMessageElem2.innerHTML = '';
-    validateMessageElem3.innerHTML = '';
-    validateMessageElem4.innerHTML = '';
-    validateMessageElem5.innerHTML = '';
-};
+export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
 
-const onCheckOneOption = (curStT,stT) => {
-    let accessVal = 0;
-    curStT === stT ? accessVal = 1 : accessVal = 0;
-    return accessVal === 1 || false;
-};
-const onCheckTwoOption = (curStT,stT,endT) => {
-    let accessVal = 0;
-    curStT > stT && curStT < endT
-    ? accessVal = 1
-    : accessVal = 0;
-    return accessVal === 1 || false;
-};
-const onCheckThreeOption = (curEndT,endT) => {
-    let accessVal = 0;
-    curEndT === endT ? accessVal = 1 : accessVal = 0;
-    return accessVal === 1 || false;
-};
-const onCheckFourOption = (curEndT,endT,stT) => {
-    let accessVal = 0;
-    curEndT < endT && curEndT > stT
-    ? accessVal = 1
-    : accessVal = 0;
-    return accessVal === 1 || false;
-};
-const onCheckFiveOption = (curStT,curEndT,stT,endT) => {
-    let accessVal = 0;
-    curStT < stT && curEndT < endT
-    ? accessVal = 1
-    : accessVal = 0;
-    return accessVal === 1 || false;
-};
+// const onCheckOneOption = (curStT,stT) => {
+//     let accessVal = 0;
+//     curStT === stT ? accessVal = 1 : accessVal = 0;
+//     return accessVal === 1 || false;
+// };
+
+
+// const onCheckTwoOption1 = (curStTh,curStTm,stTh,stTm) => {
+//     if(curStTh >= stTh && curStTm > stTm){
+//         return true;
+//     }else false;
+// };
+// const onCheckTwoOption2 = (curStTh,curStTm,endTh,endTm) => {
+//     if(curStTh < endTh && curStTm < endTm){
+//         return true;
+//     }else false;
+// }
+
+// const onCheckThreeOption = (curEndT,endT) => {
+//     let accessVal = 0;
+//     curEndT === endT ? accessVal = 1 : accessVal = 0;
+//     return accessVal === 1 || false;
+// };
+// const onCheckFourOption = (curEndT,endT,stT) => {
+//     let accessVal = 0;
+//     curEndT < endT && curEndT > stT
+//     ? accessVal = 1
+//     : accessVal = 0;
+//     return accessVal === 1 || false;
+// };
+// const onCheckFiveOption = (curStT,curEndT,stT,endT) => {
+//     let accessVal = 0;
+//     curStT < stT && curEndT < endT
+//     ? accessVal = 1
+//     : accessVal = 0;
+//     return accessVal === 1 || false;
+// };
+
 
 const onCheckIntersectionEvents = (object) => {
-    let withoutIntersecttion = true;
-    const currentStTime = object.startTime.getDate();
-    const currentEndTime = object.endTime.getDate();
-    for(let i = 0; i < eventsArray.length; i++){
-        let checkedStTime = eventsArray[i].startTime.getDate();
-        let checkedEndTime = eventsArray[i].endTime.getDate();
+    // const currentStTimeHours = object.startTime.getHours();
+    // const currentStTimeMinutes = object.startTime.getMinutes();
+    // const currentEndTimeHours = object.endTime.getHours();
+    // const currentEndTimeMinutes = object.endTime.getMinutes();
+    const currentStTime = object.startTime.getTime();
+    const currentEndTime = object.endTime.getTime();
 
-        if(onCheckOneOption(currentStTime, checkedStTime)){
-            withoutIntersecttion = false;
-            break;
-        }else withoutIntersecttion = true;
-
-        if(onCheckTwoOption(currentStTime,checkedStTime,checkedEndTime)){
-                withoutIntersecttion = false;
-                break;
-        }else withoutIntersecttion = true;
-
-        if(onCheckThreeOption(currentEndTime,checkedEndTime)){
-            withoutIntersecttion = false;
-            break;
-        }else withoutIntersecttion = true;
+    let errorText = undefined;
+    eventsArray.forEach(elem => {
+        if(currentStTime < elem.endTime.getTime() 
+            && currentEndTime > elem.startTime.getTime()){
+            errorText = 'Error! Event can`t intersect';
+        }else errorText = undefined;
+    });
+    // for(let i = 0; i < eventsArray.length; i++){
+    //     let checkedStTimeHours = eventsArray[i].startTime.getHours();
+    //     let checkedStTimeMinutes = eventsArray[i].startTime.getMinutes();
+    //     let checkedEndTimeHours = eventsArray[i].endTime.getHours();
+    //     let checkedEndTimeMinutes = eventsArray[i].endTime.getMinutes();
         
-        if(onCheckFourOption(currentEndTime,checkedEndTime,checkedStTime)){
-                withoutIntersecttion = false;
-                break;
-        }else withoutIntersecttion = true;
 
-        if(onCheckFiveOption(currentStTime,currentEndTime,checkedStTime,checkedEndTime)){
-                withoutIntersecttion = false;
-                break;
-        }else withoutIntersecttion = true;
-    }
-    return withoutIntersecttion;  
+        // if((currentStTimeHours <= checkedEndTimeHours 
+        //     && currentStTimeMinutes <= checkedEndTimeMinutes) 
+        // && 
+        //     (currentEndTimeHours >= checkedStTimeHours
+        //     && currentEndTimeMinutes >= checkedStTimeMinutes)
+        // ){
+        //     errorText = 'Error! Event can`t intersect';
+        // }
+        
+        // if(
+        //     (checkedStTimeHours > currentEndTimeHours
+        //     && checkedStTimeMinutes > currentEndTimeMinutes) 
+        // || 
+        //     (checkedEndTimeHours < currentStTimeHours
+        //     && checkedEndTimeMinutes < currentStTimeMinutes)
+        // ){
+        //     errorText = undefined;
+        // }else errorText = 'Error! Event can`t intersect';
+
+
+        // if(currentStTimeHours === checkedStTimeHours
+        //     && currentStTimeMinutes === checkedStTimeMinutes){     
+        //     errorText = 'Error! Event can`t intersect';
+        //     break;
+        // }else errorText = undefined;
+
+        // if(currentEndTimeHours === checkedEndTimeHours
+        //     && currentEndTimeMinutes === checkedEndTimeMinutes){     
+        //     errorText = 'Error! Event can`t intersect';
+        //     break;
+        // }else errorText = undefined;
+
+        // let oneOpt1 = onCheckTwoOption1(currentStTimeHours,currentStTimeMinutes,
+        //     checkedStTimeHours,checkedStTimeMinutes);
+        // let oneOpt2 = onCheckTwoOption2(currentStTimeHours,currentStTimeMinutes,
+        //     checkedEndTimeHours,checkedEndTimeMinutes);
+        // if(oneOpt1 == true && oneOpt2 === true){
+        //         errorText = 'Error! Event can`t intersect';
+        //         console.log(errorText);
+        //         break;
+        //     }else errorText = undefined;
+        
+
+
+
+        // if(onCheckTwoOption(currentStTime,checkedStTime,checkedEndTime)){
+        //     errorText = 'Error! Event can`t intersect';
+        // }else errorText = undefined;
+
+        // if(onCheckThreeOption(currentEndTime,checkedEndTime)){
+        //     errorText = 'Error! Event can`t intersect';
+        // }else errorText = undefined;
+        
+        // if(onCheckFourOption(currentEndTime,checkedEndTime,checkedStTime)){
+        //     errorText = 'Error! Event can`t intersect';
+        // }else errorText = undefined;
+
+        // if(onCheckFiveOption(currentStTime,currentEndTime,checkedStTime,checkedEndTime)){
+        //     errorText = 'Error! Event can`t intersect';
+        // }else errorText = undefined;
+    //}
+    return errorText;
 };
 
 
-const onCheckCorrectDates = (object) => object.endTime > object.startTime || false;
+const onCheckCorrectDates = (object) =>
+    object.endTime < object.startTime
+        ? 'Error! End date can`t be ealier than start date'
+        : undefined;
 
-const onCheckEventLength = (object) => {
-    const maxLength = 21600000;
-    const objectLength = object.endTime - object.startTime;
-    return objectLength <= maxLength || false; 
-};
 
-const onCheckMinutes = (object) => {
-    let startMinutes = object.startTime.getMinutes();
-    let endMinutes = object.endTime.getMinutes();
-    return startMinutes % 15 !== 0 || endMinutes % 15 !== 0 ? false : true;
-};
+const onCheckEventLength = (object) =>
+    21600000 <= object.endTime - object.startTime
+    ? 'Error! Event can`t be more than 6 hours'
+    : undefined;
+
+
+const onCheckMinutes = (object) => 
+    object.startTime.getMinutes() % 15 !== 0 
+    || object.endTime.getMinutes() % 15 !== 0
+        ? 'Error! Minuts must be a multiple of fifteen'
+        : undefined;
 
 const onMakeObjectFromValuesInForm = () => {
     const tempObj = [...new FormData(form)]
@@ -122,87 +174,27 @@ const onMakeObjectFromValuesInForm = () => {
     return tempObj;
 };
 
+
 const form = document.querySelector('.popup');
-
-
-
-
-
-
-export const onInputValidateOnMinutes = event => {
+const arrOfValidateFuncs = [onCheckMinutes, onCheckEventLength, 
+    onCheckCorrectDates, onCheckIntersectionEvents];
+export const onInputValidate = event => {
     if(!event.target.classList.contains('input')) return;
-
     const tempObj = onMakeObjectFromValuesInForm();
-    
-    if(!onCheckMinutes(tempObj)){
-        validateMessageElem1.innerHTML = ' Error! Minuts must be a multiple of fifteen';
-        saveButton.removeEventListener('click', funcForSaveButton);
-        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+    const errorText = arrOfValidateFuncs
+        .map(func => func(tempObj))
+        .filter(erroText => erroText)
+        .join(' ');
+    validateMessageElem.textContent = errorText;
+    if(validateMessageElem.textContent !== ''){
+        form.removeEventListener('submit', funcForSaveButton);
+        form.removeEventListener('submit', funcForSaveButtonAfterEdit); 
     }else{
-        validateMessageElem1.innerHTML = '';
-        saveButton.addEventListener('click', funcForSaveButton);
-        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-    };
-}
-form.addEventListener('input', onInputValidateOnMinutes);
-
-
-
-
-
-export const onInputValidateOnLong = event => {
-    if(!event.target.classList.contains('input')) return;
-
-    const tempObj = onMakeObjectFromValuesInForm();
-    
-    if(!onCheckEventLength(tempObj)){
-        validateMessageElem2.innerHTML = 'Error! Event can`t be more than 6 hours';
-        saveButton.removeEventListener('click', funcForSaveButton);
-        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-    }else{
-        validateMessageElem2.innerHTML = '';
-        saveButton.addEventListener('click', funcForSaveButton);
-        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-    };
-}
-form.addEventListener('input', onInputValidateOnLong);
-
-export const onInputCorrectDates = event => {
-    if(!event.target.classList.contains('input')) return;
-
-    const tempObj = onMakeObjectFromValuesInForm();
-
-    if(!onCheckCorrectDates(tempObj)){
-        validateMessageElem5.innerHTML = 'Error! End date can`t be ealier than start date';
-        saveButton.removeEventListener('click', funcForSaveButton);
-        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-    }else{
-        validateMessageElem5.innerHTML = '';
-        saveButton.addEventListener('click', funcForSaveButton);
-        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-    };    
+        form.addEventListener('submit', funcForSaveButton);
+        form.addEventListener('submit', funcForSaveButtonAfterEdit);
+    } 
 };
-form.addEventListener('input', onInputCorrectDates);
-
-
-
-
-export const onInputValidateOnIntersection = event => {
-    if(!event.target.classList.contains('input')) return;
-
-    const tempObj = onMakeObjectFromValuesInForm();
-    
-    if(!onCheckIntersectionEvents(tempObj)){
-        validateMessageElem4.innerHTML = 'Error! Event can`t intersect';
-        saveButton.removeEventListener('click', funcForSaveButton);
-        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-    }else{
-        validateMessageElem4.innerHTML = '';
-        saveButton.addEventListener('click', funcForSaveButton);
-        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-    };
-}
-form.addEventListener('input', onInputValidateOnIntersection);
+form.addEventListener('input', onInputValidate);
 
 
 
@@ -212,20 +204,20 @@ form.addEventListener('input', onInputValidateOnIntersection);
 
 
 
-export const onCheckLateEffortOfDeleteOrEdite = (object) => {
-    const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60; 
-    if(timeToEvent <= 15){
-        validateMessageElem3.innerHTML = 'You can`t change or delete event after 15 minutes to event';
-        saveButton.removeEventListener('click', funcForSaveButton);
-        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-        deleteBasket.removeEventListener('click', funcForDeleteEvene);
-    }else{
-        validateMessageElem3.innerHTML = '';
-        saveButton.addEventListener('click', funcForSaveButton);
-        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-        deleteBasket.addEventListener('click', funcForDeleteEvene);
-    };
-};
+// export const onCheckLateEffortOfDeleteOrEdite = (object) => {
+//     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60; 
+//     if(timeToEvent <= 15){
+//         validateMessageElem3.innerHTML = 'You can`t change or delete event after 15 minutes to event';
+//         saveButton.removeEventListener('click', funcForSaveButton);
+//         saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
+//         deleteBasket.removeEventListener('click', funcForDeleteEvene);
+//     }else{
+//         validateMessageElem3.innerHTML = '';
+//         saveButton.addEventListener('click', funcForSaveButton);
+//         saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
+//         deleteBasket.addEventListener('click', funcForDeleteEvene);
+//     };
+// };
 
 
 
