@@ -107,6 +107,3 @@ export const onCheckLateEffortOfDeleteOrEdite = (object) => {
         deleteBasket.addEventListener('click', funcForDeleteEvene);
     };
 };
-
-
-
