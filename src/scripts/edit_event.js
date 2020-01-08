@@ -1,7 +1,7 @@
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
-//import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
+import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
 
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
@@ -11,6 +11,7 @@ let currentObject = [];
 export let indexOfElement = 0; 
 export let markValuable = 0;
 export let markValuable2 = 0;
+export let dataId = '';
 
 export const funcForMakeMarkValuableNull = () => {
     markValuable = 0;
@@ -21,6 +22,10 @@ export const funcForMakeindexOfElementNull = () => {
     indexOfElement = 0;
 };
 
+export const funcForMakeDataIdEmpty = () => {
+    dataId = '';
+};
+
 
 export const funcForEditEvent = event => {
     const blockOfEvent = event.target;
@@ -29,7 +34,7 @@ export const funcForEditEvent = event => {
     popupBlock.style.display = 'block';
     iconDelete.style.display = 'block';
 
-    const dataId = blockOfEvent.dataset.id;
+    dataId = blockOfEvent.dataset.id;
     eventsArray.forEach((element,index) => {
         if(element.ident === dataId) indexOfElement = index;
     })
@@ -90,7 +95,7 @@ export const funcForEditEvent = event => {
         endTimePlace.value = `${endHour}:${endMin}`;
         markValuable = 1;
     }
-    //onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
+    onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
     markValuable2 = 1;
 };
 blockOfDays.addEventListener('click', funcForEditEvent);

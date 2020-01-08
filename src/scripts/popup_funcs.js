@@ -2,9 +2,10 @@ import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderEventOnClick } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
-import { onClearValidateMessages } from './validate.js';
+import { onClearValidateMessages, onMakeMarkValuavle4Null } from './validate.js';
+import { markValuble4 } from './validate.js';
 import { markValuable, indexOfElement, markValuable2 } from './edit_event.js';
-import { funcForMakeindexOfElementNull, funcForMakeMarkValuableNull, funcForEditEvent } from './edit_event.js';
+import { funcForMakeindexOfElementNull, funcForMakeMarkValuableNull, funcForMakeDataIdEmpty } from './edit_event.js';
 
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
@@ -19,6 +20,8 @@ export const funcForLockWindow = () => {
     iconDelete.style.display = 'none';
     blockOfDays.addEventListener('click', renderEventOnClick);
     onClearValidateMessages();
+    funcForMakeDataIdEmpty();
+    onMakeMarkValuavle4Null();
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 
@@ -32,14 +35,14 @@ export const funcForSaveButton = event => {
     tempObj.startTime = tempObj.startTime.split('-');
     tempObj.startTime[1] = tempObj.startTime[1] - 1;
     tempObj.startTimePlace = tempObj.startTimePlace.split(':');
-    //tempObj.startTime = [...tempObj.startTime, ...tempObj.startTimePlace];
+    //tempObj.startTime = [...tempObj.startTime, ...tempObj.startTimePlace]; //this expression makes the same as next expression that is down
     tempObj.startTime = tempObj.startTime.concat(tempObj.startTimePlace);
     tempObj.startTime = new Date(...tempObj.startTime);
 
     tempObj.endTime = tempObj.endTime.split('-');
     tempObj.endTime[1] = tempObj.endTime[1] - 1;
     tempObj.endTimePlace = tempObj.endTimePlace.split(':');
-    //tempObj.endTime = [...tempObj.endTime, ...tempObj.endTimePlace];
+    //tempObj.endTime = [...tempObj.endTime, ...tempObj.endTimePlace]; //this expression makes the same as next expression that is down
     tempObj.endTime = tempObj.endTime.concat(tempObj.endTimePlace);
     tempObj.endTime = new Date(...tempObj.endTime);
     
@@ -47,7 +50,7 @@ export const funcForSaveButton = event => {
 
     delete tempObj.startTimePlace;
     delete tempObj.endTimePlace;
-    
+    if(markValuble4 === 1) return;
     eventsArray.push(tempObj);
     markValuable3 = 1;
     if(markValuable2 === 1 && markValuable3 === 1){
@@ -68,5 +71,6 @@ export const funcForSaveButton = event => {
     popupBlock.style.display = 'none';
     blockOfDays.addEventListener('click', renderEventOnClick);
     renderRedLIne();
+    funcForMakeDataIdEmpty();
 };
 form.addEventListener('submit', funcForSaveButton);

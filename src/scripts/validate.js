@@ -1,25 +1,37 @@
 import { eventsArray } from './storage.js';
 import { funcForSaveButton } from './popup_funcs.js';
-//import { funcForDeleteEvene } from './delete_event.js';
+import { funcForDeleteEvene } from './delete_event.js';
+import { dataId } from './edit_event.js';
+
 
 let validateMessageElem = document.querySelector('.message_validation');
-//const deleteBasket = document.querySelector('.event__btn-delete');
+const deleteBasket = document.querySelector('.event__btn-delete');
+export let markValuble4 = 0;
+
+export const onMakeMarkValuavle4Null = () => {
+    markValuble4 = 0;
+};
 
 export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
 
 
 const onCheckIntersectionEvents = (object) => {
     let errorText = undefined;
-    eventsArray.forEach(elem => {
-        if((object.startTime < elem.endTime 
-            && object.startTime < elem.endTime) 
+    let currentStartTime = object.startTime.getTime();
+    let currentEndTime = object.endTime.getTime();
+    for(let i = 0; i < eventsArray.length; i++) {
+        if(eventsArray[i].ident === object.ident) continue;
+        let elemStartTime = eventsArray[i].startTime.getTime();
+        let elemEndTime = eventsArray[i].endTime.getTime();
+        if((currentStartTime < elemEndTime 
+            && currentStartTime < elemEndTime) 
         && 
-            (object.endTime > elem.startTime
-            && object.endTime > elem.startTime)
+            (currentEndTime > elemStartTime
+            && currentEndTime > elemStartTime)
         ){
             errorText = 'Error! Event can`t intersect';
         }
-    });
+    };
     return errorText; 
 };
 
@@ -37,8 +49,9 @@ const onCheckEventLength = (object) =>
 
 
 const onCheckMinutes = (object) => 
-    object.startTime.getMinutes() % 15 !== 0 
-    || object.endTime.getMinutes() % 15 !== 0
+    (object.startTime.getMinutes() !== 0 && object.startTime.getMinutes() % 15 !== 0) 
+    ||
+    (object.endTime.getMinutes() !== 0 && object.endTime.getMinutes() % 15 !== 0)
         ? 'Error! Minuts must be a multiple of fifteen'
         : undefined;
 
@@ -50,14 +63,20 @@ const onMakeObjectFromValuesInForm = () => {
     const startDate_hours = tempObj.startTimePlace.split(':')[0];
     const startDate_min = tempObj.startTimePlace.split(':')[1];
     tempObj.startTime = [...tempObj.startTime.split('-')];
+    tempObj.startTime[1] = tempObj.startTime[1] - 1;
     tempObj.startTime.push(startDate_hours, startDate_min);
     tempObj.startTime = new Date(...tempObj.startTime);
     
     const endDate_hours = tempObj.endTimePlace.split(':')[0];
     const endDate_min = tempObj.endTimePlace.split(':')[1];
     tempObj.endTime = [...tempObj.endTime.split('-')];
+    tempObj.endTime[1] = tempObj.endTime[1] - 1;
     tempObj.endTime.push(endDate_hours, endDate_min);
     tempObj.endTime = new Date(...tempObj.endTime);
+    
+    if(dataId !== ''){
+        tempObj.ident = dataId;
+    }else tempObj.ident = Math.random().toFixed(10);
 
     return tempObj;
 };
@@ -75,9 +94,9 @@ export const onInputValidate = event => {
         .join(' ');
     validateMessageElem.textContent = errorText;
     if(validateMessageElem.textContent !== ''){
-        form.removeEventListener('submit', funcForSaveButton);
+        markValuble4 = 1;
     }else{
-        form.addEventListener('submit', funcForSaveButton);
+        markValuble4 = 0;
     } 
 };
 form.addEventListener('input', onInputValidate);
@@ -85,22 +104,15 @@ form.addEventListener('input', onInputValidate);
 
 
 
-
-
-
-
-
-// export const onCheckLateEffortOfDeleteOrEdite = (object) => {
-//     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60; 
-//     if(timeToEvent <= 15){
-//         validateMessageElem.innerHTML = 'You can`t change or delete event after 15 minutes to event';
-//         form.removeEventListener('submit', funcForSaveButton);
-//         form.removeEventListener('submit', funcForSaveButtonAfterEdit);
-//         deleteBasket.removeEventListener('click', funcForDeleteEvene);
-//     }else{
-//         validateMessageElem.innerHTML = '';
-//         form.addEventListener('submit', funcForSaveButton);
-//         form.addEventListener('submit', funcForSaveButtonAfterEdit);
-//         deleteBasket.addEventListener('click', funcForDeleteEvene);
-//     };
-// };
+export const onCheckLateEffortOfDeleteOrEdite = (object) => {
+    const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60;
+    if(timeToEvent <= 15 && timeToEvent > 0){
+        validateMessageElem.innerHTML = 'You can`t change or delete event after 15 minutes to event';
+        markValuble4 = 1;
+        deleteBasket.removeEventListener('click', funcForDeleteEvene);
+    }else{
+        validateMessageElem.innerHTML = '';
+        markValuble4 = 0;
+        deleteBasket.addEventListener('click', funcForDeleteEvene);
+    };
+};
