@@ -1,5 +1,4 @@
 import { eventsArray } from './storage.js';
-import { funcForSaveButton } from './popup_funcs.js';
 import { funcForDeleteEvene } from './delete_event.js';
 import { dataId } from './edit_event.js';
 
