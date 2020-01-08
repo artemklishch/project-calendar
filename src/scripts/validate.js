@@ -9,20 +9,20 @@ let validateMessageElem = document.querySelector('.message_validation');
 export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
 
 
-const onCheckIntersectionEvents = (object) => {
-    let errorText = undefined;
-    eventsArray.forEach(elem => {
-        if((object.startTime.getHours() <= elem.endTime.getHours() 
-            && object.startTime.getMinutes() <= elem.endTime.getMinutes()) 
-        && 
-            (object.endTime.getHours() >= elem.startTime.getHours()
-            && object.endTime.getMinutes() >= elem.startTime.getMinutes())
-        ){
-            errorText = 'Error! Event can`t intersect';
-        }
-    });
-    return errorText;
-};
+// const onCheckIntersectionEvents = (object) => {
+//     let errorText = undefined;
+//     eventsArray.forEach(elem => {
+//         if((object.startTime.getHours() <= elem.endTime.getHours() 
+//             && object.startTime.getMinutes() <= elem.endTime.getMinutes()) 
+//         && 
+//             (object.endTime.getHours() >= elem.startTime.getHours()
+//             && object.endTime.getMinutes() >= elem.startTime.getMinutes())
+//         ){
+//             errorText = 'Error! Event can`t intersect';
+//         }
+//     });
+//     return errorText; 
+// };
 
 
 const onCheckCorrectDates = (object) =>
@@ -66,7 +66,7 @@ const onMakeObjectFromValuesInForm = () => {
 
 const form = document.querySelector('.popup');
 const arrOfValidateFuncs = [onCheckMinutes, onCheckEventLength, 
-    onCheckCorrectDates, onCheckIntersectionEvents];
+    onCheckCorrectDates];
 export const onInputValidate = event => {
     if(!event.target.classList.contains('input')) return;
     const tempObj = onMakeObjectFromValuesInForm();
