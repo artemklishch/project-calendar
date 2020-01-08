@@ -18,7 +18,7 @@ const onCheckIntersectionEvents = (object) => {
             (object.endTime.getHours() >= elem.startTime.getHours()
             && object.endTime.getMinutes() >= elem.startTime.getMinutes())
         ){
-        errorText = 'Error! Event can`t intersect';
+            errorText = 'Error! Event can`t intersect';
         }
     });
     return errorText;
