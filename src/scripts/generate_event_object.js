@@ -48,7 +48,8 @@ const forHeight = (object, elem) => {
     if(object.startTime.getMinutes() === 45)elem.style.top = '75%';
 
     let timesOfRange = (object.endTime - object.startTime)/1000/60/15;
-    elem.style.height = (timesOfRange*24) + '%';
+    elem.style.height = (timesOfRange*24.5) + '%';
+    if(timesOfRange < 4) elem.style.padding = 0;
 }
 
 const transformHourFormat = (hour) => {
@@ -87,7 +88,7 @@ const fillDayPlace = (dayObject) => {
     if(endTimeMinutes !== 0) {
         endTimeHour += `:${endTimeMinutes}`; 
     }
-   
+    
     let certainDay = [...fileOfHoures]
         .find((elem,index) => index === new Date(dayObject.startTime).getDay());
     let certainPlace = [...certainDay.children]
@@ -105,7 +106,7 @@ const fillDayPlace = (dayObject) => {
             tempVal = `${startTimeHour} - ${endTimeHour} PM`;
         }
     });
-    
+   
     const divElem = document.createElement('div');
     const h7Elem = document.createElement('h7');
     dayObject.header ? h7Elem.innerHTML = dayObject.header : h7Elem.innerHTML = "without of header";
@@ -132,6 +133,7 @@ export const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) =>
     let lastDayMonth = lastDateInWeek.getMonth();
     let lastDayDate = lastDateInWeek.getDate();
     lastPoint = new Date(lastDayYear, lastDayMonth, lastDayDate+1); 
+    
     return eventsArray
         .filter(elem => elem.startTime >= firstPoint && elem.startTime < lastPoint);        
 };
@@ -146,9 +148,6 @@ const forChangingEventsArray = (array) => {
     let tempArr = filterCorrectDays(array,arrDaysOfWeek[0],arrDaysOfWeek[6]);
     tempArr.forEach(elem => fillDayPlace(elem));
 };
-
-
-
 
 
 export const renderEventObject = (array) => {

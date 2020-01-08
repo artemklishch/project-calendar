@@ -1,5 +1,4 @@
 import { arrDaysOfWeek } from './current_week.js';
-import { funcForTimeOptions } from './create_button.js';
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
@@ -22,18 +21,29 @@ export const renderEventOnClick = event => {
 
     popupBlock.style.display = 'block';
     saveBtn.style.display = 'block';
-    funcForTimeOptions();
      
     const myDate = document.querySelectorAll('.specialDate');
     [...myDate].forEach(elem => elem.value = new Date(endTime)
         .toISOString().substr(0, 10));
 
-    const startHour = document.querySelector('.event__time-start');
-    startHour.value = hourNumber;
 
-    const endHour = document.querySelector('.event__time-end');
-    endHour.value = hourNumber+1;
+    const startHour = new Date(currentYear, currentMonth, currentDate, hourNumber).getHours();
+    const endHour = startHour + 1;
+
+    const startTimePlace = document.querySelector('.startTime_place');
+    startHour < 10 
+    ? startTimePlace.value = [`0${startHour}`, '00'].join(':')
+    : startTimePlace.value = [`${startHour}`, '00'].join(':');
+    
+    const endTimePlace = document.querySelector('.endTime_place');
+    endHour < 10 
+    ? endTimePlace.value = [`0${endHour}`, '00'].join(':')
+    : endTimePlace.value = [`${endHour}`, '00'].join(':');
+    if(startHour === 23)endTimePlace.value = [`00`, '00'].join(':');
+
     blockOfDays.removeEventListener('click', renderEventOnClick);
+
+    //onInputValidate();
     
 };
 blockOfDays.addEventListener('click', renderEventOnClick);
