@@ -39,11 +39,19 @@ export const renderEventOnClick = event => {
     endHour < 10 
     ? endTimePlace.value = [`0${endHour}`, '00'].join(':')
     : endTimePlace.value = [`${endHour}`, '00'].join(':');
-    if(startHour === 23)endTimePlace.value = [`00`, '00'].join(':');
+    if(startHour === 23){
+        [...myDate][1].value = new Date(endTime.setDate(endTime.getDate()+1))
+            .toISOString().substr(0, 10);
+        endTimePlace.value = [`00`, '00'].join(':');
+    }
+
+    const headerInput = document.querySelector('.event__name');
+    headerInput.value = '';
+
+    const descriptionInput = document.querySelector('.multiline__text');
+    descriptionInput.value = '';
 
     blockOfDays.removeEventListener('click', renderEventOnClick);
-
-    //onInputValidate();
     
 };
 blockOfDays.addEventListener('click', renderEventOnClick);
