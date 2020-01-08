@@ -1,7 +1,7 @@
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
-//import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
+import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
 
 
 const blockOfDays = document.querySelector('.main__sidebar_days');
@@ -69,7 +69,7 @@ export const funcForEditEvent = event => {
         endTimePlace.value = `${endHour}:${endMin}`;
         markValuable = 1;
     }
-    //onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
+    onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
 };
 blockOfDays.addEventListener('click', funcForEditEvent);
 
