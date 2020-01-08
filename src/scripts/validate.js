@@ -1,28 +1,27 @@
 import { eventsArray } from './storage.js';
 import { funcForSaveButton } from './popup_funcs.js';
-import { funcForSaveButtonAfterEdit } from './edit_event.js';
-import { funcForDeleteEvene } from './delete_event.js';
+//import { funcForDeleteEvene } from './delete_event.js';
 
 let validateMessageElem = document.querySelector('.message_validation');
-
+//const deleteBasket = document.querySelector('.event__btn-delete');
 
 export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
 
 
-// const onCheckIntersectionEvents = (object) => {
-//     let errorText = undefined;
-//     eventsArray.forEach(elem => {
-//         if((object.startTime.getHours() <= elem.endTime.getHours() 
-//             && object.startTime.getMinutes() <= elem.endTime.getMinutes()) 
-//         && 
-//             (object.endTime.getHours() >= elem.startTime.getHours()
-//             && object.endTime.getMinutes() >= elem.startTime.getMinutes())
-//         ){
-//             errorText = 'Error! Event can`t intersect';
-//         }
-//     });
-//     return errorText; 
-// };
+const onCheckIntersectionEvents = (object) => {
+    let errorText = undefined;
+    eventsArray.forEach(elem => {
+        if((object.startTime < elem.endTime 
+            && object.startTime < elem.endTime) 
+        && 
+            (object.endTime > elem.startTime
+            && object.endTime > elem.startTime)
+        ){
+            errorText = 'Error! Event can`t intersect';
+        }
+    });
+    return errorText; 
+};
 
 
 const onCheckCorrectDates = (object) =>
@@ -66,7 +65,7 @@ const onMakeObjectFromValuesInForm = () => {
 
 const form = document.querySelector('.popup');
 const arrOfValidateFuncs = [onCheckMinutes, onCheckEventLength, 
-    onCheckCorrectDates];
+    onCheckCorrectDates, onCheckIntersectionEvents];
 export const onInputValidate = event => {
     if(!event.target.classList.contains('input')) return;
     const tempObj = onMakeObjectFromValuesInForm();
@@ -77,10 +76,8 @@ export const onInputValidate = event => {
     validateMessageElem.textContent = errorText;
     if(validateMessageElem.textContent !== ''){
         form.removeEventListener('submit', funcForSaveButton);
-        form.removeEventListener('submit', funcForSaveButtonAfterEdit); 
     }else{
         form.addEventListener('submit', funcForSaveButton);
-        form.addEventListener('submit', funcForSaveButtonAfterEdit);
     } 
 };
 form.addEventListener('input', onInputValidate);
@@ -93,17 +90,17 @@ form.addEventListener('input', onInputValidate);
 
 
 
-export const onCheckLateEffortOfDeleteOrEdite = (object) => {
-    const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60; 
-    if(timeToEvent <= 15){
-        validateMessageElem3.innerHTML = 'You can`t change or delete event after 15 minutes to event';
-        saveButton.removeEventListener('click', funcForSaveButton);
-        saveBtnForEdit.removeEventListener('click', funcForSaveButtonAfterEdit);
-        deleteBasket.removeEventListener('click', funcForDeleteEvene);
-    }else{
-        validateMessageElem3.innerHTML = '';
-        saveButton.addEventListener('click', funcForSaveButton);
-        saveBtnForEdit.addEventListener('click', funcForSaveButtonAfterEdit);
-        deleteBasket.addEventListener('click', funcForDeleteEvene);
-    };
-};
+// export const onCheckLateEffortOfDeleteOrEdite = (object) => {
+//     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60; 
+//     if(timeToEvent <= 15){
+//         validateMessageElem.innerHTML = 'You can`t change or delete event after 15 minutes to event';
+//         form.removeEventListener('submit', funcForSaveButton);
+//         form.removeEventListener('submit', funcForSaveButtonAfterEdit);
+//         deleteBasket.removeEventListener('click', funcForDeleteEvene);
+//     }else{
+//         validateMessageElem.innerHTML = '';
+//         form.addEventListener('submit', funcForSaveButton);
+//         form.addEventListener('submit', funcForSaveButtonAfterEdit);
+//         deleteBasket.addEventListener('click', funcForDeleteEvene);
+//     };
+// };
