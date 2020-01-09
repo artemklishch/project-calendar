@@ -32,9 +32,10 @@ export const renderRedLIne = () => {
     redLine.style.top = position + "px";
     hourDiv.appendChild(redLine);
 }
-
+export let timerId;
 export const intervalFunc = () => {
-    return setInterval(renderRedLIne, 60 * 1000);
+    timerId = setInterval(renderRedLIne, 60 * 1000);
+    return timerId;
 };
 intervalFunc(); 
 
