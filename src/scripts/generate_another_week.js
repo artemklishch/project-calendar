@@ -5,6 +5,7 @@ import { renderTitleDate } from './generate_title_date.js';
 import { eventsArray } from './storage.js';
 import { renderEventObject, clearFunc } from './generate_event_object.js';
 import { renderRedLIne, intervalFunc } from './redline.js';
+import { timerId } from './redline.js';
 
 
 
@@ -47,7 +48,7 @@ export const renderAnotherWeek = event => {
         renderEventObject(eventsArray);
     }
     renderTitleDate(arrDaysOfWeek[0], arrDaysOfWeek[6]);
-
+    clearInterval(timerId);
     if (counter === 0) {
         const arr = generateArrDaysOfWeek();
         renderCurrentWeek(arr);
