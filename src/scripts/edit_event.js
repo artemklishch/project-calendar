@@ -24,7 +24,6 @@ export const funcForMakeDataIdEmpty = () => {
     dataId = '';
 };
 
-
 export const funcForEditEvent = event => {
     const blockOfEvent = event.target;
     if(!blockOfEvent.classList.contains('main__sidebar_day_object')) return;
@@ -41,41 +40,46 @@ export const funcForEditEvent = event => {
         });
     eventsArray
         .forEach((element,index) => {
-            if(element.ident === dataId) indexOfElement = index;
+            if(element.ident === dataId){
+                indexOfElement = index;
+                //console.log(element);
+            } 
+          
         });
     currentObject = eventsArray.filter(elem => elem.ident === dataId);
-
+    
     const title = document.querySelector('.event__name');
-    currentObject[0].header !== undefined
+    currentObject[0].header !== null
     ? title.value = currentObject[0].header
-    : title.value = ''; 
-   
+    : title.value = '';     
 
-    let dataAttr = blockOfEvent.closest('.main__sidebar_days_hours');
-    if(dataAttr === 0){
-        const startDate = document.querySelector('.event__date-start');
-        let tempStartDate = currentObject[0].startTime.setDate(currentObject[0].startTime.getDate()+1);
-        startDate.value = new Date(tempStartDate).toISOString().substr(0, 10);
-    
-        const endDate = document.querySelector('.event__date-end');
-        currentObject.length === 1
-        ? endDate.value = new Date(currentObject[0].endTime.setDate(currentObject[0].endTime.getDate()+1))
-            .toISOString().substr(0, 10)
-        : endDate.value = new Date(currentObject[1].endTime.setDate(currentObject[0].endTime.getDate()+1))
-            .toISOString().substr(0, 10);
-    }
-    if(dataAttr === 1){
-        const startDate = document.querySelector('.event__date-start');
-        let tempStartDate = currentObject[0].startTime.setDate(currentObject[0].startTime.getDate()+1);
-        startDate.value = new Date(tempStartDate).toISOString().substr(0, 10);
-    
-        const endDate = document.querySelector('.event__date-end');
-        currentObject.length === 1
-        ? endDate.value = new Date(currentObject[0].endTime).toISOString().substr(0, 10)
-        : endDate.value = new Date(currentObject[1].endTime).toISOString().substr(0, 10);
-    }
+    const description = document.querySelector('.multiline__text');
+    currentObject[0].description !== null
+    ? description.value = currentObject[0].description
+    : description.value = '';     
 
+    const startDateInput = document.querySelector('.event__date-start');
+    const startYear = currentObject[0].startTime.getFullYear();
+    let startMonth = currentObject[0].startTime.getMonth();
+    let startDate = currentObject[0].startTime.getDate();
+    const startDateObject = new Date(Date.UTC(startYear,startMonth,startDate));
+    startDateInput.value = new Date(startDateObject).toISOString().substr(0, 10);
     
+    if(currentObject.length === 1){
+        const endDateInput = document.querySelector('.event__date-end');
+        const endYear = currentObject[0].endTime.getFullYear();
+        let endMonth = currentObject[0].endTime.getMonth();
+        let endDate = currentObject[0].endTime.getDate();
+        const endDateObject = new Date(Date.UTC(endYear,endMonth,endDate));
+        endDateInput.value = new Date(endDateObject).toISOString().substr(0, 10);
+    }else{
+        const endDateInput = document.querySelector('.event__date-end');
+        const endYear = currentObject[1].endTime.getFullYear();
+        let endMonth = currentObject[1].endTime.getMonth();
+        let endDate = currentObject[1].endTime.getDate();
+        const endDateObject = new Date(Date.UTC(endYear,endMonth,endDate));
+        endDateInput.value = new Date(endDateObject).toISOString().substr(0, 10);
+    }
     
 
     const startTimePlace = document.querySelector('.startTime_place');

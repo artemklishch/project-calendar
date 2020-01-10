@@ -22,21 +22,20 @@ const transformObjectFunc = (array, element) => {
     const startMonthForObj2 = new Date(element.endTime).getMonth();
     const endDateForObj2 = new Date(element.endTime).getDate();
     const startTimeForObj2 = new Date(startYearForObj2,startMonthForObj2,endDateForObj2);
-    const indentificator = Math.random().toFixed(10);
 
     const obj1 = {
         header: element.header,
         startTime:element.startTime,
         endTime: endTimeForObj1,
         description:element.description,
-        ident: indentificator,
+        ident: element.ident,
     };
     const obj2 = {
         header: element.header,
         startTime:startTimeForObj2,
         endTime: element.endTime,
         description:element.description,
-        ident: indentificator,
+        ident: element.ident,
     };
     array.push(obj1, obj2);  
 
