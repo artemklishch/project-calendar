@@ -113,6 +113,7 @@ const fillDayPlace = (dayObject) => {
     const pElem = document.createElement('p');
     pElem.innerHTML = tempVal;
     divElem.classList.add('main__sidebar_day_object');
+    divElem.style.backgroundColor = dayObject.backgroundColor;
     divElem.setAttribute('data-id', dayObject.ident);
     forHeight(dayObject, divElem);
     divElem.append(h7Elem, pElem);

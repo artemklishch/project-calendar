@@ -90,13 +90,18 @@
                         <input type="time" class="endTime_place time-place input" name="endTimePlace">
                         <input class="event__date-end specialDate input" name="endTime" required type="date">
                     </div>
-                    <img class="multiline" src="https://img.icons8.com/windows/32/000000/multiline-text.png">
-                    <input type="text" class="multiline__text" placeholder="add description" name="description">  
+                    <div class="centerData">
+                        <img class="multiline" src="https://img.icons8.com/windows/32/000000/multiline-text.png">
+                        <textarea type="text" class="multiline__text" placeholder="add description" name="description"></textarea>  
+                        <input type="color" class="pick_color" name="backgroundColor">
+                    </div>
                     <div class="footer-popup">
                         <p class="message_validation"></p>
-                        <span class="event__btn-delete"><img class="bascket"
-                                src="https://img.icons8.com/windows/32/000000/trash.png"></span>
-                        <button type="submit" class="event__btn-save btn_save">Save</button>
+                        <div class="buttons">
+                            <img class="event__btn-delete"
+                                src="https://img.icons8.com/windows/32/000000/trash.png">
+                            <button type="submit" class="event__btn-save btn_save">Save</button>
+                        </div>
                     </div>
                 </form>
             </div>

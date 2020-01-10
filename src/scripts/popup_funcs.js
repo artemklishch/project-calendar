@@ -47,9 +47,10 @@ export const funcForSaveButton = event => {
     tempObj.endTime = new Date(...tempObj.endTime);
     
     tempObj.ident = Math.random().toFixed(10);
-
+    
     delete tempObj.startTimePlace;
     delete tempObj.endTimePlace;
+    
     if(markValuble4 === 1) return;
     eventsArray.push(tempObj);
     setItem('eventsArray', eventsArray);

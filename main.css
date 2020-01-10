@@ -206,7 +206,6 @@
 
 .main__sidebar_day_object {
   font-size: 12px;
-  background-color: #0851f6;
   color: #fff;
   height: 95%;
   width: 93%;
@@ -248,9 +247,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 16px 16px 8px;
+  padding: 16px 8px 16px 8px;
   border-radius: 8px;
-  text-align: right;
   background-color: #fff;
 }
 .popup__picker {
@@ -302,8 +300,8 @@
 
 .footer-popup {
   position: relative;
-  height: 40px;
-  display: flex;
+  top: 60px;
+  width: 100%;
 }
 
 .clock {
@@ -321,19 +319,18 @@
 
 .multiline {
   cursor: pointer;
-  position: absolute;
-  left: 20px;
-  width: 30px;
-  height: 30px;
 }
 .multiline__text {
   color: #353538;
-  padding-top: 7px;
-  margin-right: 145px;
   border: none;
 }
 .multiline__text:hover {
   background-color: #e3e8ed;
+}
+
+.centerData {
+  display: flex;
+  justify-content: space-between;
 }
 
 .close {
@@ -343,29 +340,19 @@
   margin-top: 10px;
 }
 
-.bascket {
+.event__btn-delete {
   cursor: pointer;
-  margin-top: 70px;
-}
-
-.select {
-  display: inline-block;
-  border: none;
-  overflow: hidden;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  height: 20px;
-  width: 30px;
-  margin-left: 5px;
+  display: none;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
 }
 
 .btn_save {
-  margin-top: 67px;
   position: absolute;
   right: 10px;
-  height: 35px;
-  padding-left: 25px;
-  padding-right: 25px;
+  bottom: 10px;
+  padding: 10px 20px;
   background: royalblue;
   color: white;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
@@ -376,6 +363,15 @@
 
 .message_validation {
   color: red;
+  margin: 0;
+  margin-top: 10px;
+  height: 1.2em;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .redline {
