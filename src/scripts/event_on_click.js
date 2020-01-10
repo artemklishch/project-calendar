@@ -46,6 +46,9 @@ export const renderEventOnClick = event => {
     const descriptionInput = document.querySelector('.multiline__text');
     descriptionInput.value = '';
 
+    const defaultBackgroundColor = document.querySelector('.pick_color');
+    defaultBackgroundColor.value = '#0851f6';
+
     blockOfDays.removeEventListener('click', renderEventOnClick);
     
 };
