@@ -21,6 +21,13 @@ export const funcForCreateButton = () => {
     const today = new Date();
     [...myDate].forEach(elem => elem.value = today.toISOString().substr(0, 10));
 
+
+    const headerInput = document.querySelector('.event__name');
+    headerInput.value = '';
+
+    const descriptionInput = document.querySelector('.multiline__text');
+    descriptionInput.value = '';
+
     blockOfDays.removeEventListener('click', renderEventOnClick);
 };
 createButton.addEventListener('click', funcForCreateButton);

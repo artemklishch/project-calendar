@@ -12,3 +12,13 @@ import { renderEventOnClick } from './event_on_click.js';
 import { funcForEditEvent } from './edit_event.js';
 import { funcForDeleteEvene } from './delete_event.js';
 import { onInputValidate } from './validate.js';
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderEventObject();
+});
+
+const onStorageChange = e => {
+    if(e.key === 'eventsArray') renderEventObject();
+};
+window.addEventListener('storage', onStorageChange);

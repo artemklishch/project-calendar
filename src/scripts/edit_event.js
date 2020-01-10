@@ -33,9 +33,16 @@ export const funcForEditEvent = event => {
     iconDelete.style.display = 'block';
 
     dataId = blockOfEvent.dataset.id;
-    eventsArray.forEach((element,index) => {
-        if(element.ident === dataId) indexOfElement = index;
-    })
+    let eventsArray = getItem('eventsArray') || [];
+    eventsArray
+        .map(elem => {
+            elem.startTime = new Date(elem.startTime);
+            elem.endTime = new Date(elem.endTime);
+        });
+    eventsArray
+        .forEach((element,index) => {
+            if(element.ident === dataId) indexOfElement = index;
+        });
     currentObject = eventsArray.filter(elem => elem.ident === dataId);
 
     const title = document.querySelector('.event__name');

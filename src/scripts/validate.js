@@ -17,6 +17,11 @@ export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
 
 const onCheckIntersectionEvents = (object) => {
     let errorText = undefined;
+    let eventsArray = getItem('eventsArray') || [];
+    eventsArray.map(elem => {
+        elem.startTime = new Date(elem.startTime);
+        elem.endTime = new Date(elem.endTime);
+    });
     let currentStartTime = object.startTime.getTime();
     let currentEndTime = object.endTime.getTime();
     for(let i = 0; i < eventsArray.length; i++) {

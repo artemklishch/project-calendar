@@ -12,7 +12,7 @@ const clearFunc = () => {
 
 
 
-const transformObjectFunc = (element) => {
+const transformObjectFunc = (array, element) => {
     const endYearForObj1 = new Date(element.startTime).getFullYear();
     const endMonthForObj1 = new Date(element.startTime).getMonth();
     const endDateForObj1 = new Date(element.startTime).getDate();
@@ -38,7 +38,8 @@ const transformObjectFunc = (element) => {
         description:element.description,
         ident: indentificator,
     };
-    eventsArray.push(obj1, obj2);  
+    array.push(obj1, obj2);  
+
 };
 
 
@@ -140,9 +141,11 @@ export const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) =>
 
 const forChangingEventsArray = (array) => {
     array.map((element,index) => {
+        element.startTime = new Date(element.startTime);
+        element.endTime = new Date(element.endTime);
         if(element.startTime.getDate() !== element.endTime.getDate() && element.endTime.getHours() > 0){
             array.splice(index,1);
-            transformObjectFunc(element);
+            transformObjectFunc(array, element);
         }
     });
     let tempArr = filterCorrectDays(array,arrDaysOfWeek[0],arrDaysOfWeek[6]);

@@ -59,14 +59,16 @@ export const funcForSaveButton = event => {
            eventsArray.splice(indexOfElement,1);
            eventsArray.splice(indexOfElement-1,1);
            markValuable3 = 0;
+           setItem('eventsArray', eventsArray); 
         }else{
             eventsArray.splice(indexOfElement,1);
             markValuable3 = 0;
+            setItem('eventsArray', eventsArray);
         } 
     funcForMakeindexOfElementNull();
     funcForMakeMarkValuableNull();
    }
-
+    
     renderEventObject();
     popupBlock.style.display = 'none';
     blockOfDays.addEventListener('click', renderEventOnClick);

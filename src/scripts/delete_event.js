@@ -9,10 +9,15 @@ const deleteBasket = document.querySelector('.event__btn-delete');
 const popupBlock = document.querySelector('.popup-layer');
 
 export const funcForDeleteEvene = () => {
+    const eventsArray = getItem('eventsArray') || [];
     if(markValuable !== 0){
         eventsArray.splice(indexOfElement,1);
         eventsArray.splice(indexOfElement-1,1);
-    }else eventsArray.splice(indexOfElement,1);
+        setItem('eventsArray', eventsArray);
+    }else{
+        eventsArray.splice(indexOfElement,1);
+        setItem('eventsArray', eventsArray);
+    } 
     funcForMakeindexOfElementNull();
     renderEventObject();
     popupBlock.style.display = 'none';

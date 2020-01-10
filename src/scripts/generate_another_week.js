@@ -30,7 +30,7 @@ export const renderAnotherWeek = event => {
             temp.setDate(temp.getDate() + 1);
         });
         counter++;
-        renderEventObject(eventsArray);
+        renderEventObject();
     }
     if (certainArrow.classList.contains('nav__arow_left')) {
         arrDaysOfWeek

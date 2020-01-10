@@ -64,17 +64,14 @@
 //     },
 // ];
 
-localStorage.setItem('obj', JSON.stringify({name: 'Tom'}));
 
 export const setItem = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value, null, 2));
+    localStorage.setItem(key, JSON.stringify(value));
 };
-export const getItem = key => 
-    JSON.parse(localStorage.getItem(key))
-    .map(elem => {
-        elem.startTime = new Date(elem.startTime);
-        elem.endTime = new Date(elem.endTime);
-    });
+export const getItem = key => JSON.parse(localStorage.getItem(key));
+  
+
+
 
 
 
