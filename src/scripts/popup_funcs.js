@@ -1,5 +1,5 @@
-import { eventsArray } from './storage.js';
-import { renderEventObject, clearFunc } from './generate_event_object.js';
+import { setItem, getItem } from './storage.js';
+import { renderEventObject } from './generate_event_object.js';
 import { renderEventOnClick } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
 import { onClearValidateMessages, onMakeMarkValuavle4Null } from './validate.js';
@@ -29,7 +29,7 @@ lockWindow.addEventListener('click', funcForLockWindow);
 const form = document.querySelector('.popup');
 export const funcForSaveButton = event => {
     event.preventDefault();
-    
+    const eventsArray = getItem('eventsArray') || [];
     let tempObj = [...new FormData(form)]
         .reduce((acc, [field,value]) => ({...acc,[field]:value}),{});
     tempObj.startTime = tempObj.startTime.split('-');
@@ -52,6 +52,7 @@ export const funcForSaveButton = event => {
     delete tempObj.endTimePlace;
     if(markValuble4 === 1) return;
     eventsArray.push(tempObj);
+    setItem('eventsArray', eventsArray);
     markValuable3 = 1;
     if(markValuable2 === 1 && markValuable3 === 1){
         if(markValuable !== 0){
@@ -66,8 +67,7 @@ export const funcForSaveButton = event => {
     funcForMakeMarkValuableNull();
    }
 
-    clearFunc();
-    renderEventObject(eventsArray);
+    renderEventObject();
     popupBlock.style.display = 'none';
     blockOfDays.addEventListener('click', renderEventOnClick);
     renderRedLIne();

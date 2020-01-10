@@ -1,11 +1,11 @@
-import { eventsArray } from './storage.js';
+import { setItem, getItem } from './storage.js';
 import { arrDaysOfWeek } from './current_week.js';
 
 
 export let firstPoint, lastPoint;
 const fileOfHoures = document.querySelectorAll('.main__sidebar_days_line');
 
-export const clearFunc = () => {
+const clearFunc = () => {
     const arrOfHours = document.querySelectorAll('.main__sidebar_days_hours');
     [...arrOfHours].forEach(elem => elem.innerHTML = '');
 };
@@ -150,7 +150,8 @@ const forChangingEventsArray = (array) => {
 };
 
 
-export const renderEventObject = (array) => {
+export const renderEventObject = () => {
+    clearFunc();
+    const array = getItem('eventsArray') || [];
     return forChangingEventsArray(array);    
 };
-renderEventObject(eventsArray);

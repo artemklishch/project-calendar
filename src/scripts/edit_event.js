@@ -1,6 +1,4 @@
-import { eventsArray } from './storage.js';
-import { renderEventObject, clearFunc } from './generate_event_object.js';
-import { renderRedLIne } from './redline.js';
+import { setItem, getItem } from './storage.js';
 import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
 
 

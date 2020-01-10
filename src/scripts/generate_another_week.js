@@ -2,8 +2,8 @@ import { arrDaysOfWeek } from './current_week.js';
 import { generateArrDaysOfWeek } from './current_week.js';
 import { renderCurrentWeek } from './current_week.js';
 import { renderTitleDate } from './generate_title_date.js';
-import { eventsArray } from './storage.js';
-import { renderEventObject, clearFunc } from './generate_event_object.js';
+import { setItem, getItem } from './storage.js';
+import { renderEventObject } from './generate_event_object.js';
 import { renderRedLIne, intervalFunc } from './redline.js';
 import { timerId } from './redline.js';
 
@@ -18,7 +18,6 @@ export const renderAnotherWeek = event => {
         certainArrow.classList.contains('nav__arow_right');
     if (!checkArrow) return;
 
-    clearFunc();
     if (certainArrow.classList.contains('nav__arow_right')) {
         arrDaysOfWeek
             .forEach(element => element.setDate(element.getDate() + 7));
@@ -45,7 +44,7 @@ export const renderAnotherWeek = event => {
             temp.setDate(temp.getDate() + 1);
         });
         counter--;
-        renderEventObject(eventsArray);
+        renderEventObject();
     }
     renderTitleDate(arrDaysOfWeek[0], arrDaysOfWeek[6]);
     clearInterval(timerId);
