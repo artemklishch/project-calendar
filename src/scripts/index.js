@@ -14,11 +14,3 @@ import { funcForDeleteEvene } from './delete_event.js';
 import { onInputValidate } from './validate.js';
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderEventObject();
-});
-
-const onStorageChange = e => {
-    if(e.key === 'eventsArray') renderEventObject();
-};
-window.addEventListener('storage', onStorageChange);
