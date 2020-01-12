@@ -104,6 +104,10 @@ export const funcForEditEvent = event => {
         endTimePlace.value = `${endHour}:${endMin}`;
         markValuable = 1;
     }
+
+    const colorPicerInput = document.querySelector('.pick_color');
+    colorPicerInput.value = currentObject[0].backgroundColor;
+
     onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
     markValuable2 = 1;
 };
