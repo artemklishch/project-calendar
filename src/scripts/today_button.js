@@ -8,10 +8,10 @@ import { renderEventObject } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
 
 export const todayButtonFunc = () => {   
-    renderTitleDate(arrDaysOfWeek[0], arrDaysOfWeek[6]);
     const arr = generateArrDaysOfWeek();
     renderCurrentWeek(arr);
     renderEventObject();
     renderRedLIne();
+    renderTitleDate(arrDaysOfWeek[0], arrDaysOfWeek[6]);
 };
 todayButton.addEventListener('click', todayButtonFunc);
