@@ -10,7 +10,7 @@ import { timerId } from './redline.js';
 
 
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
-let counter = 0;
+export let counter = 0;
 
 export const renderAnotherWeek = event => {
     const certainArrow = event.target;

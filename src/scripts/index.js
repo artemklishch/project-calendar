@@ -16,6 +16,7 @@ import { onInputValidate } from './validate.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     renderEventObject();
+    renderRedLIne();
 });
 
 const onStorageChange = e => {

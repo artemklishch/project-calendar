@@ -1,5 +1,6 @@
 import { setItem, getItem } from './storage.js';
 import { renderEventObject } from './generate_event_object.js';
+import { counter } from './generate_another_week.js';
 import { renderEventOnClick } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
 import { onClearValidateMessages, onMakeMarkValuavle4Null } from './validate.js';
@@ -32,6 +33,7 @@ export const funcForSaveButton = event => {
     const eventsArray = getItem('eventsArray') || [];
     let tempObj = [...new FormData(form)]
         .reduce((acc, [field,value]) => ({...acc,[field]:value}),{});
+
     tempObj.startTime = tempObj.startTime.split('-');
     tempObj.startTime[1] = tempObj.startTime[1] - 1;
     tempObj.startTimePlace = tempObj.startTimePlace.split(':');
@@ -71,9 +73,9 @@ export const funcForSaveButton = event => {
    }
     
     renderEventObject();
+    if(counter === 0) renderRedLIne();
     popupBlock.style.display = 'none';
     blockOfDays.addEventListener('click', renderEventOnClick);
-    renderRedLIne();
     funcForMakeDataIdEmpty();
 };
 form.addEventListener('submit', funcForSaveButton);
