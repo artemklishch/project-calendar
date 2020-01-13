@@ -24,6 +24,7 @@ const transformObjectFunc = (array, element) => {
     const startTimeForObj2 = new Date(startYearForObj2,startMonthForObj2,endDateForObj2);
 
     const obj1 = {
+        backgroundColor:element.backgroundColor,
         header: element.header,
         startTime:element.startTime,
         endTime: endTimeForObj1,
@@ -31,6 +32,7 @@ const transformObjectFunc = (array, element) => {
         ident: element.ident,
     };
     const obj2 = {
+        backgroundColor:element.backgroundColor,
         header: element.header,
         startTime:startTimeForObj2,
         endTime: element.endTime,
