@@ -1,34 +1,33 @@
 import { setItem, getItem } from './storage.js';
 import { renderEventObject } from './generate_event_object.js';
 import { counter } from './generate_another_week.js';
-import { renderEventOnClick } from './event_on_click.js';
+import { onClickOnPlaceInField } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
-import { onClearValidateMessages, onMakeMarkValuavle4Null } from './validate.js';
-import { markValuble4 } from './validate.js';
-import { markValuable, indexOfElement, markValuable2 } from './edit_event.js';
+import { onClearValidateMessages, onMakeMarkOnValidateTextNull } from './validate.js';
+import { markOnValidateText } from './validate.js';
+import { markOnFactLongEvent, indexOfElement, markOnFactOfEdit } from './edit_event.js';
 import { funcForMakeindexOfElementNull, funcForMakeMarkValuableNull, funcForMakeDataIdEmpty } from './edit_event.js';
 
 
 const fieldOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
-let markValuable3 = 0;
 
 
 const lockWindow = document.querySelector('.popup__btn-close');
 export const funcForLockWindow = () => {
     popupBlock.style.display = 'none';
     iconDelete.style.display = 'none';
-    fieldOfDays.addEventListener('click', renderEventOnClick);
+    fieldOfDays.addEventListener('click', onClickOnPlaceInField);
     onClearValidateMessages();
     funcForMakeDataIdEmpty();
-    onMakeMarkValuavle4Null();
+    onMakeMarkOnValidateTextNull();
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 
 
 const form = document.querySelector('.popup');
-export const funcForSaveButton = event => {
+export const onFormSubmit = event => {
     event.preventDefault();
     const eventsArray = getItem('eventsArray') || [];
     let tempObj = [...new FormData(form)]
@@ -53,19 +52,16 @@ export const funcForSaveButton = event => {
     delete tempObj.startTimePlace;
     delete tempObj.endTimePlace;
     
-    if(markValuble4 === 1) return;
+    if(markOnValidateText === 1) return;
     eventsArray.push(tempObj);
     setItem('eventsArray', eventsArray);
-    markValuable3 = 1;
-    if(markValuable2 === 1 && markValuable3 === 1){
-        if(markValuable !== 0){
+    if(markOnFactOfEdit === 1){
+        if(markOnFactLongEvent !== 0){
            eventsArray.splice(indexOfElement,1);
            eventsArray.splice(indexOfElement-1,1);
-           markValuable3 = 0;
            setItem('eventsArray', eventsArray); 
         }else{
             eventsArray.splice(indexOfElement,1);
-            markValuable3 = 0;
             setItem('eventsArray', eventsArray);
         } 
     funcForMakeindexOfElementNull();
@@ -75,7 +71,7 @@ export const funcForSaveButton = event => {
     renderEventObject();
     if(counter === 0) renderRedLIne();
     popupBlock.style.display = 'none';
-    fieldOfDays.addEventListener('click', renderEventOnClick);
+    fieldOfDays.addEventListener('click', onClickOnPlaceInField);
     funcForMakeDataIdEmpty();
 };
-form.addEventListener('submit', funcForSaveButton);
+form.addEventListener('submit', onFormSubmit);

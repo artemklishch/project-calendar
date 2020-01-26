@@ -1,16 +1,16 @@
-import { indexOfElement, markValuable } from './edit_event.js';
+import { indexOfElement, markOnFactLongEvent } from './edit_event.js';
 import { funcForMakeindexOfElementNull, funcForMakeMarkValuableNull } from './edit_event.js';
 import { setItem, getItem } from './storage.js';
 import { renderEventObject } from './generate_event_object.js';
 import { renderRedLIne } from './redline.js';
-import { onClearValidateMessages, onMakeMarkValuavle4Null } from './validate.js';
+import { onClearValidateMessages, onMakeMarkOnValidateTextNull } from './validate.js';
 
 const deleteBasket = document.querySelector('.event__btn-delete');
 const popupBlock = document.querySelector('.popup-layer');
 
 export const funcForDeleteEvene = () => {
     const eventsArray = getItem('eventsArray') || [];
-    if(markValuable !== 0){
+    if(markOnFactLongEvent !== 0){
         eventsArray.splice(indexOfElement,1);
         eventsArray.splice(indexOfElement-1,1);
         setItem('eventsArray', eventsArray);
@@ -25,6 +25,6 @@ export const funcForDeleteEvene = () => {
     funcForMakeMarkValuableNull();
     renderRedLIne(); 
     onClearValidateMessages();
-    onMakeMarkValuavle4Null();
+    onMakeMarkOnValidateTextNull();
 };
 deleteBasket.addEventListener('click', funcForDeleteEvene);

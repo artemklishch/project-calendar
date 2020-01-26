@@ -1,15 +1,14 @@
 import { setItem, getItem } from './storage.js';
 import { funcForDeleteEvene } from './delete_event.js';
 import { dataId } from './edit_event.js';
-import { funcForSaveButton } from './popup_funcs.js';
 
 
 let validateMessageElem = document.querySelector('.message_validation');
 const deleteBasket = document.querySelector('.event__btn-delete');
-export let markValuble4 = 0;
+export let markOnValidateText = 0;
 
-export const onMakeMarkValuavle4Null = () => {
-    markValuble4 = 0;
+export const onMakeMarkOnValidateTextNull = () => {
+    markOnValidateText = 0;
 };
 
 export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
@@ -61,7 +60,8 @@ const onCheckMinutes = (object) =>
         : undefined;
 
         
-const onMakeObjectFromValuesInForm = () => {
+export const onMakeObjectFromValuesInForm = () => {
+    const form = document.querySelector('.popup');
     const tempObj = [...new FormData(form)]
         .reduce((acc,[field,value]) => ({...acc, [field]:value}),{});
     
@@ -99,12 +99,14 @@ export const onInputValidate = event => {
         .join(' ');
     validateMessageElem.textContent = errorText;
     if(validateMessageElem.textContent !== ''){
-        markValuble4 = 1;
+        markOnValidateText = 1;
     }else{
-        markValuble4 = 0;
+        markOnValidateText = 0;
     } 
 };
 form.addEventListener('input', onInputValidate);
+
+
 
 
 
@@ -112,11 +114,25 @@ export const onCheckLateEffortOfDeleteOrEdite = (object) => {
     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60;
     if(timeToEvent <= 15 && timeToEvent > 0){
         validateMessageElem.innerHTML = 'You can`t change or delete event after 15 minutes to event';
-        markValuble4 = 1;
+        markOnValidateText = 1;
         deleteBasket.removeEventListener('click', funcForDeleteEvene);
     }else{
         validateMessageElem.innerHTML = '';
-        markValuble4 = 0;
+        markOnValidateText = 0;
         deleteBasket.addEventListener('click', funcForDeleteEvene);
     };
+};
+
+
+export const onClickValidate = object => {
+    const errorText = arrOfValidateFuncs
+        .map(func => func(object))
+        .filter(erroText => erroText)
+        .join(' ');
+    validateMessageElem.textContent = errorText;
+    if(validateMessageElem.textContent !== ''){
+        markOnValidateText = 1;
+    }else{
+        markOnValidateText = 0;
+    } 
 };

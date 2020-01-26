@@ -7,13 +7,13 @@ const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
 let currentObject = [];
 export let indexOfElement = 0; 
-export let markValuable = 0;
-export let markValuable2 = 0;
+export let markOnFactLongEvent = 0;
+export let markOnFactOfEdit = 0;
 export let dataId = '';
 
 export const funcForMakeMarkValuableNull = () => {
-    markValuable = 0;
-    markValuable2 = 0;
+    markOnFactLongEvent = 0;
+    markOnFactOfEdit = 0;
 };
 
 export const funcForMakeindexOfElementNull = () => {
@@ -42,9 +42,7 @@ export const funcForEditEvent = event => {
         .forEach((element,index) => {
             if(element.ident === dataId){
                 indexOfElement = index;
-                //console.log(element);
-            } 
-          
+            }    
         });
     currentObject = eventsArray.filter(elem => elem.ident === dataId);
     
@@ -102,13 +100,13 @@ export const funcForEditEvent = event => {
         let endMin = new Date(currentObject[1].endTime).getMinutes(); 
         endMin < 10 ? endMin = `0${endMin}` : endMin;
         endTimePlace.value = `${endHour}:${endMin}`;
-        markValuable = 1;
+        markOnFactLongEvent = 1;
     }
 
     const colorPicerInput = document.querySelector('.pick_color');
     colorPicerInput.value = currentObject[0].backgroundColor;
 
     onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
-    markValuable2 = 1;
+    markOnFactOfEdit = 1;
 };
 fieldOfDays.addEventListener('click', funcForEditEvent);

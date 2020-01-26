@@ -1,7 +1,9 @@
-import { renderEventOnClick } from './event_on_click.js';
+import { onClickOnPlaceInField } from './event_on_click.js';
+import { onClickValidate, onMakeObjectFromValuesInForm } from './validate.js';
 const createButton = document.querySelector('.nav__button');
 const popupBlock = document.querySelector('.popup-layer');
 const fieldOfDays = document.querySelector('.main__sidebar_days');
+
 
 export const onCreateButton = () => {
     const startHour = new Date().getHours();
@@ -28,6 +30,9 @@ export const onCreateButton = () => {
     const defaultBackgroundColor = document.querySelector('.pick_color');
     defaultBackgroundColor.value = '#0851f6';
 
-    fieldOfDays.removeEventListener('click', renderEventOnClick);
+    fieldOfDays.removeEventListener('click', onClickOnPlaceInField);
+
+    let tempObj = onMakeObjectFromValuesInForm();
+    onClickValidate(tempObj);
 };
 createButton.addEventListener('click', onCreateButton);

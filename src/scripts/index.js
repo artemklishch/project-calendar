@@ -7,11 +7,11 @@ import { todayButtonFunc } from './today_button.js';
 import { renderRedLIne } from './redline.js';
 import { renderEventObject } from './generate_event_object.js';
 import { onCreateButton } from './create_button.js';
-import { funcForSaveButton } from './popup_funcs.js';
-import { renderEventOnClick } from './event_on_click.js';
+import { onFormSubmit } from './popup_funcs.js';
+import { onClickOnPlaceInField } from './event_on_click.js';
 import { funcForEditEvent } from './edit_event.js';
 import { funcForDeleteEvene } from './delete_event.js';
-import { onInputValidate, onClickValidate } from './validate.js';
+import { onInputValidate } from './validate.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
