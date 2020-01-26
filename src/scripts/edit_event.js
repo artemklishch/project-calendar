@@ -2,7 +2,7 @@ import { setItem, getItem } from './storage.js';
 import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
 
 
-const blockOfDays = document.querySelector('.main__sidebar_days');
+const fieldOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
 let currentObject = [];
@@ -111,4 +111,4 @@ export const funcForEditEvent = event => {
     onCheckLateEffortOfDeleteOrEdite(currentObject[0]);
     markValuable2 = 1;
 };
-blockOfDays.addEventListener('click', funcForEditEvent);
+fieldOfDays.addEventListener('click', funcForEditEvent);

@@ -1,10 +1,9 @@
 import { renderEventOnClick } from './event_on_click.js';
 const createButton = document.querySelector('.nav__button');
 const popupBlock = document.querySelector('.popup-layer');
-const saveBtn = document.querySelector('.event__btn-save');
-const blockOfDays = document.querySelector('.main__sidebar_days');
+const fieldOfDays = document.querySelector('.main__sidebar_days');
 
-export const funcForCreateButton = () => {
+export const onCreateButton = () => {
     const startHour = new Date().getHours();
     const endHour = startHour + 1;
    
@@ -15,12 +14,10 @@ export const funcForCreateButton = () => {
         .value = [endHour, '00'].join(':');
 
     popupBlock.style.display = 'block';
-    saveBtn.style.display = 'block';
 
     const myDate = document.querySelectorAll('.specialDate');
-    const today = new Date();
-    [...myDate].forEach(elem => elem.value = today.toISOString().substr(0, 10));
-
+    [...myDate].forEach(elem => 
+        elem.value = new Date().toISOString().substr(0, 10));
 
     const headerInput = document.querySelector('.event__name');
     headerInput.value = '';
@@ -31,6 +28,6 @@ export const funcForCreateButton = () => {
     const defaultBackgroundColor = document.querySelector('.pick_color');
     defaultBackgroundColor.value = '#0851f6';
 
-    blockOfDays.removeEventListener('click', renderEventOnClick);
+    fieldOfDays.removeEventListener('click', renderEventOnClick);
 };
-createButton.addEventListener('click', funcForCreateButton);
+createButton.addEventListener('click', onCreateButton);

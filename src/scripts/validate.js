@@ -108,7 +108,6 @@ form.addEventListener('input', onInputValidate);
 
 
 
-
 export const onCheckLateEffortOfDeleteOrEdite = (object) => {
     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60;
     if(timeToEvent <= 15 && timeToEvent > 0){

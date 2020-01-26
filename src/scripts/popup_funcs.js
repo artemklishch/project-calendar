@@ -9,7 +9,7 @@ import { markValuable, indexOfElement, markValuable2 } from './edit_event.js';
 import { funcForMakeindexOfElementNull, funcForMakeMarkValuableNull, funcForMakeDataIdEmpty } from './edit_event.js';
 
 
-const blockOfDays = document.querySelector('.main__sidebar_days');
+const fieldOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
 let markValuable3 = 0;
@@ -19,7 +19,7 @@ const lockWindow = document.querySelector('.popup__btn-close');
 export const funcForLockWindow = () => {
     popupBlock.style.display = 'none';
     iconDelete.style.display = 'none';
-    blockOfDays.addEventListener('click', renderEventOnClick);
+    fieldOfDays.addEventListener('click', renderEventOnClick);
     onClearValidateMessages();
     funcForMakeDataIdEmpty();
     onMakeMarkValuavle4Null();
@@ -75,7 +75,7 @@ export const funcForSaveButton = event => {
     renderEventObject();
     if(counter === 0) renderRedLIne();
     popupBlock.style.display = 'none';
-    blockOfDays.addEventListener('click', renderEventOnClick);
+    fieldOfDays.addEventListener('click', renderEventOnClick);
     funcForMakeDataIdEmpty();
 };
 form.addEventListener('submit', funcForSaveButton);

@@ -1,6 +1,6 @@
 import { arrDaysOfWeek } from './current_week.js';
 
-const blockOfDays = document.querySelector('.main__sidebar_days');
+const fieldOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const saveBtn = document.querySelector('.event__btn-save');
 
@@ -49,7 +49,7 @@ export const renderEventOnClick = event => {
     const defaultBackgroundColor = document.querySelector('.pick_color');
     defaultBackgroundColor.value = '#0851f6';
 
-    blockOfDays.removeEventListener('click', renderEventOnClick);
+    fieldOfDays.removeEventListener('click', renderEventOnClick);
     
 };
-blockOfDays.addEventListener('click', renderEventOnClick);
+fieldOfDays.addEventListener('click', renderEventOnClick);
