@@ -7,6 +7,7 @@ import { onClearValidateMessages, onMakeMarkOnValidateTextNull } from './validat
 import { markOnValidateText } from './validate.js';
 import { markOnFactLongEvent, indexOfElement, markOnFactOfEdit } from './edit_event.js';
 import { funcForMakeindexOfElementNull, funcForMakeMarkValuableNull, funcForMakeDataIdEmpty } from './edit_event.js';
+import { getEventList, createEvent, updatEvent, deleteEvent } from './eventsGateway.js'
 
 
 const fieldOfDays = document.querySelector('.main__sidebar_days');
@@ -29,7 +30,9 @@ lockWindow.addEventListener('click', funcForLockWindow);
 const form = document.querySelector('.popup');
 export const onFormSubmit = event => {
     event.preventDefault();
-    const eventsArray = getItem('eventsArray') || [];
+    
+    //const eventsArray = getItem('eventsArray') || [];
+
     let tempObj = [...new FormData(form)]
         .reduce((acc, [field,value]) => ({...acc,[field]:value}),{});
 
@@ -53,22 +56,30 @@ export const onFormSubmit = event => {
     delete tempObj.endTimePlace;
     
     if(markOnValidateText === 1) return;
-    eventsArray.push(tempObj);
-    setItem('eventsArray', eventsArray);
-    if(markOnFactOfEdit === 1){
-        if(markOnFactLongEvent !== 0){
-           eventsArray.splice(indexOfElement,1);
-           eventsArray.splice(indexOfElement-1,1);
-           setItem('eventsArray', eventsArray); 
-        }else{
-            eventsArray.splice(indexOfElement,1);
-            setItem('eventsArray', eventsArray);
-        } 
-    funcForMakeindexOfElementNull();
-    funcForMakeMarkValuableNull();
-   }
     
-    renderEventObject();
+    //eventsArray.push(tempObj);
+    createEvent(tempObj)
+        .then(() => getEventList())
+        .then(eventsArray => {
+            if(markOnFactOfEdit === 1){
+                if(markOnFactLongEvent !== 0){
+                   eventsArray.splice(indexOfElement,1);
+                   eventsArray.splice(indexOfElement-1,1);
+                   setItem('eventsArray', eventsArray); 
+                }else{
+                    eventsArray.splice(indexOfElement,1);
+                    setItem('eventsArray', eventsArray);
+                } 
+            renderEventObject();
+            funcForMakeindexOfElementNull();
+            funcForMakeMarkValuableNull();
+           }
+        });
+
+    //setItem('eventsArray', eventsArray);
+    
+    
+   
     if(counter === 0) renderRedLIne();
     popupBlock.style.display = 'none';
     fieldOfDays.addEventListener('click', onClickOnPlaceInField);
