@@ -54,10 +54,10 @@
     position: absolute;
     z-index: 1;
     box-shadow: 3px 3px 5px 0 #b5bbc1;
-    h7,
-    p {
+    p,h4 {
         margin: 0;
         padding: 0;
+        word-wrap: break-word;
     }
 }
 

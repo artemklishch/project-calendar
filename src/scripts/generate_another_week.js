@@ -29,13 +29,13 @@ export const renderAnotherWeek = event => {
         counter--;
     }
     let temp = new Date(arrDaysOfWeek[0]);
-        [...numbersOfDates]
-        .forEach(elem => {
-            let tempElem = elem.closest('.header__week-block_days');
-            tempElem.classList.remove('today__header__week-block_days');
-            elem.innerHTML = temp.getDate();
-            temp.setDate(temp.getDate() + 1);
-        });
+    [...numbersOfDates]
+    .forEach(elem => {
+        let tempElem = elem.closest('.header__week-block_days');
+        tempElem.classList.remove('today__header__week-block_days');
+        elem.innerHTML = temp.getDate();
+        temp.setDate(temp.getDate() + 1);
+    });
     renderEventObject();
     renderTitleDate(arrDaysOfWeek[0], arrDaysOfWeek[6]);
     clearInterval(timerId);

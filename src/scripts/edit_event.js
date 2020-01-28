@@ -1,24 +1,17 @@
 import { setItem, getItem } from './storage.js';
 import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
-import { getEventList, createEvent, updatEvent, deleteEvent } from './eventsGateway.js'
+import { getEventList, createEvent, updatEvent, deleteEvent } from './eventsGateway.js';
 
 
 const fieldOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
-// let currentObject;
-export let indexOfElement = 0; 
-export let markOnFactLongEvent = 0;
+
 export let markOnFactOfEdit = 0;
 export let dataId = '';
 
 export const funcForMakeMarkValuableNull = () => {
-    markOnFactLongEvent = 0;
     markOnFactOfEdit = 0;
-};
-
-export const funcForMakeindexOfElementNull = () => {
-    indexOfElement = 0;
 };
 
 export const funcForMakeDataIdEmpty = () => {
@@ -44,12 +37,6 @@ export const funcForEditEvent = event => {
             return arr;
         })
         .then(eventsArray => {
-            eventsArray.forEach((element,index) => {
-                if(element.id === dataId){
-                    indexOfElement = index;
-                }
-            });
-            
             const currentObject = eventsArray.find(elem => elem.id === dataId);
             
             const title = document.querySelector('.event__name');
@@ -95,7 +82,7 @@ export const funcForEditEvent = event => {
 
             onCheckLateEffortOfDeleteOrEdite(currentObject);
             markOnFactOfEdit = 1;
-
+            
             return currentObject;
         });
 };
