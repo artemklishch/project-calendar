@@ -1,6 +1,6 @@
 import { setItem, getItem } from './storage.js';
 import { funcForDeleteEvene } from './delete_event.js';
-import { dataId } from './edit_event.js';
+import { dataId, markOnFactOfEdit } from './edit_event.js';
 
 
 let validateMessageElem = document.querySelector('.message_validation');
@@ -24,7 +24,7 @@ const onCheckIntersectionEvents = (object) => {
     let currentStartTime = object.startTime.getTime();
     let currentEndTime = object.endTime.getTime();
     for(let i = 0; i < eventsArray.length; i++) {
-        if(eventsArray[i].ident === object.ident) continue;
+        if(eventsArray[i].id === object.id) continue;
         let elemStartTime = eventsArray[i].startTime.getTime();
         let elemEndTime = eventsArray[i].endTime.getTime();
         if((currentStartTime < elemEndTime 
@@ -78,10 +78,8 @@ export const onMakeObjectFromValuesInForm = () => {
     tempObj.endTime[1] = tempObj.endTime[1] - 1;
     tempObj.endTime.push(endDate_hours, endDate_min);
     tempObj.endTime = new Date(...tempObj.endTime);
-    
-    if(dataId !== ''){
-        tempObj.ident = dataId;
-    }else tempObj.ident = Math.random().toFixed(10);
+
+    tempObj.id = dataId || '';    
 
     return tempObj;
 };

@@ -10,9 +10,7 @@ const clearFunc = () => {
     [...arrOfHours].forEach(elem => elem.innerHTML = '');
 };
 
-
-
-const transformObjectFunc = (array, element) => {
+const transformObjectFunc = (element) => {
     const endYearForObj1 = new Date(element.startTime).getFullYear();
     const endMonthForObj1 = new Date(element.startTime).getMonth();
     const endDateForObj1 = new Date(element.startTime).getDate();
@@ -29,7 +27,7 @@ const transformObjectFunc = (array, element) => {
         startTime:element.startTime,
         endTime: endTimeForObj1,
         description:element.description,
-        ident: element.ident,
+        id: element.id,
     };
     const obj2 = {
         backgroundColor:element.backgroundColor,
@@ -37,12 +35,11 @@ const transformObjectFunc = (array, element) => {
         startTime:startTimeForObj2,
         endTime: element.endTime,
         description:element.description,
-        ident: element.ident,
+        id: element.id,
     };
-    array.push(obj1, obj2);  
+    return [obj1, obj2];  
 
 };
-
 
 const forHeight = (object, elem) => {
     if(object.startTime.getMinutes() === 15)elem.style.top = '25%';
@@ -110,13 +107,13 @@ const fillDayPlace = (dayObject) => {
     });
    
     const divElem = document.createElement('div');
-    const h7Elem = document.createElement('h7');
+    const h7Elem = document.createElement('h4');
     dayObject.header ? h7Elem.innerHTML = dayObject.header : h7Elem.innerHTML = "without of header";
     const pElem = document.createElement('p');
     pElem.innerHTML = tempVal;
     divElem.classList.add('main__sidebar_day_object');
     divElem.style.backgroundColor = dayObject.backgroundColor;
-    divElem.setAttribute('data-id', dayObject.ident);
+    divElem.setAttribute('data-id', dayObject.id);
     forHeight(dayObject, divElem);
     divElem.append(h7Elem, pElem);
     certainPlace.append(divElem); 
@@ -142,15 +139,19 @@ export const filterCorrectDays = (eventsArray, firstDayOfWeek, lastDayOfWeek) =>
 };
 
 const forChangingEventsArray = (array) => {
-    array.map((element,index) => {
+    const arr = array.map(element => {
         element.startTime = new Date(element.startTime);
         element.endTime = new Date(element.endTime);
-        if(element.startTime.getDate() !== element.endTime.getDate() && element.endTime.getHours() > 0){
-            array.splice(index,1);
-            transformObjectFunc(array, element);
-        }
+        return element;
     });
-    let tempArr = filterCorrectDays(array,arrDaysOfWeek[0],arrDaysOfWeek[6]);
+    const transformedArray = [];
+    arr.forEach(element => {
+        if(element.startTime.getDate() !== element.endTime.getDate() && element.endTime.getHours() > 0){
+            transformObjectFunc(element)
+                .forEach(elem => transformedArray.push(elem));
+        }else transformedArray.push(element);
+    });
+    let tempArr = filterCorrectDays(transformedArray,arrDaysOfWeek[0],arrDaysOfWeek[6]);
     tempArr.forEach(elem => fillDayPlace(elem));
 };
 

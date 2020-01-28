@@ -5,8 +5,9 @@ import { onClickOnPlaceInField } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
 import { onClearValidateMessages, onMakeMarkOnValidateTextNull } from './validate.js';
 import { markOnValidateText } from './validate.js';
-import { markOnFactLongEvent, indexOfElement, markOnFactOfEdit } from './edit_event.js';
-import { funcForMakeindexOfElementNull, funcForMakeMarkValuableNull, funcForMakeDataIdEmpty } from './edit_event.js';
+import { markOnFactOfEdit, dataId } from './edit_event.js';
+import { funcForMakeMarkValuableNull, funcForMakeDataIdEmpty } from './edit_event.js';
+import { getEventList, createEvent, updatEvent } from './eventsGateway.js'
 
 
 const fieldOfDays = document.querySelector('.main__sidebar_days');
@@ -22,6 +23,7 @@ export const funcForLockWindow = () => {
     onClearValidateMessages();
     funcForMakeDataIdEmpty();
     onMakeMarkOnValidateTextNull();
+    funcForMakeMarkValuableNull();
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 
@@ -29,7 +31,7 @@ lockWindow.addEventListener('click', funcForLockWindow);
 const form = document.querySelector('.popup');
 export const onFormSubmit = event => {
     event.preventDefault();
-    const eventsArray = getItem('eventsArray') || [];
+
     let tempObj = [...new FormData(form)]
         .reduce((acc, [field,value]) => ({...acc,[field]:value}),{});
 
@@ -47,31 +49,45 @@ export const onFormSubmit = event => {
     tempObj.endTime = tempObj.endTime.concat(tempObj.endTimePlace);
     tempObj.endTime = new Date(...tempObj.endTime);
     
-    tempObj.ident = Math.random().toFixed(10);
-    
     delete tempObj.startTimePlace;
     delete tempObj.endTimePlace;
     
     if(markOnValidateText === 1) return;
-    eventsArray.push(tempObj);
-    setItem('eventsArray', eventsArray);
-    if(markOnFactOfEdit === 1){
-        if(markOnFactLongEvent !== 0){
-           eventsArray.splice(indexOfElement,1);
-           eventsArray.splice(indexOfElement-1,1);
-           setItem('eventsArray', eventsArray); 
-        }else{
-            eventsArray.splice(indexOfElement,1);
-            setItem('eventsArray', eventsArray);
-        } 
-    funcForMakeindexOfElementNull();
-    funcForMakeMarkValuableNull();
-   }
     
-    renderEventObject();
-    if(counter === 0) renderRedLIne();
+    if(markOnFactOfEdit === 0){
+        createEvent(tempObj)
+            .then(() => getEventList())
+            .then(eventsArray => {
+                setItem('eventsArray', eventsArray);
+                renderEventObject();
+                if(counter === 0) renderRedLIne();
+            })
+            .catch(err => {
+                err.message = 'Server calls limit is exceeded. Need to update server URL';
+                alert(err);
+            });
+    }else if(markOnFactOfEdit === 1){
+        getEventList()
+            .then(eventsArray => {
+                const obj = eventsArray.find(element => element.id === dataId);
+                Object.assign(obj,tempObj); 
+                updatEvent(obj.id, obj)
+                    .then(() => getEventList())
+                    .then(eventsArray => { 
+                        setItem('eventsArray', eventsArray);
+                        renderEventObject();
+                        funcForMakeMarkValuableNull();
+                        funcForMakeDataIdEmpty();
+                        if(counter === 0) renderRedLIne();
+                    })
+                    .catch(err => {
+                        err.message = 'Server calls limit is exceeded. Need to update server URL';
+                        alert(err);
+                    });
+            });
+    }
     popupBlock.style.display = 'none';
     fieldOfDays.addEventListener('click', onClickOnPlaceInField);
-    funcForMakeDataIdEmpty();
+    
 };
 form.addEventListener('submit', onFormSubmit);
