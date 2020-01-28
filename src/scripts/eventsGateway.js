@@ -1,4 +1,4 @@
-const baseUrl = 'https://crudcrud.com/api/335810b6b46c4a10adeb51846137410a/eventsArray';
+const baseUrl = 'https://crudcrud.com/api/fa10e99e40314df9aac6f46022459669/eventsArray';
 
 const mapEvents = tasks => 
     tasks.map(({_id, ...rest}) => ({...rest, id: _id}));
@@ -19,13 +19,13 @@ export const createEvent = object => {
     });
 };
 
-export const updatEvent = (taskId, updatedTaskData) => {
-    return fetch(`${baseUrl}/${taskId}`, {
+export const updatEvent = (eventId, updatedEventData) => {
+    return fetch(`${baseUrl}/${eventId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(updatedTaskData),
+        body: JSON.stringify(updatedEventData),
     });
 };
 

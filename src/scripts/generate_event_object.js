@@ -29,7 +29,7 @@ const transformObjectFunc = (array, element) => {
         startTime:element.startTime,
         endTime: endTimeForObj1,
         description:element.description,
-        ident: element.ident,
+        id: element.id,
     };
     const obj2 = {
         backgroundColor:element.backgroundColor,
@@ -37,7 +37,7 @@ const transformObjectFunc = (array, element) => {
         startTime:startTimeForObj2,
         endTime: element.endTime,
         description:element.description,
-        ident: element.ident,
+        id: element.id,
     };
     array.push(obj1, obj2);  
 
@@ -116,7 +116,7 @@ const fillDayPlace = (dayObject) => {
     pElem.innerHTML = tempVal;
     divElem.classList.add('main__sidebar_day_object');
     divElem.style.backgroundColor = dayObject.backgroundColor;
-    divElem.setAttribute('data-id', dayObject.ident);
+    divElem.setAttribute('data-id', dayObject.id);
     forHeight(dayObject, divElem);
     divElem.append(h7Elem, pElem);
     certainPlace.append(divElem); 
