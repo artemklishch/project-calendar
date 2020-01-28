@@ -23,6 +23,7 @@ export const funcForLockWindow = () => {
     onClearValidateMessages();
     funcForMakeDataIdEmpty();
     onMakeMarkOnValidateTextNull();
+    funcForMakeMarkValuableNull();
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 
@@ -55,7 +56,6 @@ export const onFormSubmit = event => {
     
     if(markOnValidateText === 1) return;
     
-
     if(markOnFactOfEdit === 0){
         createEvent(tempObj)
             .then(() => getEventList())
@@ -67,7 +67,7 @@ export const onFormSubmit = event => {
         getEventList()
             .then(eventsArray => {
                 const obj = eventsArray.find((element,index) => index === indexOfElement);
-                console.log(obj);
+                 
                 updatEvent(obj.id, obj)
                     .then(() => getEventList())
                     .then(eventsArray => {

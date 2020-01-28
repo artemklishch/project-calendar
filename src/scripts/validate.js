@@ -1,6 +1,6 @@
 import { setItem, getItem } from './storage.js';
 import { funcForDeleteEvene } from './delete_event.js';
-import { dataId } from './edit_event.js';
+import { dataId, markOnFactOfEdit } from './edit_event.js';
 
 
 let validateMessageElem = document.querySelector('.message_validation');
@@ -91,7 +91,7 @@ const form = document.querySelector('.popup');
 const arrOfValidateFuncs = [onCheckMinutes, onCheckEventLength, 
     onCheckCorrectDates, onCheckIntersectionEvents];
 export const onInputValidate = event => {
-    if(!event.target.classList.contains('input')) return;
+    if(!event.target.classList.contains('input') || markOnFactOfEdit === 1) return;
     const tempObj = onMakeObjectFromValuesInForm();
     const errorText = arrOfValidateFuncs
         .map(func => func(tempObj))
