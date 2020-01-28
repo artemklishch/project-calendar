@@ -8,7 +8,7 @@ export const getEventList = () => {
         .then(response => response.json())
         .then(tasks => mapEvents(tasks));
 };
-
+ 
 export const createEvent = object => {
     return fetch(baseUrl, {
         method: 'POST',
