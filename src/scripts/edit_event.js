@@ -76,6 +76,20 @@ export const funcForEditEvent = event => {
             const endDateObject = new Date(Date.UTC(endYear,endMonth,endDate));
             endDateInput.value = new Date(endDateObject).toISOString().substr(0, 10);
 
+            const startTimePlace = document.querySelector('.startTime_place');
+            let startHour = new Date(currentObject.startTime).getHours(); 
+            startHour < 10 ? startHour = `0${startHour}` : startHour;
+            let startMin = new Date(currentObject.startTime).getMinutes(); 
+            startMin < 10 ? startMin = `0${startMin}` : startMin;
+            startTimePlace.value = `${startHour}:${startMin}`;
+            
+            const endTimePlace = document.querySelector('.endTime_place');
+            let endHour = new Date(currentObject.endTime).getHours(); 
+            endHour < 10 ? endHour = `0${endHour}` : endHour;
+            let endMin = new Date(currentObject.endTime).getMinutes(); 
+            endMin < 10 ? endMin = `0${endMin}` : endMin;
+            endTimePlace.value = `${endHour}:${endMin}`;
+
             const colorPicerInput = document.querySelector('.pick_color');
             colorPicerInput.value = currentObject.backgroundColor;
 
