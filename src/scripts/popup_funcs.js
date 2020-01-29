@@ -64,7 +64,7 @@ export const onFormSubmit = event => {
             })
             .catch(err => {
                 err.message = 'Server calls limit is exceeded. Need to update server URL';
-                alert(err);
+                alert(err.message);
             });
     }else if(markOnFactOfEdit === 1){
         getEventList()

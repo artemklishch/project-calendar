@@ -10,7 +10,7 @@ export const getEventList = () => {
 };
  
 export const createEvent = object => {
-    return fetch(baseUrl, {
+   return fetch(baseUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
