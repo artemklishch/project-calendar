@@ -1,4 +1,4 @@
-const baseUrl = 'https://crudcrud.com/api/5fee2a6dc5ed4def955a72be0ac374e6/eventsArray';
+const baseUrl = 'https://crudcrud.com/api/5050ba2826274bbc915b58fbe7854790/eventsArray';
 
 const mapEvents = tasks => 
     tasks.map(({_id, ...rest}) => ({...rest, id: _id}));
