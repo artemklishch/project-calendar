@@ -22,10 +22,7 @@ export const funcForEditEvent = event => {
     const blockOfEvent = event.target;
     if(!blockOfEvent.classList.contains('main__sidebar_day_object')) return;
 
-    popupBlock.style.display = 'block';
-    iconDelete.style.display = 'block';
-
-    dataId = blockOfEvent.dataset.id;
+   
     getEventList()
         .then(array => {
             const arr = [];
@@ -37,6 +34,11 @@ export const funcForEditEvent = event => {
             return arr;
         })
         .then(eventsArray => {
+            popupBlock.style.display = 'block';
+            iconDelete.style.display = 'block';
+        
+            dataId = blockOfEvent.dataset.id;
+            
             const currentObject = eventsArray.find(elem => elem.id === dataId);
             
             const title = document.querySelector('.event__name');
@@ -84,6 +86,10 @@ export const funcForEditEvent = event => {
             markOnFactOfEdit = 1;
             
             return currentObject;
+        })
+        .catch(err => {
+            err.message = 'Server calls limit is exceeded. Need to update server URL';
+            alert(err);
         });
 };
 fieldOfDays.addEventListener('click', funcForEditEvent);
