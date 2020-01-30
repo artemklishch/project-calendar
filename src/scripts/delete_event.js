@@ -22,11 +22,11 @@ export const funcForDeleteEvene = () => {
             renderRedLIne(); 
             onClearValidateMessages();
             onMakeMarkOnValidateTextNull();
-        })
-        .catch(err => {
-            err.message = 'Server calls limit is exceeded. Need to update server URL';
-            alert(err);
         });
+        // .catch(err => {
+        //     err.message = 'Server calls limit is exceeded. Need to update server URL';
+        //     alert(err);
+        // });
     popupBlock.style.display = 'none';
     deleteBasket.style.display = 'none'; 
 };
