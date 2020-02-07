@@ -1,4 +1,4 @@
-import { setItem, getItem } from './storage.js';
+import { getItem } from './storage.js';
 import { arrDaysOfWeek } from './current_week.js';
 
 

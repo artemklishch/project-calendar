@@ -62,10 +62,6 @@ export const onFormSubmit = event => {
                 renderEventObject();
                 if(counter === 0) renderRedLIne();
             });
-            // .catch(err => {
-            //     //err.message = 'Server calls limit is exceeded. Need to update server URL';
-            //     alert(err.message);
-            // });
     }else if(markOnFactOfEdit === 1){
         getEventList()
             .then(eventsArray => {
@@ -80,10 +76,6 @@ export const onFormSubmit = event => {
                         funcForMakeDataIdEmpty();
                         if(counter === 0) renderRedLIne();
                     });
-                    // .catch(err => {
-                    //     err.message = 'Server calls limit is exceeded. Need to update server URL';
-                    //     alert(err.message);
-                    // });
             });
     }
     popupBlock.style.display = 'none';

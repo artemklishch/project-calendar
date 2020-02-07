@@ -1,6 +1,6 @@
-import { setItem, getItem } from './storage.js';
+import { getItem } from './storage.js';
 import { funcForDeleteEvene } from './delete_event.js';
-import { dataId, markOnFactOfEdit } from './edit_event.js';
+import { dataId } from './edit_event.js';
 
 
 let validateMessageElem = document.querySelector('.message_validation');
