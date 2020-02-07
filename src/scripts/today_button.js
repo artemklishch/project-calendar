@@ -1,5 +1,4 @@
 const todayButton = document.querySelector('.nav_day');
-import { setItem, getItem } from './storage.js';
 import { generateArrDaysOfWeek } from './current_week.js';
 import { arrDaysOfWeek } from './current_week.js';
 import { renderCurrentWeek } from './current_week.js';

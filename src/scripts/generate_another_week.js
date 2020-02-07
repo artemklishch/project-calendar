@@ -2,11 +2,9 @@ import { arrDaysOfWeek } from './current_week.js';
 import { generateArrDaysOfWeek } from './current_week.js';
 import { renderCurrentWeek } from './current_week.js';
 import { renderTitleDate } from './generate_title_date.js';
-import { setItem, getItem } from './storage.js';
 import { renderEventObject } from './generate_event_object.js';
 import { renderRedLIne, intervalFunc } from './redline.js';
 import { timerId } from './redline.js';
-
 
 
 const numbersOfDates = document.querySelectorAll('.header__week-block_daydate');
