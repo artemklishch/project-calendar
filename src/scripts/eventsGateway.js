@@ -6,13 +6,7 @@ const mapEvents = tasks =>
 export const getEventList = () => {
     return fetch(baseUrl)
         .then(response => response.json())
-        .then(tasks => mapEvents(tasks))
-        .then(response => {
-            if(!response.ok) throw new Error();
-        })
-        .catch(() =>{
-            alert('Server calls limit is exceeded. Need to update server URL');
-        });
+        .then(tasks => mapEvents(tasks));
 };
  
 export const createEvent = object => {
