@@ -21,6 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const onStorageChange = e => {
-    if (e.key === 'eventsArray') renderEventObject();
+    if (e.key === 'arrayOfEvents') renderEventObject();
 };
 window.addEventListener('storage', onStorageChange);

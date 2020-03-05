@@ -1,17 +1,16 @@
-import { setItem, getItem } from './storage.js';
 import { onCheckLateEffortOfDeleteOrEdite } from './validate.js';
-import { getEventList, createEvent, updatEvent, deleteEvent } from './eventsGateway.js';
+import { getEventList } from './eventsGateway.js';
 
 
 const fieldOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
 
-export let markOnFactOfEdit = 0;
+export let markOnFactOfEdit = false;
 export let dataId = '';
 
-export const funcForMakeMarkValuableNull = () => {
-    markOnFactOfEdit = 0;
+export const funcForMakeMarkValuableFalse = () => {
+    markOnFactOfEdit = false;
 };
 
 export const funcForMakeDataIdEmpty = () => {
@@ -83,7 +82,7 @@ export const funcForEditEvent = event => {
             colorPicerInput.value = currentObject.backgroundColor;
 
             onCheckLateEffortOfDeleteOrEdite(currentObject);
-            markOnFactOfEdit = 1;
+            markOnFactOfEdit = true;
             
             return currentObject;
         })

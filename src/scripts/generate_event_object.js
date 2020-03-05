@@ -158,6 +158,6 @@ const forChangingEventsArray = (array) => {
 
 export const renderEventObject = () => {
     clearFunc();
-    const array = getItem('eventsArray') || [];
+    const array = getItem('arrayOfEvents') || [];
     return forChangingEventsArray(array);    
 };

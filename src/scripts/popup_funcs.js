@@ -1,12 +1,12 @@
-import { setItem, getItem } from './storage.js';
+import { setItem } from './storage.js';
 import { renderEventObject } from './generate_event_object.js';
 import { counter } from './generate_another_week.js';
 import { onClickOnPlaceInField } from './event_on_click.js';
 import { renderRedLIne } from './redline.js';
-import { onClearValidateMessages, onMakeMarkOnValidateTextNull } from './validate.js';
+import { onClearValidateMessages, onMakeMarkOnValidateTextFalse } from './validate.js';
 import { markOnValidateText } from './validate.js';
 import { markOnFactOfEdit, dataId } from './edit_event.js';
-import { funcForMakeMarkValuableNull, funcForMakeDataIdEmpty } from './edit_event.js';
+import { funcForMakeMarkValuableFalse, funcForMakeDataIdEmpty } from './edit_event.js';
 import { getEventList, createEvent, updatEvent } from './eventsGateway.js'
 
 
@@ -22,8 +22,8 @@ export const funcForLockWindow = () => {
     fieldOfDays.addEventListener('click', onClickOnPlaceInField);
     onClearValidateMessages();
     funcForMakeDataIdEmpty();
-    onMakeMarkOnValidateTextNull();
-    funcForMakeMarkValuableNull();
+    onMakeMarkOnValidateTextFalse();
+    funcForMakeMarkValuableFalse();
 };
 lockWindow.addEventListener('click', funcForLockWindow);
 
@@ -52,17 +52,17 @@ export const onFormSubmit = event => {
     delete tempObj.startTimePlace;
     delete tempObj.endTimePlace;
     
-    if(markOnValidateText === 1) return;
+    if(markOnValidateText) return;
     
-    if(markOnFactOfEdit === 0){
+    if(!markOnFactOfEdit){
         createEvent(tempObj)
             .then(() => getEventList())
             .then(eventsArray => {
-                setItem('eventsArray', eventsArray);
+                setItem('arrayOfEvents', eventsArray);
                 renderEventObject();
                 if(counter === 0) renderRedLIne();
             });
-    }else if(markOnFactOfEdit === 1){
+    }else if(markOnFactOfEdit){
         getEventList()
             .then(eventsArray => {
                 const obj = eventsArray.find(element => element.id === dataId);
@@ -70,9 +70,9 @@ export const onFormSubmit = event => {
                 updatEvent(obj.id, obj)
                     .then(() => getEventList())
                     .then(eventsArray => { 
-                        setItem('eventsArray', eventsArray);
+                        setItem('arrayOfEvents', eventsArray);
                         renderEventObject();
-                        funcForMakeMarkValuableNull();
+                        funcForMakeMarkValuableFalse();
                         funcForMakeDataIdEmpty();
                         if(counter === 0) renderRedLIne();
                     });

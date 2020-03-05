@@ -5,10 +5,10 @@ import { dataId } from './edit_event.js';
 
 let validateMessageElem = document.querySelector('.message_validation');
 const deleteBasket = document.querySelector('.event__btn-delete');
-export let markOnValidateText = 0;
+export let markOnValidateText = false;
 
-export const onMakeMarkOnValidateTextNull = () => {
-    markOnValidateText = 0;
+export const onMakeMarkOnValidateTextFalse = () => {
+    markOnValidateText = false;
 };
 
 export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
@@ -97,9 +97,9 @@ export const onInputValidate = event => {
         .join(' ');
     validateMessageElem.textContent = errorText;
     if(validateMessageElem.textContent !== ''){
-        markOnValidateText = 1;
+        markOnValidateText = true;
     }else{
-        markOnValidateText = 0;
+        markOnValidateText = false;
     } 
 };
 form.addEventListener('input', onInputValidate);
@@ -112,11 +112,11 @@ export const onCheckLateEffortOfDeleteOrEdite = (object) => {
     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60;
     if(timeToEvent <= 15 && timeToEvent > 0){
         validateMessageElem.innerHTML = 'You can`t change or delete event after 15 minutes to event';
-        markOnValidateText = 1;
+        markOnValidateText = true;
         deleteBasket.removeEventListener('click', funcForDeleteEvene);
     }else{
         validateMessageElem.innerHTML = '';
-        markOnValidateText = 0;
+        markOnValidateText = false;
         deleteBasket.addEventListener('click', funcForDeleteEvene);
     };
 };
@@ -129,8 +129,8 @@ export const onClickValidate = object => {
         .join(' ');
     validateMessageElem.textContent = errorText;
     if(validateMessageElem.textContent !== ''){
-        markOnValidateText = 1;
+        markOnValidateText = true;
     }else{
-        markOnValidateText = 0;
+        markOnValidateText = false;
     } 
 };
