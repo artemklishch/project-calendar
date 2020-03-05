@@ -14,7 +14,6 @@ const fieldOfDays = document.querySelector('.main__sidebar_days');
 const popupBlock = document.querySelector('.popup-layer');
 const iconDelete = document.querySelector('.event__btn-delete');
 
-
 const lockWindow = document.querySelector('.popup__btn-close');
 export const funcForLockWindow = () => {
     popupBlock.style.display = 'none';
@@ -48,13 +47,14 @@ export const onFormSubmit = event => {
     //tempObj.endTime = [...tempObj.endTime, ...tempObj.endTimePlace]; //this expression makes the same as next expression that is down
     tempObj.endTime = tempObj.endTime.concat(tempObj.endTimePlace);
     tempObj.endTime = new Date(...tempObj.endTime);
-    
+
     delete tempObj.startTimePlace;
     delete tempObj.endTimePlace;
     
     if(markOnValidateText) return;
     
     if(!markOnFactOfEdit){
+        tempObj._id = String(Math.round(Math.random() * 1000000));
         createEvent(tempObj)
             .then(() => getEventList())
             .then(eventsArray => {
@@ -65,7 +65,7 @@ export const onFormSubmit = event => {
     }else if(markOnFactOfEdit){
         getEventList()
             .then(eventsArray => {
-                const obj = eventsArray.find(element => element.id === dataId);
+                const obj = eventsArray.find(element => element._id === dataId);
                 Object.assign(obj,tempObj); 
                 updatEvent(obj.id, obj)
                     .then(() => getEventList())

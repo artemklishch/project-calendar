@@ -16,7 +16,7 @@ export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
 
 const onCheckIntersectionEvents = (object) => {
     let errorText = undefined;
-    let eventsArray = getItem('eventsArray') || [];
+    let eventsArray = getItem('arrayOfEvents') || [];
     eventsArray.map(elem => {
         elem.startTime = new Date(elem.startTime);
         elem.endTime = new Date(elem.endTime);
@@ -24,7 +24,7 @@ const onCheckIntersectionEvents = (object) => {
     let currentStartTime = object.startTime.getTime();
     let currentEndTime = object.endTime.getTime();
     for(let i = 0; i < eventsArray.length; i++) {
-        if(eventsArray[i].id === object.id) continue;
+        if(eventsArray[i]._id === object._id) continue;
         let elemStartTime = eventsArray[i].startTime.getTime();
         let elemEndTime = eventsArray[i].endTime.getTime();
         if((currentStartTime < elemEndTime 
@@ -79,7 +79,7 @@ export const onMakeObjectFromValuesInForm = () => {
     tempObj.endTime.push(endDate_hours, endDate_min);
     tempObj.endTime = new Date(...tempObj.endTime);
 
-    tempObj.id = dataId || '';    
+    tempObj._id = dataId || '';    
 
     return tempObj;
 };

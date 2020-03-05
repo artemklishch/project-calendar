@@ -11,7 +11,7 @@ const popupBlock = document.querySelector('.popup-layer');
 
 export const funcForDeleteEvene = () => {
     const eventsArray = getItem('arrayOfEvents') || [];
-    const currentObject = eventsArray.find(elem => elem.id === dataId);
+    const currentObject = eventsArray.find(elem => elem._id === dataId);
     deleteEvent(currentObject.id)
         .then(() => getEventList())
         .then(eventsArray => {

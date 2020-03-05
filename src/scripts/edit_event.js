@@ -21,7 +21,6 @@ export const funcForEditEvent = event => {
     const blockOfEvent = event.target;
     if(!blockOfEvent.classList.contains('main__sidebar_day_object')) return;
 
-   
     getEventList()
         .then(array => {
             const arr = [];
@@ -38,7 +37,7 @@ export const funcForEditEvent = event => {
         
             dataId = blockOfEvent.dataset.id;
             
-            const currentObject = eventsArray.find(elem => elem.id === dataId);
+            const currentObject = eventsArray.find(elem => elem._id === dataId);
             
             const title = document.querySelector('.event__name');
             currentObject.header !== null
